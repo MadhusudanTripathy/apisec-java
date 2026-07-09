@@ -8,6 +8,7 @@ public class RuleModels {
   public static class Group {
     public Object _id;
     public String id;
+    public String sourceName;
     public String name;
     public String description;
     public boolean predefined;

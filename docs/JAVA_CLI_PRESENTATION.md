@@ -253,7 +253,7 @@ scanner.maxRequestsPerRule=3
 scanner.redactSecrets=true
 scanner.allowDangerous=false
 
-rules.directory=../rules
+rules.directory=../apisec/rules
 rules.activeGroups=owasp-api-2023
 
 reports.directory=~/.apisec/java-reports
@@ -274,7 +274,7 @@ After this, scans do not need repeated rules/report/webhook flags.
 
 ```sh
 java -jar target/apisec-java-1.0.0.jar scan \
-  --rules ../rules/owasp-api-2023.json \
+  --rules ../apisec/rules/owasp-api-2023.json \
   --curl "curl http://localhost:9002/itorix/v1/permissions -H 'x-apikey: test'"
 ```
 
@@ -282,14 +282,14 @@ java -jar target/apisec-java-1.0.0.jar scan \
 
 ```sh
 java -jar target/apisec-java-1.0.0.jar rules validate \
-  --file ../rules/owasp-api-2023.json
+  --file ../apisec/rules/owasp-api-2023.json
 ```
 
 ### List Rules
 
 ```sh
 java -jar target/apisec-java-1.0.0.jar rules list \
-  --rules-dir ../rules
+  --rules-dir ../apisec/rules
 ```
 
 ### Show Config
@@ -307,9 +307,21 @@ java -jar target/apisec-java-1.0.0.jar config init
 ### Pull Remote Rules
 
 ```sh
-java -jar target/apisec-java-1.0.0.jar pull \
-  --source https://rules.example.com/api/security/rule-groups \
-  --token "$APISEC_RULES_TOKEN"
+java -jar target/apisec-java-1.0.0.jar pull
+```
+
+The pull URL and tenant can be configured once:
+
+```properties
+rules.pull.sourceUrl=http://localhost:8073/v1/apiwiz-api-security/cli/pull/rule-group
+rules.pull.tenant=acme-team-dev
+rules.pull.tokenEnv=APISEC_RULES_TOKEN
+```
+
+The CLI sends:
+
+```txt
+tenant: acme-team-dev
 ```
 
 ### Send Reports To API Security
@@ -324,7 +336,7 @@ Java CLI example:
 
 ```sh
 java -jar target/apisec-java-1.0.0.jar scan \
-  --rules ../rules/owasp-api-2023.json \
+  --rules ../apisec/rules/owasp-api-2023.json \
   --curl-file request.curl \
   --webhook http://localhost:9002/v1/apiwiz-api-security/cli/webhook \
   --webhook-tenant my-tenant \
@@ -405,7 +417,7 @@ Create an Application run configuration:
 Main class: com.apisec.cli.ApiSec
 Working directory: /Users/madhusudantripathy/Documents/apisec/apisec-java
 Program arguments:
-scan --rules ../rules/owasp-api-2023.json --curl "curl http://localhost:9002/itorix/v1/permissions -H 'x-apikey: test'"
+scan --rules ../apisec/rules/owasp-api-2023.json --curl "curl http://localhost:9002/itorix/v1/permissions -H 'x-apikey: test'"
 ```
 
 Useful breakpoints:

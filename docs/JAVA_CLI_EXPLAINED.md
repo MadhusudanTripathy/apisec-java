@@ -415,7 +415,7 @@ Let’s use this example:
 
 ```sh
 java -jar target/apisec-java-1.0.0.jar scan \
-  --rules ../rules/owasp-api-2023.json \
+  --rules ../apisec/rules/owasp-api-2023.json \
   --curl "curl --location 'http://localhost:9002/itorix/v1/permissions' --header 'Content-Type: application/json' --header 'x-apikey: test'"
 ```
 
@@ -902,8 +902,11 @@ scanner.maxRequestsPerRule=3
 scanner.redactSecrets=true
 scanner.allowDangerous=false
 
-rules.directory=../rules
+rules.directory=../apisec/rules
 rules.activeGroups=owasp-api-2023
+rules.pull.sourceUrl=http://localhost:8073/v1/apiwiz-api-security/cli/pull/rule-group
+rules.pull.tenant=acme-team-dev
+rules.pull.tokenEnv=APISEC_RULES_TOKEN
 
 reports.directory=~/.apisec/java-reports
 
@@ -918,6 +921,18 @@ Then scan can be simple:
 ```sh
 java -jar target/apisec-java-1.0.0.jar scan \
   --curl "curl http://localhost:9002/itorix/v1/permissions -H 'x-apikey: test'"
+```
+
+Pull can also be simple after config:
+
+```sh
+java -jar target/apisec-java-1.0.0.jar pull
+```
+
+That calls the configured rule-group API and sends:
+
+```txt
+tenant: acme-team-dev
 ```
 
 ## Redaction
@@ -1022,7 +1037,7 @@ Command:
 
 ```sh
 java -jar target/apisec-java-1.0.0.jar scan \
-  --rules ../rules/owasp-api-2023.json \
+  --rules ../apisec/rules/owasp-api-2023.json \
   --curl "curl http://localhost:9002/itorix/v1/permissions -H 'x-apikey: test'"
 ```
 
