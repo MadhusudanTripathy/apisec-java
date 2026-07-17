@@ -1,0 +1,194 @@
+[
+  {
+    "name": "com.apisec.cli.ApiSec",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.ScanCommand",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.ScanCommand$CurlCmd",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.PullCommand",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.RulesCommand",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.ConfigCommand",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.RulesCommand$ListCmd",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.RulesCommand$ShowCmd",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.RulesCommand$ValidateCmd",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.ConfigCommand$InitCmd",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.cli.ConfigCommand$ShowCmd",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.config.AppConfig",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.config.AppConfig$Scanner",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.config.AppConfig$Rules",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.config.AppConfig$Pull",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.config.AppConfig$Reports",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.config.AppConfig$Webhook",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.model.RequestModel",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.model.ResponseModel",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.report.ReportModels$Report",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.report.ReportModels$Target",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "picocli.CommandLine$AutoHelpMixin",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "com.apisec.report.ReportModels$RuleGroupInfo",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.report.ReportModels$Summary",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.report.ReportModels$Finding",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.report.ReportModels$WebhookStatus",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.rules.RuleModels$Group",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.rules.RuleModels$Rule",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.rules.RuleModels$Assertion",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.rules.RuleModels$Placeholder",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.rules.RuleModels$MetadataEntry",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
+    "name": "com.apisec.rules.RuleModels$Mutation",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  }
+]

@@ -39,8 +39,21 @@ public class Evaluator {
       for (String v: many) if (match(p, v, true)) return new PHResult(true, p.key + " wildcard check");
       return new PHResult(false, p.key + " wildcard check");
     }
+    if (usesBodySimilarityAlias(p)) {
+      String score = String.valueOf(similarity(baseline.body, response.body));
+      return new PHResult(match(p, score, true), p.key + " " + String.valueOf(p.rule).toLowerCase(Locale.ROOT) + " check");
+    }
     Val v = value(p.key, req, baseline, response);
     return new PHResult(match(p, v.value, v.present), p.key + " " + String.valueOf(p.rule).toLowerCase(Locale.ROOT) + " check");
+  }
+
+  private static boolean usesBodySimilarityAlias(Placeholder p) {
+    if (p == null || p.key == null || p.rule == null) return false;
+    if (!"request.body".equals(p.key)) return false;
+    return switch (String.valueOf(p.rule)) {
+      case "GREATER_THAN", "GREATER_THAN_EQUAL_TO", "LESSER_THAN", "LESSER_THAN_EQUAL_TO" -> true;
+      default -> false;
+    };
   }
 
   private static boolean match(Placeholder p, String actual, boolean present) {

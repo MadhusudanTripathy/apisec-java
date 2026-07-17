@@ -1,0 +1,827 @@
+{
+  "_id" : null,
+  "id" : "6a4c8c7f9eaa468e6224069b",
+  "sourceName" : "api8-security-misconfiguration",
+  "name" : "API8 Security Misconfiguration",
+  "description" : "API8 Security Misconfiguration defensive API scanner rule group.",
+  "predefined" : true,
+  "precondition" : {
+    "expression" : "({0} || {1} || {2} || {3})",
+    "placeholders" : [ {
+      "rule" : "PRESENT",
+      "key" : "request.headers.*",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.queryParams.*",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.body",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.path",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    } ],
+    "success" : false,
+    "type" : "Field",
+    "serviceRegistryId" : "",
+    "metadata" : [ ]
+  },
+  "rules" : [ {
+    "_id" : null,
+    "id" : "b971369a6b9a8f9d85fef289",
+    "ruleId" : "API8-CONFIG-001",
+    "name" : "HTTP instead of HTTPS",
+    "description" : "Production APIs should use HTTPS.",
+    "assertion" : {
+      "expression" : "false",
+      "placeholders" : [ ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-319" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Use HTTPS with modern TLS for all API traffic.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "e7245201602adc0692b1837d",
+    "ruleId" : "API8-CONFIG-002",
+    "name" : "CORS wildcard with credentials",
+    "description" : "CORS is unsafe when wildcard origins are combined with credentialed requests.",
+    "assertion" : {
+      "expression" : "({0} && {1})",
+      "placeholders" : [ {
+        "rule" : "EQUAL_TO",
+        "key" : "response.headers.Access-Control-Allow-Origin",
+        "value" : "*",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      }, {
+        "rule" : "EQUAL_TO",
+        "key" : "response.headers.Access-Control-Allow-Credentials",
+        "value" : "true",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-942" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Use explicit CORS origins and avoid wildcard credentials.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "HIGH",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "7ccd350d3400302c8e5676e6",
+    "ruleId" : "API8-CONFIG-003",
+    "name" : "Verbose stack trace from malformed JSON",
+    "description" : "Malformed JSON should not reveal stack traces.",
+    "assertion" : {
+      "expression" : "({0})",
+      "placeholders" : [ {
+        "rule" : "REGEX",
+        "key" : "response.body",
+        "value" : "(?i)(stack trace|exception|panic|traceback|syntaxerror)",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-209" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "active-safe",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Return generic validation errors and log details server-side.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[{\"name\":\"malformed-json\",\"operation\":\"MALFORM_JSON\",\"key\":\"\",\"value\":\"\"}]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "1281048426ec115d1a8ebee8",
+    "ruleId" : "API8-CONFIG-004",
+    "name" : "Server version disclosure",
+    "description" : "Server version headers should not disclose stack details.",
+    "assertion" : {
+      "expression" : "({0})",
+      "placeholders" : [ {
+        "rule" : "PRESENT",
+        "key" : "response.headers.Server",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-200" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Suppress detailed server version headers.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "LOW",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "e486ac6f4d8faaca87d15fd8",
+    "ruleId" : "API8-CONFIG-005",
+    "name" : "Debug endpoint exposure warning",
+    "description" : "Debug endpoints should not be exposed.",
+    "assertion" : {
+      "expression" : "false",
+      "placeholders" : [ ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-489" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Disable debug endpoints in production.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "LOW",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "4c242b08b53b79b2ea59212e",
+    "ruleId" : "API8-CONFIG-006",
+    "name" : "TRACE method enabled",
+    "description" : "TRACE should generally be disabled.",
+    "assertion" : {
+      "expression" : "({0} && {1} && {2} && {3} && {4})",
+      "placeholders" : [ {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "400",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "401",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "403",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "404",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "405",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-16" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "active-safe",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Disable TRACE at the edge and application server.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[{\"name\":\"trace-method\",\"operation\":\"TRACE_METHOD\",\"key\":\"\",\"value\":\"\"}]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "b5b4cc2b7a3aa3f205c2b14a",
+    "ruleId" : "API8-CONFIG-007",
+    "name" : "Missing anti-sniffing security header",
+    "description" : "APIs should prevent MIME sniffing where browser clients may consume responses.",
+    "assertion" : {
+      "expression" : "({0})",
+      "placeholders" : [ {
+        "rule" : "ABSENT",
+        "key" : "response.headers.X-Content-Type-Options",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-693" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Set X-Content-Type-Options: nosniff on API responses. Use cache-control rules separately for sensitive data.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "LOW",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "964642cccd5a0455e7ca09a2",
+    "ruleId" : "API8-CONFIG-008",
+    "name" : "GraphQL introspection response exposed",
+    "description" : "GraphQL APIs should not expose introspection results in production unless explicitly authorized.",
+    "assertion" : {
+      "expression" : "({0})",
+      "placeholders" : [ {
+        "rule" : "REGEX",
+        "key" : "response.body",
+        "value" : "(?i)(__schema|__type|IntrospectionQuery)",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-200" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Disable GraphQL introspection in production or protect it with authorization.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "4e255eda64f87a2f1140f423",
+    "ruleId" : "API8-CONFIG-009",
+    "name" : "Sensitive response missing cache control",
+    "description" : "Sensitive API responses should include cache-control directives that prevent unintended storage.",
+    "assertion" : {
+      "expression" : "({0} && {1})",
+      "placeholders" : [ {
+        "rule" : "REGEX",
+        "key" : "response.body",
+        "value" : "(?i)(access[_-]?token|refresh[_-]?token|api[_-]?key|secret|password|ssn|credit.?card|private[_-]?key)",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      }, {
+        "rule" : "ABSENT",
+        "key" : "response.headers.Cache-Control",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API8:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-525", "CWE-200" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Set Cache-Control: no-store for sensitive responses and avoid returning unnecessary secrets.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  } ],
+  "action" : {
+    "type" : "Email",
+    "name" : "",
+    "description" : "",
+    "email" : { },
+    "slack" : { },
+    "microsoftTeams" : { },
+    "incident" : { },
+    "serviceCallout" : [ ],
+    "executeWorkflow" : { },
+    "executed" : false
+  },
+  "anyActionExecuted" : false,
+  "scope" : "GLOBAL",
+  "apis" : [ ],
+  "metadata" : {
+    "version" : "1.1.0"
+  },
+  "success" : false,
+  "enforced" : false,
+  "blockOnThreat" : false,
+  "editable" : false,
+  "passedRules" : 0,
+  "skippedRules" : 0,
+  "_class" : null
+}

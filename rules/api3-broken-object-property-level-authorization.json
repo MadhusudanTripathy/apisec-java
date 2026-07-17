@@ -1,0 +1,640 @@
+{
+  "_id" : null,
+  "id" : "6a4c8c7f9eaa468e62240691",
+  "sourceName" : "api3-broken-object-property-level-authorization",
+  "name" : "API3 Broken Object Property Level Authorization",
+  "description" : "API3 Broken Object Property Level Authorization defensive API scanner rule group.",
+  "predefined" : true,
+  "precondition" : {
+    "expression" : "({0} || {1} || {2} || {3})",
+    "placeholders" : [ {
+      "rule" : "PRESENT",
+      "key" : "request.headers.*",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.queryParams.*",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.body",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.path",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    } ],
+    "success" : false,
+    "type" : "Field",
+    "serviceRegistryId" : "",
+    "metadata" : [ ]
+  },
+  "rules" : [ {
+    "_id" : null,
+    "id" : "44f39d1b95af74a6540cf9b8",
+    "ruleId" : "API3-BOPLA-001",
+    "name" : "Sensitive response fields",
+    "description" : "Responses should not expose sensitive fields.",
+    "assertion" : {
+      "expression" : "({0})",
+      "placeholders" : [ {
+        "rule" : "REGEX",
+        "key" : "response.body",
+        "value" : "(?i)(password|passwd|secret|token|api[_-]?key|ssn|credit_?card|private_?key)",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API3:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-200" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Remove sensitive fields from API responses.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "HIGH",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "d43fa87a538a4c636035c8f3",
+    "ruleId" : "API3-BOPLA-002",
+    "name" : "Internal/debug fields exposed",
+    "description" : "Internal fields should not be exposed.",
+    "assertion" : {
+      "expression" : "({0})",
+      "placeholders" : [ {
+        "rule" : "REGEX",
+        "key" : "response.body",
+        "value" : "(?i)(debug|stack|trace|internal|sql)",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API3:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-209" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Filter internal and debug fields from serialized responses.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "0147c3660d82bba5ea9a59ef",
+    "ruleId" : "API3-BOPLA-003",
+    "name" : "Mass assignment role field",
+    "description" : "Role fields should not be accepted from clients.",
+    "assertion" : {
+      "expression" : "({0} && {1} && {2} && {3})",
+      "placeholders" : [ {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "400",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "401",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "403",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "422",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API3:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-915" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "active-safe",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Use explicit input DTOs and deny-list privileged fields.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[{\"name\":\"add-role-field\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"role\",\"value\":\"admin\"}]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "HIGH",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "3163e72ecc8c2569caf0e5d7",
+    "ruleId" : "API3-BOPLA-004",
+    "name" : "Mass assignment ownership field",
+    "description" : "Ownership fields should not be accepted from clients.",
+    "assertion" : {
+      "expression" : "({0} && {1} && {2} && {3})",
+      "placeholders" : [ {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "400",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "401",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "403",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "422",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API3:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-915" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "active-safe",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Bind ownership on the server from authenticated identity.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[{\"name\":\"add-owner-field\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"ownerId\",\"value\":\"999999\"}]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "HIGH",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "b4fb5615d557dfe016101371",
+    "ruleId" : "API3-BOPLA-005",
+    "name" : "Read-only field mutation",
+    "description" : "Read-only fields should not be writable.",
+    "assertion" : {
+      "expression" : "({0} && {1} && {2} && {3})",
+      "placeholders" : [ {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "400",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "401",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "403",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "422",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API3:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-915" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "active-safe",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Ignore or reject read-only client-supplied fields.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[{\"name\":\"add-readonly-field\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"createdAt\",\"value\":\"2000-01-01T00:00:00Z\"}]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "5baf8dfcd7b2d7528b90dcb8",
+    "ruleId" : "API3-BOPLA-006",
+    "name" : "Unknown JSON property accepted",
+    "description" : "Unknown JSON fields should be rejected or ignored safely.",
+    "assertion" : {
+      "expression" : "({0} && {1} && {2} && {3})",
+      "placeholders" : [ {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "400",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "401",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "403",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "422",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API3:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-915" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "active-safe",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Reject unexpected JSON properties for sensitive endpoints.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[{\"name\":\"add-unknown-json-property\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"apisec_unknown\",\"value\":\"true\"}]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "LOW",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  } ],
+  "action" : {
+    "type" : "Email",
+    "name" : "",
+    "description" : "",
+    "email" : { },
+    "slack" : { },
+    "microsoftTeams" : { },
+    "incident" : { },
+    "serviceCallout" : [ ],
+    "executeWorkflow" : { },
+    "executed" : false
+  },
+  "anyActionExecuted" : false,
+  "scope" : "GLOBAL",
+  "apis" : [ ],
+  "metadata" : {
+    "version" : "1.1.0"
+  },
+  "success" : false,
+  "enforced" : false,
+  "blockOnThreat" : false,
+  "editable" : false,
+  "passedRules" : 0,
+  "skippedRules" : 0,
+  "_class" : null
+}

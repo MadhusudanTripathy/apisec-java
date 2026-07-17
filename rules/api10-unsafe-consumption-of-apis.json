@@ -1,0 +1,531 @@
+{
+  "_id" : null,
+  "id" : "6a4c8c7f9eaa468e6224068d",
+  "sourceName" : "api10-unsafe-consumption-of-apis",
+  "name" : "API10 Unsafe Consumption Of APIs",
+  "description" : "API10 Unsafe Consumption Of APIs defensive API scanner rule group.",
+  "predefined" : true,
+  "precondition" : {
+    "expression" : "({0} || {1} || {2} || {3})",
+    "placeholders" : [ {
+      "rule" : "PRESENT",
+      "key" : "request.headers.*",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.queryParams.*",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.body",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    }, {
+      "rule" : "PRESENT",
+      "key" : "request.path",
+      "value" : "",
+      "resolvedValue" : null,
+      "valueDataType" : "STRING",
+      "successful" : null
+    } ],
+    "success" : false,
+    "type" : "Field",
+    "serviceRegistryId" : "",
+    "metadata" : [ ]
+  },
+  "rules" : [ {
+    "_id" : null,
+    "id" : "1f99e6eefd7453b6d50ace92",
+    "ruleId" : "API10-CONSUME-001",
+    "name" : "Callback URL accepted without allowlist signal",
+    "description" : "Outbound callback URLs should be allowlisted.",
+    "assertion" : {
+      "expression" : "false",
+      "placeholders" : [ ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API10:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-829" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Allowlist trusted callback destinations.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "df77f18597a1ca335b7b67a8",
+    "ruleId" : "API10-CONSUME-002",
+    "name" : "Webhook endpoint missing signature header",
+    "description" : "Webhook-like endpoints should require a request signature header from callers.",
+    "assertion" : {
+      "expression" : "({0} && {1} && {2} && {3})",
+      "placeholders" : [ {
+        "rule" : "REGEX",
+        "key" : "request.path",
+        "value" : "(?i)(webhook|callback|event|notification)",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      }, {
+        "rule" : "ABSENT",
+        "key" : "request.headers.X-Hub-Signature-256",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      }, {
+        "rule" : "ABSENT",
+        "key" : "request.headers.X-Signature",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      }, {
+        "rule" : "ABSENT",
+        "key" : "request.headers.X-Webhook-Signature",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API10:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-345" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Require and verify HMAC signatures for incoming webhooks.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "45f9f02c0e8a1d6048dcc2a1",
+    "ruleId" : "API10-CONSUME-003",
+    "name" : "Third-party/upstream error leaked",
+    "description" : "Upstream errors should not leak implementation details.",
+    "assertion" : {
+      "expression" : "({0})",
+      "placeholders" : [ {
+        "rule" : "REGEX",
+        "key" : "response.body",
+        "value" : "(?i)(upstream|third.party|vendor|gateway timeout|bad gateway)",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API10:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-209" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Normalize upstream failures into safe client errors.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "LOW",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "883977ce6c784001f004a5fb",
+    "ruleId" : "API10-CONSUME-004",
+    "name" : "Insecure upstream URL field",
+    "description" : "Client supplied upstream URLs should be HTTPS and trusted.",
+    "assertion" : {
+      "expression" : "({0} && {1} && {2} && {3})",
+      "placeholders" : [ {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "400",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "401",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "403",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      }, {
+        "rule" : "NOT_EQUAL_TO",
+        "key" : "response.code",
+        "value" : "422",
+        "resolvedValue" : null,
+        "valueDataType" : "INTEGER",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API10:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-829" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "active-safe",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Use configured upstreams or validate client-provided URLs against an allowlist.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[{\"name\":\"insecure-upstream-url\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"upstreamUrl\",\"value\":\"http://example.com\"}]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "MEDIUM",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  }, {
+    "_id" : null,
+    "id" : "b4737f9a57abe1202dedd9a9",
+    "ruleId" : "API10-CONSUME-005",
+    "name" : "Webhook replay protection missing, passive unless test mode",
+    "description" : "Webhook-like endpoints should include timestamp or nonce headers to limit replay.",
+    "assertion" : {
+      "expression" : "({0} && {1} && {2} && {3})",
+      "placeholders" : [ {
+        "rule" : "REGEX",
+        "key" : "request.path",
+        "value" : "(?i)(webhook|callback|event|notification)",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      }, {
+        "rule" : "ABSENT",
+        "key" : "request.headers.X-Webhook-Timestamp",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      }, {
+        "rule" : "ABSENT",
+        "key" : "request.headers.X-Request-Timestamp",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      }, {
+        "rule" : "ABSENT",
+        "key" : "request.headers.X-Webhook-Nonce",
+        "value" : "",
+        "resolvedValue" : null,
+        "valueDataType" : "STRING",
+        "successful" : null
+      } ],
+      "success" : false,
+      "type" : "Field",
+      "serviceRegistryId" : "",
+      "metadata" : [ {
+        "key" : "owasp",
+        "value" : "API10:2023",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "cwe",
+        "value" : [ "CWE-294" ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "cves",
+        "value" : [ ],
+        "required" : false,
+        "type" : "STRING_ARRAY"
+      }, {
+        "key" : "scanType",
+        "value" : "passive",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "destructive",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAuthContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "requiresAltContext",
+        "value" : "false",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "passive",
+        "value" : "true",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "remediation",
+        "value" : "Require timestamped signatures and reject replayed webhook deliveries.",
+        "required" : false,
+        "type" : "STRING"
+      }, {
+        "key" : "curlMutations",
+        "value" : "[]",
+        "required" : false,
+        "type" : "STRING"
+      } ]
+    },
+    "rateLimitConfig" : {
+      "statusCode" : "",
+      "limit" : 0,
+      "windowSize" : 0
+    },
+    "actions" : [ ],
+    "priority" : "LOW",
+    "success" : false,
+    "enforced" : true,
+    "blockOnThreat" : false
+  } ],
+  "action" : {
+    "type" : "Email",
+    "name" : "",
+    "description" : "",
+    "email" : { },
+    "slack" : { },
+    "microsoftTeams" : { },
+    "incident" : { },
+    "serviceCallout" : [ ],
+    "executeWorkflow" : { },
+    "executed" : false
+  },
+  "anyActionExecuted" : false,
+  "scope" : "GLOBAL",
+  "apis" : [ ],
+  "metadata" : {
+    "version" : "1.1.0"
+  },
+  "success" : false,
+  "enforced" : false,
+  "blockOnThreat" : false,
+  "editable" : false,
+  "passedRules" : 0,
+  "skippedRules" : 0,
+  "_class" : null
+}

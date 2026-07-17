@@ -1,0 +1,672 @@
+{
+  "scanId" : "scan_de04336f",
+  "startedAt" : "2026-07-10T08:30:56.514235Z",
+  "finishedAt" : "2026-07-10T08:31:01.973416Z",
+  "durationMs" : 5459,
+  "maxSeverity" : "CRITICAL",
+  "totalFindings" : 10,
+  "aiUsed" : false,
+  "aiStatus" : "FAILED",
+  "aiError" : "request timed out",
+  "application" : {
+    "applicationProfileId" : "6a4e16c99aa5317165ae03d7",
+    "applicationId" : "ttoG5K",
+    "name" : "Payment Flow App",
+    "swaggerIds" : [ "6e757f5a67864d91bb9f8cf6b192562f", "61e45d53994543f5a5c4837ac2f94a0f" ]
+  },
+  "resource" : {
+    "resourceId" : "7f2a11b6aeed99c839c03ff439bab1448f8034d22ddc9847de4d05bbfcc462c2",
+    "swaggerDocumentId" : "6a436946892b3175f28723f1",
+    "swaggerId" : "6e757f5a67864d91bb9f8cf6b192562f",
+    "swaggerName" : "API_sec test booker",
+    "revision" : 1,
+    "status" : "Publish",
+    "baseUrl" : "https://restful-booker.herokuapp.com",
+    "path" : "/booking/{id}",
+    "method" : "GET",
+    "operationId" : "getBookingById",
+    "summary" : "Get a specific booking by ID",
+    "tags" : [ ],
+    "servers" : [ "https://restful-booker.herokuapp.com" ]
+  },
+  "target" : {
+    "method" : "GET",
+    "url" : "https://restful-booker.herokuapp.com/booking/1",
+    "host" : "restful-booker.herokuapp.com"
+  },
+  "baseline" : {
+    "request" : {
+      "method" : "GET",
+      "url" : "https://restful-booker.herokuapp.com/booking/1",
+      "path" : "/booking/1",
+      "query" : { },
+      "headers" : {
+        "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ]
+      },
+      "cookies" : { },
+      "bodySize" : 0,
+      "body" : ""
+    },
+    "response" : {
+      "statusCode" : 418,
+      "durationMs" : 1947,
+      "bodySize" : 12,
+      "contentType" : "text/plain; charset=utf-8",
+      "headers" : {
+        "content-length" : [ "12" ],
+        "content-type" : [ "text/plain; charset=utf-8" ],
+        "date" : [ "Fri, 10 Jul 2026 08:30:58 GMT" ],
+        "etag" : [ "W/\"c-2UDTmC4hdG5PUA+z8oDkrgejuV8\"" ],
+        "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+        "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=EKHBcmdAe7luhGxgN1w%2B2RtbetqTkfxuYWyaONJYFcA%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672258\"}],\"max_age\":3600}" ],
+        "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=EKHBcmdAe7luhGxgN1w%2B2RtbetqTkfxuYWyaONJYFcA%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672258\"" ],
+        "server" : [ "Heroku" ],
+        "via" : [ "1.1 heroku-router" ],
+        "x-powered-by" : [ "Express" ]
+      },
+      "body" : "I'm a Teapot"
+    }
+  },
+  "ruleGroups" : [ {
+    "name" : "API6 Unrestricted Access To Sensitive Business Flows",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API9 Improper Inventory Management",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API1 Broken Object Level Authorization",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API7 Server Side Request Forgery",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API10 Unsafe Consumption Of APIs",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API5 Broken Function Level Authorization",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API4 Unrestricted Resource Consumption",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API3 Broken Object Property Level Authorization",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API2 Broken Authentication",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API8 Security Misconfiguration",
+    "version" : "1.1.0"
+  } ],
+  "summary" : {
+    "totalRules" : 61,
+    "passed" : 24,
+    "failed" : 10,
+    "skipped" : 27,
+    "errors" : 0,
+    "critical" : 1,
+    "high" : 3,
+    "medium" : 2,
+    "low" : 4
+  },
+  "findings" : [ {
+    "ruleId" : "API6-BUSINESS-001",
+    "name" : "Missing anti-automation signal",
+    "description" : "Business flow endpoints should expose anti-automation controls.",
+    "impact" : "Weak anti-automation protections can enable scripted abuse, enumeration, and repeated business workflow execution.",
+    "severity" : "LOW",
+    "owasp" : "API6:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Use rate limits, bot controls, and abuse monitoring for sensitive flows.",
+    "cwe" : [ "CWE-799" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "reason" : "Sensitive business endpoint has no visible anti-automation/rate-limit signal.",
+      "location" : {
+        "requestPart" : "response-header",
+        "field" : "X-RateLimit-Limit",
+        "operation" : "ABSENT_RESPONSE_HEADER",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The endpoint did not present the expected anti-automation signal",
+      "summary" : "Sensitive business endpoint has no visible anti-automation/rate-limit signal."
+    }
+  }, {
+    "ruleId" : "API5-BFLA-001",
+    "name" : "Admin path without auth",
+    "description" : "Admin-like paths should require auth.",
+    "impact" : "If confirmed, Admin path without auth can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "HIGH",
+    "owasp" : "API5:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Protect administrative functions with server-side authorization checks.",
+    "cwe" : [ "CWE-285" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "mutationStatus" : 418,
+      "mutation" : "admin-remove-auth",
+      "mutatedCredential" : "Authorization header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "GET",
+          "url" : "https://restful-booker.herokuapp.com/booking/1",
+          "path" : "/booking/1",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ]
+          },
+          "cookies" : { },
+          "bodySize" : 0,
+          "body" : ""
+        },
+        "response" : {
+          "statusCode" : 418,
+          "durationMs" : 345,
+          "bodySize" : 12,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "12" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:59 GMT" ],
+            "etag" : [ "W/\"c-2UDTmC4hdG5PUA+z8oDkrgejuV8\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=95Dw0sWV178fmBi8yHa%2Bu%2BE7dJkxk%2BXKQdynObmTphs%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672259\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=95Dw0sWV178fmBi8yHa%2Bu%2BE7dJkxk%2BXKQdynObmTphs%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672259\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "I'm a Teapot"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "Authorization",
+        "operation" : "REMOVE_HEADER",
+        "mutationName" : "admin-remove-auth"
+      },
+      "reason" : "Admin/function-level authorization probe returned HTTP 418.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "OBJECT_DETAIL" ],
+      "title" : "Mutation triggered an unexpected application response",
+      "summary" : "Admin/function-level authorization probe returned HTTP 418. Baseline status was 418 and mutated status was 418."
+    }
+  }, {
+    "ruleId" : "API5-BFLA-003",
+    "name" : "Unsafe method override header",
+    "description" : "Method override headers should not bypass authorization.",
+    "impact" : "Method or function authorization gaps can let an attacker perform operations that should require higher privilege.",
+    "severity" : "MEDIUM",
+    "owasp" : "API5:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Disable method override or apply authorization after effective method resolution.",
+    "cwe" : [ "CWE-284" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "mutationStatus" : 418,
+      "mutation" : "method-override-delete",
+      "mutatedCredential" : "X-HTTP-Method-Override header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "GET",
+          "url" : "https://restful-booker.herokuapp.com/booking/1",
+          "path" : "/booking/1",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "X-HTTP-Method-Override" : [ "DELETE" ]
+          },
+          "cookies" : { },
+          "bodySize" : 0,
+          "body" : ""
+        },
+        "response" : {
+          "statusCode" : 418,
+          "durationMs" : 346,
+          "bodySize" : 12,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "12" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:59 GMT" ],
+            "etag" : [ "W/\"c-2UDTmC4hdG5PUA+z8oDkrgejuV8\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=95Dw0sWV178fmBi8yHa%2Bu%2BE7dJkxk%2BXKQdynObmTphs%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672259\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=95Dw0sWV178fmBi8yHa%2Bu%2BE7dJkxk%2BXKQdynObmTphs%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672259\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "I'm a Teapot"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "X-HTTP-Method-Override",
+        "operation" : "ADD_HEADER",
+        "mutationName" : "method-override-delete"
+      },
+      "reason" : "Request with unsafe method override returned HTTP 418.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "OBJECT_DETAIL" ],
+      "title" : "Mutation triggered an unexpected application response",
+      "summary" : "Request with unsafe method override returned HTTP 418. Baseline status was 418 and mutated status was 418."
+    }
+  }, {
+    "ruleId" : "API5-BFLA-005",
+    "name" : "Privileged query flag",
+    "description" : "Client-controlled privileged flags should be rejected.",
+    "impact" : "If confirmed, Privileged query flag can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "MEDIUM",
+    "owasp" : "API5:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Ignore privileged client-supplied flags and derive privileges from identity.",
+    "cwe" : [ "CWE-285" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "mutationStatus" : 418,
+      "mutation" : "privileged-query-flag",
+      "mutatedCredential" : "admin query parameter",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "GET",
+          "url" : "https://restful-booker.herokuapp.com/booking/1?admin=true",
+          "path" : "/booking/1",
+          "query" : {
+            "admin" : [ "true" ]
+          },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ]
+          },
+          "cookies" : { },
+          "bodySize" : 0,
+          "body" : ""
+        },
+        "response" : {
+          "statusCode" : 418,
+          "durationMs" : 342,
+          "bodySize" : 12,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "12" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:31:00 GMT" ],
+            "etag" : [ "W/\"c-2UDTmC4hdG5PUA+z8oDkrgejuV8\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xw%2F7qgr47dCod%2FtLb6QJDSqzVK6FJ41536dI7couPp8%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672260\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=xw%2F7qgr47dCod%2FtLb6QJDSqzVK6FJ41536dI7couPp8%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672260\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "I'm a Teapot"
+        }
+      },
+      "location" : {
+        "requestPart" : "query",
+        "field" : "admin",
+        "operation" : "ADD_QUERY_PARAM",
+        "mutationName" : "privileged-query-flag"
+      },
+      "reason" : "Request with privileged access tampering 'privileged-query-flag' returned HTTP 418.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "OBJECT_DETAIL" ],
+      "title" : "Mutation triggered an unexpected application response",
+      "summary" : "Request with privileged access tampering 'privileged-query-flag' returned HTTP 418. Baseline status was 418 and mutated status was 418."
+    }
+  }, {
+    "ruleId" : "API5-BFLA-006",
+    "name" : "Role header tampering",
+    "description" : "Role headers should not grant privileges.",
+    "impact" : "If confirmed, Role header tampering can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "HIGH",
+    "owasp" : "API5:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Do not trust client-controlled role headers.",
+    "cwe" : [ "CWE-285" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "mutationStatus" : 418,
+      "mutation" : "role-header-admin",
+      "mutatedCredential" : "X-Role header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "GET",
+          "url" : "https://restful-booker.herokuapp.com/booking/1",
+          "path" : "/booking/1",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "X-Role" : [ "admin" ]
+          },
+          "cookies" : { },
+          "bodySize" : 0,
+          "body" : ""
+        },
+        "response" : {
+          "statusCode" : 418,
+          "durationMs" : 348,
+          "bodySize" : 12,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "12" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:31:00 GMT" ],
+            "etag" : [ "W/\"c-2UDTmC4hdG5PUA+z8oDkrgejuV8\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xw%2F7qgr47dCod%2FtLb6QJDSqzVK6FJ41536dI7couPp8%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672260\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=xw%2F7qgr47dCod%2FtLb6QJDSqzVK6FJ41536dI7couPp8%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672260\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "I'm a Teapot"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "X-Role",
+        "operation" : "ADD_HEADER",
+        "mutationName" : "role-header-admin"
+      },
+      "reason" : "Request with privileged access tampering 'role-header-admin' returned HTTP 418.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "OBJECT_DETAIL" ],
+      "title" : "Mutation triggered an unexpected application response",
+      "summary" : "Request with privileged access tampering 'role-header-admin' returned HTTP 418. Baseline status was 418 and mutated status was 418."
+    }
+  }, {
+    "ruleId" : "API4-RESOURCE-006",
+    "name" : "Missing rate-limit headers",
+    "description" : "Sensitive APIs should expose standard or de-facto rate-limit signals.",
+    "impact" : "If confirmed, Missing rate-limit headers can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "LOW",
+    "owasp" : "API4:2023",
+    "status" : "FAILED",
+    "confidence" : "HIGH",
+    "certainty" : "INFO",
+    "remediation" : "Implement and communicate rate limits using standard RateLimit headers or documented compatibility headers.",
+    "cwe" : [ "CWE-770" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "reason" : "Baseline response does not expose common rate-limit headers.",
+      "location" : {
+        "requestPart" : "response-header",
+        "field" : "X-RateLimit-Limit",
+        "operation" : "ABSENT_RESPONSE_HEADER",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The baseline response matched a risky security pattern",
+      "summary" : "Baseline response does not expose common rate-limit headers."
+    }
+  }, {
+    "ruleId" : "API2-AUTH-001",
+    "name" : "Endpoint should reject missing Authorization header",
+    "description" : "Authenticated endpoints should reject missing authorization.",
+    "impact" : "An attacker may access protected functionality without valid authentication by removing an existing credential.",
+    "severity" : "CRITICAL",
+    "owasp" : "API2:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Require authentication for protected endpoints.",
+    "cwe" : [ "CWE-306", "CWE-287" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "mutationStatus" : 418,
+      "mutation" : "remove-x-apikey-header",
+      "mutatedCredential" : "x-apikey header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "GET",
+          "url" : "https://restful-booker.herokuapp.com/booking/1",
+          "path" : "/booking/1",
+          "query" : { },
+          "headers" : { },
+          "cookies" : { },
+          "bodySize" : 0,
+          "body" : ""
+        },
+        "response" : {
+          "statusCode" : 418,
+          "durationMs" : 341,
+          "bodySize" : 12,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "12" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:31:00 GMT" ],
+            "etag" : [ "W/\"c-2UDTmC4hdG5PUA+z8oDkrgejuV8\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xw%2F7qgr47dCod%2FtLb6QJDSqzVK6FJ41536dI7couPp8%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672260\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=xw%2F7qgr47dCod%2FtLb6QJDSqzVK6FJ41536dI7couPp8%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672260\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "I'm a Teapot"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "x-apikey",
+        "operation" : "REMOVE_HEADER",
+        "mutationName" : "remove-x-apikey-header"
+      },
+      "reason" : "Endpoint returned HTTP 418 after auth credential was removed.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "OBJECT_DETAIL" ],
+      "title" : "Endpoint accepted request after authentication was removed",
+      "summary" : "Endpoint returned HTTP 418 after auth credential was removed. Baseline status was 418 and mutated status was 418."
+    }
+  }, {
+    "ruleId" : "API2-AUTH-006",
+    "name" : "Missing auth should not return same body as baseline",
+    "description" : "Removing auth should not return the same sensitive body.",
+    "impact" : "A missing credential boundary can allow a caller to continue using a session or token after it should have been rejected.",
+    "severity" : "HIGH",
+    "owasp" : "API2:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Return an auth error body instead of protected resource data.",
+    "cwe" : [ "CWE-306" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "mutationStatus" : 418,
+      "mutation" : "remove-x-apikey-header",
+      "mutatedCredential" : "x-apikey header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "GET",
+          "url" : "https://restful-booker.herokuapp.com/booking/1",
+          "path" : "/booking/1",
+          "query" : { },
+          "headers" : { },
+          "cookies" : { },
+          "bodySize" : 0,
+          "body" : ""
+        },
+        "response" : {
+          "statusCode" : 418,
+          "durationMs" : 340,
+          "bodySize" : 12,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "12" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:31:01 GMT" ],
+            "etag" : [ "W/\"c-2UDTmC4hdG5PUA+z8oDkrgejuV8\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=Rz1YOT8D9XivMZckuFEHPGiYAiqlR6m3dsccm4la2Gs%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672261\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=Rz1YOT8D9XivMZckuFEHPGiYAiqlR6m3dsccm4la2Gs%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672261\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "I'm a Teapot"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "x-apikey",
+        "operation" : "REMOVE_HEADER",
+        "mutationName" : "remove-x-apikey-header"
+      },
+      "reason" : "Endpoint returned HTTP 418 after auth credential was removed.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "OBJECT_DETAIL" ],
+      "title" : "Endpoint accepted request after authentication was removed",
+      "summary" : "Endpoint returned HTTP 418 after auth credential was removed. Baseline status was 418 and mutated status was 418."
+    }
+  }, {
+    "ruleId" : "API8-CONFIG-004",
+    "name" : "Server version disclosure",
+    "description" : "Server version headers should not disclose stack details.",
+    "impact" : "If confirmed, Server version disclosure can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "LOW",
+    "owasp" : "API8:2023",
+    "status" : "FAILED",
+    "confidence" : "HIGH",
+    "certainty" : "INFO",
+    "remediation" : "Suppress detailed server version headers.",
+    "cwe" : [ "CWE-200" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "reason" : "Response exposes server/version style headers.",
+      "location" : {
+        "requestPart" : "response-header",
+        "field" : "Server",
+        "operation" : "PRESENT_RESPONSE_HEADER",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The baseline response matched a risky security pattern",
+      "summary" : "Response exposes server/version style headers."
+    }
+  }, {
+    "ruleId" : "API8-CONFIG-007",
+    "name" : "Missing anti-sniffing security header",
+    "description" : "APIs should prevent MIME sniffing where browser clients may consume responses.",
+    "impact" : "If confirmed, Missing anti-sniffing security header can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "LOW",
+    "owasp" : "API8:2023",
+    "status" : "FAILED",
+    "confidence" : "HIGH",
+    "certainty" : "INFO",
+    "remediation" : "Set X-Content-Type-Options: nosniff on API responses. Use cache-control rules separately for sensitive data.",
+    "cwe" : [ "CWE-693" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 418,
+      "reason" : "Response is missing X-Content-Type-Options.",
+      "location" : {
+        "requestPart" : "response-header",
+        "field" : "X-Content-Type-Options",
+        "operation" : "ABSENT_RESPONSE_HEADER",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The baseline response matched a risky security pattern",
+      "summary" : "Response is missing X-Content-Type-Options."
+    }
+  } ],
+  "webhook" : {
+    "enabled" : false,
+    "delivered" : false,
+    "statusCode" : 0,
+    "attempts" : 0,
+    "error" : ""
+  }
+}

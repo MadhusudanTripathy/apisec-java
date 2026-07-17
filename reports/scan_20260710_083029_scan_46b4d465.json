@@ -1,0 +1,1103 @@
+{
+  "scanId" : "scan_46b4d465",
+  "startedAt" : "2026-07-10T08:30:29.289516Z",
+  "finishedAt" : "2026-07-10T08:30:35.216587Z",
+  "durationMs" : 5927,
+  "maxSeverity" : "CRITICAL",
+  "totalFindings" : 16,
+  "aiUsed" : true,
+  "aiStatus" : "USED",
+  "aiSummary" : {
+    "model" : "gpt-4o-mini-2024-07-18",
+    "generatedAt" : "2026-07-10T08:30:54.382047Z",
+    "overview" : "The API security scan identified 16 failed findings across various security rules, indicating potential vulnerabilities in the Payment Flow App."
+  },
+  "application" : {
+    "applicationProfileId" : "6a4e16c99aa5317165ae03d7",
+    "applicationId" : "ttoG5K",
+    "name" : "Payment Flow App",
+    "swaggerIds" : [ "6e757f5a67864d91bb9f8cf6b192562f", "61e45d53994543f5a5c4837ac2f94a0f" ]
+  },
+  "resource" : {
+    "resourceId" : "ef778870c6c1ce02f9abe5227029d450a48cef751b36e9477a1bd1a03e3a737e",
+    "swaggerDocumentId" : "6a436946892b3175f28723f1",
+    "swaggerId" : "6e757f5a67864d91bb9f8cf6b192562f",
+    "swaggerName" : "API_sec test booker",
+    "revision" : 1,
+    "status" : "Publish",
+    "baseUrl" : "https://restful-booker.herokuapp.com",
+    "path" : "/booking",
+    "method" : "POST",
+    "operationId" : "createBooking",
+    "summary" : "Create a new booking",
+    "tags" : [ ],
+    "servers" : [ "https://restful-booker.herokuapp.com" ]
+  },
+  "target" : {
+    "method" : "POST",
+    "url" : "https://restful-booker.herokuapp.com/booking",
+    "host" : "restful-booker.herokuapp.com"
+  },
+  "baseline" : {
+    "request" : {
+      "method" : "POST",
+      "url" : "https://restful-booker.herokuapp.com/booking",
+      "path" : "/booking",
+      "query" : { },
+      "headers" : {
+        "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+        "Content-Type" : [ "application/json" ]
+      },
+      "cookies" : { },
+      "bodySize" : 2,
+      "body" : "{}"
+    },
+    "response" : {
+      "statusCode" : 500,
+      "durationMs" : 1027,
+      "bodySize" : 21,
+      "contentType" : "text/plain; charset=utf-8",
+      "headers" : {
+        "content-length" : [ "21" ],
+        "content-type" : [ "text/plain; charset=utf-8" ],
+        "date" : [ "Fri, 10 Jul 2026 08:30:30 GMT" ],
+        "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+        "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+        "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=0zFFXwplewLQ2R1ZzIzyYblkpJBLqE6WeWSpnnHjUD4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672230\"}],\"max_age\":3600}" ],
+        "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=0zFFXwplewLQ2R1ZzIzyYblkpJBLqE6WeWSpnnHjUD4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672230\"" ],
+        "server" : [ "Heroku" ],
+        "via" : [ "1.1 heroku-router" ],
+        "x-powered-by" : [ "Express" ]
+      },
+      "body" : "Internal Server Error"
+    }
+  },
+  "ruleGroups" : [ {
+    "name" : "API6 Unrestricted Access To Sensitive Business Flows",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API9 Improper Inventory Management",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API1 Broken Object Level Authorization",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API7 Server Side Request Forgery",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API10 Unsafe Consumption Of APIs",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API5 Broken Function Level Authorization",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API4 Unrestricted Resource Consumption",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API3 Broken Object Property Level Authorization",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API2 Broken Authentication",
+    "version" : "1.1.0"
+  }, {
+    "name" : "API8 Security Misconfiguration",
+    "version" : "1.1.0"
+  } ],
+  "summary" : {
+    "totalRules" : 61,
+    "passed" : 21,
+    "failed" : 16,
+    "skipped" : 24,
+    "errors" : 0,
+    "critical" : 1,
+    "high" : 5,
+    "medium" : 4,
+    "low" : 6
+  },
+  "findings" : [ {
+    "ruleId" : "API6-BUSINESS-001",
+    "name" : "Missing anti-automation signal",
+    "description" : "Business flow endpoints should expose anti-automation controls.",
+    "impact" : "Weak anti-automation protections can enable scripted abuse, enumeration, and repeated business workflow execution.",
+    "severity" : "LOW",
+    "owasp" : "API6:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Use rate limits, bot controls, and abuse monitoring for sensitive flows.",
+    "ai" : {
+      "whyDangerous" : "Weak anti-automation protections can enable scripted abuse and enumeration.",
+      "remediation" : "Implement anti-automation controls such as rate limiting.",
+      "businessImpact" : "Increased risk of abuse and operational disruption.",
+      "evidenceTitle" : "The endpoint did not present the expected anti-automation signal",
+      "evidenceSummary" : "Sensitive business endpoint has no visible anti-automation/rate-limit signal."
+    },
+    "cwe" : [ "CWE-799" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "reason" : "Sensitive business endpoint has no visible anti-automation/rate-limit signal.",
+      "location" : {
+        "requestPart" : "response-header",
+        "field" : "X-RateLimit-Limit",
+        "operation" : "ABSENT_RESPONSE_HEADER",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The endpoint did not present the expected anti-automation signal",
+      "summary" : "Sensitive business endpoint has no visible anti-automation/rate-limit signal."
+    }
+  }, {
+    "ruleId" : "API9-INVENTORY-004",
+    "name" : "Dev/staging hostname exposure",
+    "description" : "Dev or staging hosts should not be exposed in production responses.",
+    "impact" : "If confirmed, Dev/staging hostname exposure can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "LOW",
+    "owasp" : "API9:2023",
+    "status" : "FAILED",
+    "confidence" : "MEDIUM",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Avoid leaking internal environment hostnames.",
+    "ai" : {
+      "whyDangerous" : "Exposing dev/staging hostnames can weaken security controls.",
+      "remediation" : "Ensure production responses do not expose dev/staging hostnames.",
+      "businessImpact" : "Potential exposure of sensitive operations and data.",
+      "evidenceTitle" : "The baseline response matched a risky security pattern",
+      "evidenceSummary" : "Response body regex check indicated potential exposure."
+    },
+    "cwe" : [ "CWE-200" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "reason" : "response.body regex check",
+      "location" : {
+        "requestPart" : "response-body",
+        "operation" : "REGEX_RESPONSE_BODY",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The baseline response matched a risky security pattern",
+      "summary" : "response.body regex check"
+    }
+  }, {
+    "ruleId" : "API5-BFLA-001",
+    "name" : "Admin path without auth",
+    "description" : "Admin-like paths should require auth.",
+    "impact" : "If confirmed, Admin path without auth can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "HIGH",
+    "owasp" : "API5:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Protect administrative functions with server-side authorization checks.",
+    "ai" : {
+      "whyDangerous" : "Admin paths without authentication can expose sensitive operations.",
+      "remediation" : "Require authentication for admin-like paths.",
+      "businessImpact" : "Increased risk of unauthorized access to sensitive operations.",
+      "evidenceTitle" : "Mutation triggered an unexpected application response",
+      "evidenceSummary" : "Admin authorization probe returned HTTP 500."
+    },
+    "cwe" : [ "CWE-285" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "admin-remove-auth",
+      "mutatedCredential" : "Authorization header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "Content-Type" : [ "application/json" ]
+          },
+          "cookies" : { },
+          "bodySize" : 2,
+          "body" : "{}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 344,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:30 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=0zFFXwplewLQ2R1ZzIzyYblkpJBLqE6WeWSpnnHjUD4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672230\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=0zFFXwplewLQ2R1ZzIzyYblkpJBLqE6WeWSpnnHjUD4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672230\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "Authorization",
+        "operation" : "REMOVE_HEADER",
+        "mutationName" : "admin-remove-auth"
+      },
+      "reason" : "Admin/function-level authorization probe returned HTTP 500.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Mutation triggered an unexpected application response",
+      "summary" : "Admin/function-level authorization probe returned HTTP 500. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API5-BFLA-003",
+    "name" : "Unsafe method override header",
+    "description" : "Method override headers should not bypass authorization.",
+    "impact" : "Method or function authorization gaps can let an attacker perform operations that should require higher privilege.",
+    "severity" : "MEDIUM",
+    "owasp" : "API5:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Disable method override or apply authorization after effective method resolution.",
+    "ai" : {
+      "whyDangerous" : "Method override headers can allow unauthorized operations.",
+      "remediation" : "Restrict method override headers to authorized users only.",
+      "businessImpact" : "Risk of unauthorized actions being performed.",
+      "evidenceTitle" : "Mutation triggered an unexpected application response",
+      "evidenceSummary" : "Request with unsafe method override returned HTTP 500."
+    },
+    "cwe" : [ "CWE-284" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "method-override-delete",
+      "mutatedCredential" : "X-HTTP-Method-Override header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "Content-Type" : [ "application/json" ],
+            "X-HTTP-Method-Override" : [ "DELETE" ]
+          },
+          "cookies" : { },
+          "bodySize" : 2,
+          "body" : "{}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 338,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:31 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=7XRC3PWlyOvHhksCSJiPfp29pRsh%2Fs3K44%2BiDvCt49Q%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672231\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=7XRC3PWlyOvHhksCSJiPfp29pRsh%2Fs3K44%2BiDvCt49Q%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672231\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "X-HTTP-Method-Override",
+        "operation" : "ADD_HEADER",
+        "mutationName" : "method-override-delete"
+      },
+      "reason" : "Request with unsafe method override returned HTTP 500.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Mutation triggered an unexpected application response",
+      "summary" : "Request with unsafe method override returned HTTP 500. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API5-BFLA-005",
+    "name" : "Privileged query flag",
+    "description" : "Client-controlled privileged flags should be rejected.",
+    "impact" : "If confirmed, Privileged query flag can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "MEDIUM",
+    "owasp" : "API5:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Ignore privileged client-supplied flags and derive privileges from identity.",
+    "ai" : {
+      "whyDangerous" : "Client-controlled privileged flags can weaken security controls.",
+      "remediation" : "Reject client-controlled privileged flags.",
+      "businessImpact" : "Potential exposure of sensitive operations and data.",
+      "evidenceTitle" : "Mutation triggered an unexpected application response",
+      "evidenceSummary" : "Request with privileged access tampering returned HTTP 500."
+    },
+    "cwe" : [ "CWE-285" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "privileged-query-flag",
+      "mutatedCredential" : "admin query parameter",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking?admin=true",
+          "path" : "/booking",
+          "query" : {
+            "admin" : [ "true" ]
+          },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "Content-Type" : [ "application/json" ]
+          },
+          "cookies" : { },
+          "bodySize" : 2,
+          "body" : "{}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 338,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:31 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=7XRC3PWlyOvHhksCSJiPfp29pRsh%2Fs3K44%2BiDvCt49Q%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672231\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=7XRC3PWlyOvHhksCSJiPfp29pRsh%2Fs3K44%2BiDvCt49Q%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672231\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "query",
+        "field" : "admin",
+        "operation" : "ADD_QUERY_PARAM",
+        "mutationName" : "privileged-query-flag"
+      },
+      "reason" : "Request with privileged access tampering 'privileged-query-flag' returned HTTP 500.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Mutation triggered an unexpected application response",
+      "summary" : "Request with privileged access tampering 'privileged-query-flag' returned HTTP 500. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API5-BFLA-006",
+    "name" : "Role header tampering",
+    "description" : "Role headers should not grant privileges.",
+    "impact" : "If confirmed, Role header tampering can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "HIGH",
+    "owasp" : "API5:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Do not trust client-controlled role headers.",
+    "ai" : {
+      "whyDangerous" : "Role header tampering can grant unauthorized privileges.",
+      "remediation" : "Validate role headers to prevent privilege escalation.",
+      "businessImpact" : "Increased risk of unauthorized access to sensitive operations.",
+      "evidenceTitle" : "Mutation triggered an unexpected application response",
+      "evidenceSummary" : "Request with role header tampering returned HTTP 500."
+    },
+    "cwe" : [ "CWE-285" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "role-header-admin",
+      "mutatedCredential" : "X-Role header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "Content-Type" : [ "application/json" ],
+            "X-Role" : [ "admin" ]
+          },
+          "cookies" : { },
+          "bodySize" : 2,
+          "body" : "{}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 348,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:32 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=XQ1PLxBQruqGZKwMintkl67zfyD1M4HGjyzIuHu02O4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672232\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=XQ1PLxBQruqGZKwMintkl67zfyD1M4HGjyzIuHu02O4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672232\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "X-Role",
+        "operation" : "ADD_HEADER",
+        "mutationName" : "role-header-admin"
+      },
+      "reason" : "Request with privileged access tampering 'role-header-admin' returned HTTP 500.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Mutation triggered an unexpected application response",
+      "summary" : "Request with privileged access tampering 'role-header-admin' returned HTTP 500. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API4-RESOURCE-006",
+    "name" : "Missing rate-limit headers",
+    "description" : "Sensitive APIs should expose standard or de-facto rate-limit signals.",
+    "impact" : "If confirmed, Missing rate-limit headers can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "LOW",
+    "owasp" : "API4:2023",
+    "status" : "FAILED",
+    "confidence" : "HIGH",
+    "certainty" : "INFO",
+    "remediation" : "Implement and communicate rate limits using standard RateLimit headers or documented compatibility headers.",
+    "ai" : {
+      "whyDangerous" : "Missing rate-limit headers can expose sensitive operations.",
+      "remediation" : "Implement standard rate-limit headers in responses.",
+      "businessImpact" : "Increased risk of abuse and operational disruption.",
+      "evidenceTitle" : "The baseline response matched a risky security pattern",
+      "evidenceSummary" : "Baseline response does not expose common rate-limit headers."
+    },
+    "cwe" : [ "CWE-770" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "reason" : "Baseline response does not expose common rate-limit headers.",
+      "location" : {
+        "requestPart" : "response-header",
+        "field" : "X-RateLimit-Limit",
+        "operation" : "ABSENT_RESPONSE_HEADER",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The baseline response matched a risky security pattern",
+      "summary" : "Baseline response does not expose common rate-limit headers."
+    }
+  }, {
+    "ruleId" : "API3-BOPLA-002",
+    "name" : "Internal/debug fields exposed",
+    "description" : "Internal fields should not be exposed.",
+    "impact" : "If confirmed, Internal/debug fields exposed can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "MEDIUM",
+    "owasp" : "API3:2023",
+    "status" : "FAILED",
+    "confidence" : "MEDIUM",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Filter internal and debug fields from serialized responses.",
+    "ai" : {
+      "whyDangerous" : "Exposing internal fields can weaken security controls.",
+      "remediation" : "Ensure internal fields are not exposed in responses.",
+      "businessImpact" : "Potential exposure of sensitive operations and data.",
+      "evidenceTitle" : "Unexpected field mutation changed server behavior",
+      "evidenceSummary" : "Response body regex check indicated potential exposure."
+    },
+    "cwe" : [ "CWE-209" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "reason" : "response.body regex check",
+      "location" : {
+        "requestPart" : "response-body",
+        "operation" : "REGEX_RESPONSE_BODY",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "Unexpected field mutation changed server behavior",
+      "summary" : "response.body regex check"
+    }
+  }, {
+    "ruleId" : "API3-BOPLA-003",
+    "name" : "Mass assignment role field",
+    "description" : "Role fields should not be accepted from clients.",
+    "impact" : "Unexpected writable fields can let an attacker change protected object properties that should be controlled by the server.",
+    "severity" : "HIGH",
+    "owasp" : "API3:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Use explicit input DTOs and deny-list privileged fields.",
+    "ai" : {
+      "whyDangerous" : "Unexpected writable fields can allow unauthorized changes.",
+      "remediation" : "Restrict writable fields to server-controlled properties.",
+      "businessImpact" : "Risk of unauthorized modifications to protected properties.",
+      "evidenceTitle" : "Unexpected field mutation changed server behavior",
+      "evidenceSummary" : "Request with unexpected field mutation returned HTTP 500."
+    },
+    "cwe" : [ "CWE-915" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "add-role-field",
+      "mutatedCredential" : "add-role-field",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "Content-Type" : [ "application/json" ]
+          },
+          "cookies" : { },
+          "bodySize" : 16,
+          "body" : "{\"role\":\"admin\"}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 345,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:32 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=XQ1PLxBQruqGZKwMintkl67zfyD1M4HGjyzIuHu02O4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672232\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=XQ1PLxBQruqGZKwMintkl67zfyD1M4HGjyzIuHu02O4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672232\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "body",
+        "field" : "role",
+        "operation" : "ADD_JSON_FIELD",
+        "mutationName" : "add-role-field"
+      },
+      "reason" : "Request with unexpected field mutation 'add-role-field' returned HTTP 500.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Unexpected field mutation changed server behavior",
+      "summary" : "Request with unexpected field mutation 'add-role-field' returned HTTP 500. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API3-BOPLA-004",
+    "name" : "Mass assignment ownership field",
+    "description" : "Ownership fields should not be accepted from clients.",
+    "impact" : "Unauthorized writable fields can expose or modify attributes outside the intended object ownership boundary.",
+    "severity" : "HIGH",
+    "owasp" : "API3:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Bind ownership on the server from authenticated identity.",
+    "ai" : {
+      "whyDangerous" : "Unauthorized writable fields can expose or modify attributes.",
+      "remediation" : "Reject ownership fields from client requests.",
+      "businessImpact" : "Increased risk of unauthorized access to sensitive data.",
+      "evidenceTitle" : "Unexpected field mutation changed server behavior",
+      "evidenceSummary" : "Request with unexpected field mutation returned HTTP 500."
+    },
+    "cwe" : [ "CWE-915" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "add-owner-field",
+      "mutatedCredential" : "add-owner-field",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "Content-Type" : [ "application/json" ]
+          },
+          "cookies" : { },
+          "bodySize" : 20,
+          "body" : "{\"ownerId\":\"999999\"}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 351,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:32 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=XQ1PLxBQruqGZKwMintkl67zfyD1M4HGjyzIuHu02O4%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672232\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=XQ1PLxBQruqGZKwMintkl67zfyD1M4HGjyzIuHu02O4%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672232\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "body",
+        "field" : "ownerId",
+        "operation" : "ADD_JSON_FIELD",
+        "mutationName" : "add-owner-field"
+      },
+      "reason" : "Request with unexpected field mutation 'add-owner-field' returned HTTP 500.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Unexpected field mutation changed server behavior",
+      "summary" : "Request with unexpected field mutation 'add-owner-field' returned HTTP 500. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API3-BOPLA-005",
+    "name" : "Read-only field mutation",
+    "description" : "Read-only fields should not be writable.",
+    "impact" : "Relaxed object property validation can let an attacker tamper with fields that influence business decisions.",
+    "severity" : "MEDIUM",
+    "owasp" : "API3:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Ignore or reject read-only client-supplied fields.",
+    "cwe" : [ "CWE-915" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "add-readonly-field",
+      "mutatedCredential" : "add-readonly-field",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "Content-Type" : [ "application/json" ]
+          },
+          "cookies" : { },
+          "bodySize" : 36,
+          "body" : "{\"createdAt\":\"2000-01-01T00:00:00Z\"}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 351,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:33 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=ulHMiGMZGU5DH%2FJo6kcWJRJvEwsnFd0PXezolKjv6ow%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672233\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=ulHMiGMZGU5DH%2FJo6kcWJRJvEwsnFd0PXezolKjv6ow%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672233\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "body",
+        "field" : "createdAt",
+        "operation" : "ADD_JSON_FIELD",
+        "mutationName" : "add-readonly-field"
+      },
+      "reason" : "Request with unexpected field mutation 'add-readonly-field' returned HTTP 500.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Unexpected field mutation changed server behavior",
+      "summary" : "Request with unexpected field mutation 'add-readonly-field' returned HTTP 500. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API3-BOPLA-006",
+    "name" : "Unknown JSON property accepted",
+    "description" : "Unknown JSON fields should be rejected or ignored safely.",
+    "impact" : "Improper property-level authorization can expose hidden fields or allow unauthorized updates.",
+    "severity" : "LOW",
+    "owasp" : "API3:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Reject unexpected JSON properties for sensitive endpoints.",
+    "cwe" : [ "CWE-915" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "add-unknown-json-property",
+      "mutatedCredential" : "add-unknown-json-property",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "x-apikey" : [ "E5KAHRATn8kjWZbdAVaXTD7FVtCsdXuijm9dRpatlBLJ4gOplbGSMWSOlcn8x1lwyJLgzug1UVfmF/duXtk1oa9oG5+S6iDGA9zWpTjafpy4U0OT9kBiA5r/nDb55MzE4qfKfWXlpAqtEZrDiwtOlR1tjjzdCTEYmqPEfjYgQr7/WjIUBU2UQdB6zg2oQUWKBbPf1NY+F+TZiVcbhbwHibM7+yTSeLydksCElDo84GEb06QyoHxkXbB+QLWBdw9PvShGJr1e3xnIcf1MupyIPDVfB1WjwqNPSUD+KKqtKI/OSjQGR4x/6ov8zESd1nGQAiEKCvAW5/uhF5uVv0A70w==" ],
+            "Content-Type" : [ "application/json" ]
+          },
+          "cookies" : { },
+          "bodySize" : 25,
+          "body" : "{\"apisec_unknown\":\"true\"}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 473,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:33 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=ulHMiGMZGU5DH%2FJo6kcWJRJvEwsnFd0PXezolKjv6ow%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672233\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=ulHMiGMZGU5DH%2FJo6kcWJRJvEwsnFd0PXezolKjv6ow%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672233\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "body",
+        "field" : "apisec_unknown",
+        "operation" : "ADD_JSON_FIELD",
+        "mutationName" : "add-unknown-json-property"
+      },
+      "reason" : "Request with unexpected field mutation 'add-unknown-json-property' returned HTTP 500.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Unexpected field mutation changed server behavior",
+      "summary" : "Request with unexpected field mutation 'add-unknown-json-property' returned HTTP 500. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API2-AUTH-001",
+    "name" : "Endpoint should reject missing Authorization header",
+    "description" : "Authenticated endpoints should reject missing authorization.",
+    "impact" : "An attacker may access protected functionality without valid authentication by removing an existing credential.",
+    "severity" : "CRITICAL",
+    "owasp" : "API2:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Require authentication for protected endpoints.",
+    "cwe" : [ "CWE-306", "CWE-287" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "remove-x-apikey-header",
+      "mutatedCredential" : "x-apikey header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "Content-Type" : [ "application/json" ]
+          },
+          "cookies" : { },
+          "bodySize" : 2,
+          "body" : "{}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 515,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:33 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=ulHMiGMZGU5DH%2FJo6kcWJRJvEwsnFd0PXezolKjv6ow%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672233\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=ulHMiGMZGU5DH%2FJo6kcWJRJvEwsnFd0PXezolKjv6ow%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672233\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "x-apikey",
+        "operation" : "REMOVE_HEADER",
+        "mutationName" : "remove-x-apikey-header"
+      },
+      "reason" : "Endpoint returned HTTP 500 after auth credential was removed.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Endpoint accepted request after authentication was removed",
+      "summary" : "Endpoint returned HTTP 500 after auth credential was removed. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API2-AUTH-006",
+    "name" : "Missing auth should not return same body as baseline",
+    "description" : "Removing auth should not return the same sensitive body.",
+    "impact" : "A missing credential boundary can allow a caller to continue using a session or token after it should have been rejected.",
+    "severity" : "HIGH",
+    "owasp" : "API2:2023",
+    "status" : "FAILED",
+    "confidence" : "LOW",
+    "certainty" : "POTENTIAL",
+    "remediation" : "Return an auth error body instead of protected resource data.",
+    "cwe" : [ "CWE-306" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "mutationStatus" : 500,
+      "mutation" : "remove-x-apikey-header",
+      "mutatedCredential" : "x-apikey header",
+      "mutationExchange" : {
+        "request" : {
+          "method" : "POST",
+          "url" : "https://restful-booker.herokuapp.com/booking",
+          "path" : "/booking",
+          "query" : { },
+          "headers" : {
+            "Content-Type" : [ "application/json" ]
+          },
+          "cookies" : { },
+          "bodySize" : 2,
+          "body" : "{}"
+        },
+        "response" : {
+          "statusCode" : 500,
+          "durationMs" : 345,
+          "bodySize" : 21,
+          "contentType" : "text/plain; charset=utf-8",
+          "headers" : {
+            "content-length" : [ "21" ],
+            "content-type" : [ "text/plain; charset=utf-8" ],
+            "date" : [ "Fri, 10 Jul 2026 08:30:34 GMT" ],
+            "etag" : [ "W/\"15-/6VXivhc2MKdLfIkLcUE47K6aH0\"" ],
+            "nel" : [ "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}" ],
+            "report-to" : [ "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=ZMBdFhIvrryg3%2FE7lRU68y7%2FaRFqCcCt%2BdTmGkw3Y%2FA%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1783672234\"}],\"max_age\":3600}" ],
+            "reporting-endpoints" : [ "heroku-nel=\"https://nel.heroku.com/reports?s=ZMBdFhIvrryg3%2FE7lRU68y7%2FaRFqCcCt%2BdTmGkw3Y%2FA%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1783672234\"" ],
+            "server" : [ "Heroku" ],
+            "via" : [ "1.1 heroku-router" ],
+            "x-powered-by" : [ "Express" ]
+          },
+          "body" : "Internal Server Error"
+        }
+      },
+      "location" : {
+        "requestPart" : "header",
+        "field" : "x-apikey",
+        "operation" : "REMOVE_HEADER",
+        "mutationName" : "remove-x-apikey-header"
+      },
+      "reason" : "Endpoint returned HTTP 500 after auth credential was removed.",
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "endpointTypes" : [ "UNKNOWN" ],
+      "title" : "Endpoint accepted request after authentication was removed",
+      "summary" : "Endpoint returned HTTP 500 after auth credential was removed. Baseline status was 500 and mutated status was 500."
+    }
+  }, {
+    "ruleId" : "API8-CONFIG-004",
+    "name" : "Server version disclosure",
+    "description" : "Server version headers should not disclose stack details.",
+    "impact" : "If confirmed, Server version disclosure can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "LOW",
+    "owasp" : "API8:2023",
+    "status" : "FAILED",
+    "confidence" : "HIGH",
+    "certainty" : "INFO",
+    "remediation" : "Suppress detailed server version headers.",
+    "cwe" : [ "CWE-200" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "reason" : "Response exposes server/version style headers.",
+      "location" : {
+        "requestPart" : "response-header",
+        "field" : "Server",
+        "operation" : "PRESENT_RESPONSE_HEADER",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The baseline response matched a risky security pattern",
+      "summary" : "Response exposes server/version style headers."
+    }
+  }, {
+    "ruleId" : "API8-CONFIG-007",
+    "name" : "Missing anti-sniffing security header",
+    "description" : "APIs should prevent MIME sniffing where browser clients may consume responses.",
+    "impact" : "If confirmed, Missing anti-sniffing security header can weaken the endpoint's security controls or expose sensitive operations and data.",
+    "severity" : "LOW",
+    "owasp" : "API8:2023",
+    "status" : "FAILED",
+    "confidence" : "HIGH",
+    "certainty" : "INFO",
+    "remediation" : "Set X-Content-Type-Options: nosniff on API responses. Use cache-control rules separately for sensitive data.",
+    "cwe" : [ "CWE-693" ],
+    "cves" : [ ],
+    "evidence" : {
+      "baselineStatus" : 500,
+      "reason" : "Response is missing X-Content-Type-Options.",
+      "location" : {
+        "requestPart" : "response-header",
+        "field" : "X-Content-Type-Options",
+        "operation" : "ABSENT_RESPONSE_HEADER",
+        "mutationName" : "baseline-passive-check"
+      },
+      "responseSemantics" : {
+        "success" : false,
+        "sensitiveData" : false,
+        "confirmationSignal" : false,
+        "rateLimitSignal" : false,
+        "cookieSignal" : false,
+        "markers" : [ ]
+      },
+      "title" : "The baseline response matched a risky security pattern",
+      "summary" : "Response is missing X-Content-Type-Options."
+    }
+  } ],
+  "webhook" : {
+    "enabled" : false,
+    "delivered" : false,
+    "statusCode" : 0,
+    "attempts" : 0,
+    "error" : ""
+  }
+}
