@@ -67,13 +67,16 @@ final class ProgressSupport {
       int parsed = Integer.parseInt(columns);
       if (parsed >= 60) return parsed;
     }
-    Integer tputWidth = commandWidth("/bin/sh", "-lc", "tput cols 2>/dev/null");
+    Integer tputWidth = posixCommandWidth("tput cols 2>/dev/null");
     if (tputWidth != null && tputWidth >= 60) {
       return tputWidth;
     }
     Integer sttyWidth = sttyWidth();
     if (sttyWidth != null && sttyWidth >= 60) {
       return sttyWidth;
+    }
+    if (isGitBashLikeWindows()) {
+      return 80;
     }
     if (isWindows()) {
       Integer modeWidth = commandWidth("cmd", "/c", "mode con");
@@ -91,14 +94,14 @@ final class ProgressSupport {
   }
 
   static int dashboardWidth() {
-    int margin = isWindows() ? 8 : 4;
+    int margin = isGitBashLikeWindows() ? 12 : (isWindows() ? 8 : 4);
     int width = terminalWidth() - margin;
     return Math.max(72, width);
   }
 
   private static Integer sttyWidth() {
     try {
-      Process process = new ProcessBuilder("/bin/sh", "-lc", "stty size < /dev/tty").start();
+      Process process = posixShell("stty size < /dev/tty").start();
       try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
         String line = reader.readLine();
         process.waitFor();
@@ -113,6 +116,33 @@ final class ProgressSupport {
     } catch (Exception ignored) {
     }
     return null;
+  }
+
+  private static Integer posixCommandWidth(String command) {
+    try {
+      Process process = posixShell(command).start();
+      try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+        String line = reader.readLine();
+        process.waitFor();
+        if (line == null) return null;
+        String trimmed = line.trim();
+        if (trimmed.matches("\\d+")) {
+          return Integer.parseInt(trimmed);
+        }
+      }
+    } catch (Exception ignored) {
+    }
+    return null;
+  }
+
+  private static ProcessBuilder posixShell(String command) {
+    if (isWindows()) {
+      if (isPresent("MSYSTEM")) {
+        return new ProcessBuilder("sh", "-lc", command);
+      }
+      return new ProcessBuilder("bash", "-lc", command);
+    }
+    return new ProcessBuilder("/bin/sh", "-lc", command);
   }
 
   private static Integer commandWidth(String... command) {
@@ -336,6 +366,13 @@ final class ProgressSupport {
     return System.getProperty("os.name", "")
         .toLowerCase(Locale.ROOT)
         .contains("win");
+  }
+
+  private static boolean isGitBashLikeWindows() {
+    if (!isWindows()) return false;
+    return isPresent("MSYSTEM")
+        || "xterm".equalsIgnoreCase(System.getenv("TERM"))
+        || firstNonBlank(System.getenv("TERM")).toLowerCase(Locale.ROOT).contains("mintty");
   }
 
   private static boolean isPresent(String key) {
