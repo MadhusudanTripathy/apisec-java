@@ -304,6 +304,34 @@ final class ProgressSupport {
     return "";
   }
 
+  static boolean progressDebugEnabled() {
+    String value = System.getenv("APISEC_PROGRESS_DEBUG");
+    return value != null && Boolean.parseBoolean(value);
+  }
+
+  static void debug(String component, String message) {
+    if (!progressDebugEnabled()) return;
+    System.err.printf("[progress-debug] %s %s%n", component, message);
+  }
+
+  static String terminalSummary() {
+    return "os=" + System.getProperty("os.name", "")
+        + " term=" + firstNonBlank(System.getenv("TERM"))
+        + " msystem=" + firstNonBlank(System.getenv("MSYSTEM"))
+        + " wtSession=" + firstNonBlank(System.getenv("WT_SESSION"))
+        + " termProgram=" + firstNonBlank(System.getenv("TERM_PROGRAM"))
+        + " conEmuAnsi=" + firstNonBlank(System.getenv("ConEmuANSI"))
+        + " ansicon=" + firstNonBlank(System.getenv("ANSICON"))
+        + " noColor=" + firstNonBlank(System.getenv("NO_COLOR"))
+        + " console=" + (System.console() != null)
+        + " interactive=" + isInteractive()
+        + " ansi=" + supportsAnsi()
+        + " live=" + supportsLiveDashboard()
+        + " unicode=" + supportsUnicode()
+        + " width=" + terminalWidth()
+        + " dashboardWidth=" + dashboardWidth();
+  }
+
   private static boolean isWindows() {
     return System.getProperty("os.name", "")
         .toLowerCase(Locale.ROOT)

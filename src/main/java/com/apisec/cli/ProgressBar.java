@@ -30,6 +30,7 @@ class ProgressBar implements ProgressSink, AutoCloseable {
   }
 
   ProgressBar() {
+    ProgressSupport.debug("single-init", ProgressSupport.terminalSummary());
     painter = new Thread(this::paintLoop, "apisec-progress");
     painter.setDaemon(true);
     painter.start();
@@ -116,10 +117,22 @@ class ProgressBar implements ProgressSink, AutoCloseable {
 
     renderedLines = lines.size();
     renderedRows = 0;
+    int longestVisibleLine = 0;
     for (String line : lines) {
+      int visibleLength = ProgressSupport.stripAnsi(line).length();
+      longestVisibleLine = Math.max(longestVisibleLine, visibleLength);
       renderedRows += ProgressSupport.renderedRows(line, width);
       System.err.print("\r\033[2K" + line + "\n");
     }
+    ProgressSupport.debug(
+        "single-frame",
+        "width=" + width
+            + " contentWidth=" + contentWidth
+            + " lines=" + renderedLines
+            + " rows=" + renderedRows
+            + " longestVisibleLine=" + longestVisibleLine
+            + " overall=" + overall
+            + " stage=" + ProgressSupport.compact(currentStage.get()));
   }
 
   private String compactPhases(int width) {

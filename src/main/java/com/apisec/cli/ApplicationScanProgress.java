@@ -45,6 +45,7 @@ class ApplicationScanProgress implements ApplicationProgress {
   ApplicationScanProgress(int totalResources, String applicationLabel) {
     this.totalResources = Math.max(0, totalResources);
     this.applicationLabel = ProgressSupport.firstNonBlank(applicationLabel, "Application Scan");
+    ProgressSupport.debug("app-init", ProgressSupport.terminalSummary());
     painter = new Thread(this::paintLoop, "apisec-application-progress");
     painter.setDaemon(true);
     painter.start();
@@ -146,14 +147,14 @@ class ApplicationScanProgress implements ApplicationProgress {
   private synchronized void paint() {
     if (!screenInitialized) {
       if (ansi) {
-        System.err.print("\033[?25l\033[2J\033[H");
+        System.err.print("\033[?25l");
       } else {
         System.err.println();
       }
       screenInitialized = true;
     }
-    if (ansi) {
-      System.err.print("\033[H");
+    if (ansi && renderedRows > 0) {
+      System.err.print("\033[" + renderedRows + "A\r");
     }
 
     int width = Math.max(90, ProgressSupport.dashboardWidth());
@@ -199,7 +200,10 @@ class ApplicationScanProgress implements ApplicationProgress {
 
     renderedLines = lines.size();
     renderedRows = 0;
+    int longestVisibleLine = 0;
     for (String line : lines) {
+      int visibleLength = ProgressSupport.stripAnsi(line).length();
+      longestVisibleLine = Math.max(longestVisibleLine, visibleLength);
       renderedRows += ProgressSupport.renderedRows(line, width);
       System.err.print("\r\033[2K" + line + "\n");
     }
@@ -208,6 +212,17 @@ class ApplicationScanProgress implements ApplicationProgress {
     }
     maxRenderedLines = Math.max(maxRenderedLines, renderedLines);
     maxRenderedRows = Math.max(maxRenderedRows, renderedRows);
+    ProgressSupport.debug(
+        "app-frame",
+        "width=" + width
+            + " contentWidth=" + contentWidth
+            + " lines=" + renderedLines
+            + " rows=" + renderedRows
+            + " maxRows=" + maxRenderedRows
+            + " longestVisibleLine=" + longestVisibleLine
+            + " currentResource=" + currentResourceIndex + "/" + Math.max(totalResources, 1)
+            + " endpointPercent=" + currentEndpointPercent
+            + " stage=" + ProgressSupport.compact(currentStage));
   }
 
   private String renderPhaseLine(PhaseState state, int contentWidth) {
@@ -280,12 +295,12 @@ class ApplicationScanProgress implements ApplicationProgress {
   private void clearScreen() {
     if (!screenInitialized || maxRenderedRows <= 0) return;
     if (ansi) {
-      System.err.print("\033[H");
+      System.err.print("\033[" + maxRenderedRows + "A\r");
       for (int i = 0; i < maxRenderedRows; i++) {
         System.err.print("\r\033[2K");
         if (i < maxRenderedRows - 1) System.err.print("\n");
       }
-      System.err.print("\033[H\033[?25h");
+      System.err.print("\r\033[?25h");
     } else {
       System.err.println();
     }
