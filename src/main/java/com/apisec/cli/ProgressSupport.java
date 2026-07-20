@@ -8,9 +8,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 final class ProgressSupport {
   static final String[] SPINNER = {"|", "/", "-", "\\"};
+  private static final Pattern ANSI_ESCAPE = Pattern.compile("\u001B\\[[;?0-9]*[ -/]*[@-~]");
   static final String APIWIZ_ASCII_ART = """
            ▗▄▖ ▗▄▄▖▗▄▄▄▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▄▖
           ▐▌ ▐▌▐▌ ▐▌ █  ▐▌ ▐▌  █     ▗▞▘
@@ -164,6 +166,17 @@ final class ProgressSupport {
     String compact = compact(text);
     if (compact.length() <= max) return compact;
     return compact.substring(0, Math.max(0, max - 3)) + "...";
+  }
+
+  static int renderedRows(String text, int width) {
+    int safeWidth = Math.max(1, width);
+    int visibleLength = stripAnsi(text).length();
+    return Math.max(1, (visibleLength + safeWidth - 1) / safeWidth);
+  }
+
+  static String stripAnsi(String text) {
+    if (text == null || text.isEmpty()) return "";
+    return ANSI_ESCAPE.matcher(text).replaceAll("");
   }
 
   static String clipFromMiddle(String text, int max) {

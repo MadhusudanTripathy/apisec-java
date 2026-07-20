@@ -23,6 +23,7 @@ class ProgressBar implements ProgressSink, AutoCloseable {
 
   private volatile boolean screenInitialized;
   private volatile int renderedLines;
+  private volatile int renderedRows;
 
   static boolean isInteractive() {
     return ProgressSupport.supportsLiveDashboard();
@@ -87,8 +88,8 @@ class ProgressBar implements ProgressSink, AutoCloseable {
       System.err.println();
       screenInitialized = true;
     }
-    if (ansi && renderedLines > 0) {
-      System.err.print("\033[" + renderedLines + "A\r");
+    if (ansi && renderedRows > 0) {
+      System.err.print("\033[" + renderedRows + "A\r");
     }
 
     int width = Math.max(80, ProgressSupport.dashboardWidth());
@@ -114,7 +115,9 @@ class ProgressBar implements ProgressSink, AutoCloseable {
     lines.add("Elapsed  " + ProgressSupport.elapsed(started));
 
     renderedLines = lines.size();
+    renderedRows = 0;
     for (String line : lines) {
+      renderedRows += ProgressSupport.renderedRows(line, width);
       System.err.print("\r\033[2K" + line + "\n");
     }
   }
@@ -148,14 +151,14 @@ class ProgressBar implements ProgressSink, AutoCloseable {
   }
 
   private void clearScreen() {
-    if (!screenInitialized || renderedLines <= 0) return;
+    if (!screenInitialized || renderedRows <= 0) return;
     if (ansi) {
-      System.err.print("\033[" + renderedLines + "A");
-      for (int i = 0; i < renderedLines; i++) {
+      System.err.print("\033[" + renderedRows + "A");
+      for (int i = 0; i < renderedRows; i++) {
         System.err.print("\r\033[2K");
-        if (i < renderedLines - 1) System.err.print("\n");
+        if (i < renderedRows - 1) System.err.print("\n");
       }
-      System.err.print("\033[" + Math.max(0, renderedLines - 1) + "A\r");
+      System.err.print("\033[" + Math.max(0, renderedRows - 1) + "A\r");
     } else {
       System.err.println();
     }

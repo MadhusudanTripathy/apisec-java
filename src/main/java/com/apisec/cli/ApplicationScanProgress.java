@@ -20,7 +20,9 @@ class ApplicationScanProgress implements ApplicationProgress {
   private final String applicationLabel;
   private volatile boolean screenInitialized;
   private volatile int renderedLines;
+  private volatile int renderedRows;
   private volatile int maxRenderedLines;
+  private volatile int maxRenderedRows;
   private volatile int frame;
   private volatile int totalResources;
   private volatile int completedResources;
@@ -196,13 +198,16 @@ class ApplicationScanProgress implements ApplicationProgress {
     lines.add("  Elapsed   " + ProgressSupport.elapsed(started));
 
     renderedLines = lines.size();
+    renderedRows = 0;
     for (String line : lines) {
+      renderedRows += ProgressSupport.renderedRows(line, width);
       System.err.print("\r\033[2K" + line + "\n");
     }
-    for (int i = renderedLines; i < maxRenderedLines; i++) {
+    for (int i = renderedRows; i < maxRenderedRows; i++) {
       System.err.print("\r\033[2K\n");
     }
     maxRenderedLines = Math.max(maxRenderedLines, renderedLines);
+    maxRenderedRows = Math.max(maxRenderedRows, renderedRows);
   }
 
   private String renderPhaseLine(PhaseState state, int contentWidth) {
@@ -273,12 +278,12 @@ class ApplicationScanProgress implements ApplicationProgress {
   }
 
   private void clearScreen() {
-    if (!screenInitialized || maxRenderedLines <= 0) return;
+    if (!screenInitialized || maxRenderedRows <= 0) return;
     if (ansi) {
       System.err.print("\033[H");
-      for (int i = 0; i < maxRenderedLines; i++) {
+      for (int i = 0; i < maxRenderedRows; i++) {
         System.err.print("\r\033[2K");
-        if (i < maxRenderedLines - 1) System.err.print("\n");
+        if (i < maxRenderedRows - 1) System.err.print("\n");
       }
       System.err.print("\033[H\033[?25h");
     } else {
