@@ -15,7 +15,7 @@ class ProgressBar implements ProgressSink, AutoCloseable {
   private final AtomicReference<String> currentStage = new AtomicReference<>("Starting");
   private final AtomicReference<String> statusLine = new AtomicReference<>("Preparing scan");
   private final AtomicBoolean running = new AtomicBoolean(true);
-  private final boolean ansi = ProgressSupport.supportsAnsi();
+  private final boolean ansi = ProgressSupport.supportsLiveDashboard();
   private final boolean unicode = ProgressSupport.supportsUnicode();
   private final long started = System.currentTimeMillis();
   private final Thread painter;
@@ -25,7 +25,7 @@ class ProgressBar implements ProgressSink, AutoCloseable {
   private volatile int renderedLines;
 
   static boolean isInteractive() {
-    return ProgressSupport.isInteractive();
+    return ProgressSupport.supportsLiveDashboard();
   }
 
   ProgressBar() {

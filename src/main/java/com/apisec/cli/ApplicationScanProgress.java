@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-class ApplicationScanProgress implements ProgressSink, AutoCloseable {
-  private final boolean ansi = ProgressSupport.supportsAnsi();
+class ApplicationScanProgress implements ApplicationProgress {
+  private final boolean ansi = ProgressSupport.supportsLiveDashboard();
   private final boolean unicode = ProgressSupport.supportsUnicode();
   private final AtomicBoolean running = new AtomicBoolean(true);
   private final long started = System.currentTimeMillis();
@@ -48,7 +48,7 @@ class ApplicationScanProgress implements ProgressSink, AutoCloseable {
     painter.start();
   }
 
-  void resourceStarted(int index, int total, String method, String target, String operationId) {
+  @Override public void resourceStarted(int index, int total, String method, String target, String operationId) {
     totalResources = Math.max(totalResources, total);
     currentResourceIndex = index;
     currentEndpointPercent = 0;
@@ -61,7 +61,7 @@ class ApplicationScanProgress implements ProgressSink, AutoCloseable {
     paint();
   }
 
-  void resourceSkipped(String reason) {
+  @Override public void resourceSkipped(String reason) {
     skippedResources++;
     currentStage = "Skipping endpoint";
     currentStatus = ProgressSupport.compact(reason);
@@ -70,7 +70,7 @@ class ApplicationScanProgress implements ProgressSink, AutoCloseable {
     paint();
   }
 
-  void resourceCompleted(Report report) {
+  @Override public void resourceCompleted(Report report) {
     completedResources++;
     currentEndpointPercent = 100;
     currentStage = "Endpoint completed";
@@ -87,7 +87,7 @@ class ApplicationScanProgress implements ProgressSink, AutoCloseable {
     paint();
   }
 
-  void resourceFailed(String reason) {
+  @Override public void resourceFailed(String reason) {
     failedResources++;
     currentEndpointPercent = 100;
     currentStage = "Endpoint failed";
@@ -156,7 +156,6 @@ class ApplicationScanProgress implements ProgressSink, AutoCloseable {
 
     int width = Math.max(90, ProgressSupport.terminalWidth());
     int contentWidth = Math.max(86, width - 2);
-    boolean showBanner = width >= ProgressSupport.asciiArtWidth() + 4;
     int finished = completedResources + skippedResources + failedResources;
     int resourcesPercent = totalResources <= 0 ? 0 : ProgressSupport.clamp((int) Math.round((finished * 100.0) / totalResources));
     String resourcesSuffix = ProgressSupport.padLeft(finished + "/" + Math.max(totalResources, 1), 7)
@@ -168,10 +167,6 @@ class ApplicationScanProgress implements ProgressSink, AutoCloseable {
     String spinner = ProgressSupport.SPINNER[Math.floorMod(frame++, ProgressSupport.SPINNER.length)];
 
     List<String> lines = new ArrayList<>();
-    if (showBanner) {
-      lines.addAll(ProgressSupport.centeredAsciiArt(width - 1));
-      lines.add("");
-    }
     lines.add(ProgressSupport.color(spinner, "36", ansi) + " "
         + ProgressSupport.color("Application API Security Scan", "1;37", ansi) + "  "
         + ProgressSupport.color(resourcesPercent >= 100 ? "Completed" : "Running", "36", ansi));

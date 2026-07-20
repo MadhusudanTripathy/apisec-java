@@ -1,21 +1,4 @@
-# apisec-java
-
-Java 17 implementation of the defensive `apisec` CLI.
-
-It mirrors the Go CLI flow:
-
-- parse a user-provided curl command
-- execute the original request as baseline
-- load the shared `SecurityRuleGroup` JSON schema
-- run safe OWASP API Security mutations
-- evaluate runtime-style placeholders and expressions
-- print a concise terminal report
-- export JSON
-- optionally deliver the report to a webhook
-
-The Java implementation intentionally keeps the same rule JSON contract used by Mongo/APIWiz runtime. It does not require the full Spring runtime dependency graph; the shared boundary is the `SecurityRuleGroup` JSON document and placeholder semantics.
-
-## Build
+# Build
 
 ```sh
 cd apisec-java
@@ -55,6 +38,31 @@ Output:
 ```txt
 target/apisec
 ```
+
+That command produces a native binary for the current host OS only.
+
+### Linux executable from macOS
+
+If you are building on macOS and need a Linux binary for Ubuntu or another Linux host, use the Docker-based Linux native build:
+
+```sh
+./scripts/build-linux-native.sh amd64
+```
+
+For Linux ARM64:
+
+```sh
+./scripts/build-linux-native.sh arm64
+```
+
+Outputs:
+
+```txt
+dist/linux-amd64/apisec
+dist/linux-arm64/apisec
+```
+
+This requires Docker to be running locally.
 
 Run it:
 

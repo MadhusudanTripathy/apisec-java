@@ -7,6 +7,7 @@ import picocli.CommandLine.Command;
         subcommands = {ScanCommand.class, PullCommand.class, RulesCommand.class, ConfigCommand.class})
 public class ApiSec implements Runnable {
     public static void main(String[] args) {
+        CliBootstrap.initialize();
         System.exit(new CommandLine(new ApiSec()).execute(args));
     }
 

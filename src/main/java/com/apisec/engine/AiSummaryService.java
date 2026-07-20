@@ -37,12 +37,15 @@ final class AiSummaryService {
       - Keep each value short enough for UI cards and detail panes.
       - Include one entry in `findings` for each failed finding in the supplied data.
       - Copy the exact `ruleId` from the supplied finding into the output entry.
-      - `overview` is a short scan-level summary paragraph.
+      - `overview` is a 100 words scan-level summary paragraph.
       - `whyDangerous` explains that finding's main security risk in plain engineering language.
       - `remediation` gives actionable remediation guidance for that finding.
       - `businessImpact` explains likely operational or business risk for that finding.
       - `evidenceTitle` is a short headline for that finding's evidence section.
       - `evidenceSummary` is a short explanation of what the evidence showed for that finding.
+      - If a finding includes `location`, use it in `evidenceTitle` or `evidenceSummary` when it helps identify where the issue was observed, such as a header name, query parameter, body field, path segment, or response field.
+      - Prefer concrete evidence from `location` over generic wording like "the request" or "the response" when the supplied data identifies the exact place.
+      - Do not invent a location; only use `location` details that are present in the supplied finding data.
       If the scan has no failed findings, state that clearly and avoid implying a confirmed vulnerability.
       """;
 

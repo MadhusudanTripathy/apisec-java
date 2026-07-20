@@ -11,24 +11,12 @@ import java.util.Map;
 
 final class ProgressSupport {
   static final String[] SPINNER = {"|", "/", "-", "\\"};
-  static final List<String> APIWIZ_ASCII_ART = List.of(
-          "               AAA               PPPPPPPPPPPPPPPPP   IIIIIIIIIIWWWWWWWW                           WWWWWWWWIIIIIIIIIIZZZZZZZZZZZZZZZZZZZ",
-      "              A:::A              P::::::::::::::::P  I::::::::IW::::::W                           W::::::WI::::::::IZ:::::::::::::::::Z",
-      "             A:::::A             P::::::PPPPPP:::::P I::::::::IW::::::W                           W::::::WI::::::::IZ:::::::::::::::::Z",
-      "            A:::::::A            PP:::::P     P:::::PII::::::IIW::::::W                           W::::::WII::::::IIZ:::ZZZZZZZZ:::::Z",
-      "           A:::::::::A             P::::P     P:::::P  I::::I   W:::::W           WWWWW           W:::::W   I::::I  ZZZZZ     Z:::::Z",
-      "          A:::::A:::::A            P::::P     P:::::P  I::::I    W:::::W         W:::::W         W:::::W    I::::I          Z:::::Z",
-      "         A:::::A A:::::A           P::::PPPPPP:::::P   I::::I     W:::::W       W:::::::W       W:::::W     I::::I         Z:::::Z",
-      "        A:::::A   A:::::A          P:::::::::::::PP    I::::I      W:::::W     W:::::::::W     W:::::W      I::::I        Z:::::Z",
-      "       A:::::A     A:::::A         P::::PPPPPPPPP      I::::I       W:::::W   W:::::W:::::W   W:::::W       I::::I       Z:::::Z",
-      "      A:::::AAAAAAAAA:::::A        P::::P              I::::I        W:::::W W:::::W W:::::W W:::::W        I::::I      Z:::::Z",
-      "     A:::::::::::::::::::::A       P::::P              I::::I         W:::::W:::::W   W:::::W:::::W         I::::I     Z:::::Z",
-      "    A:::::AAAAAAAAAAAAA:::::A      P::::P              I::::I          W:::::::::W     W:::::::::W          I::::I  ZZZ:::::Z     ZZZZZ",
-      "   A:::::A             A:::::A   PP::::::PP          II::::::II         W:::::::W       W:::::::W         II::::::IIZ::::::ZZZZZZZZ:::Z",
-      "  A:::::A               A:::::A  P::::::::P          I::::::::I          W:::::W         W:::::W          I::::::::IZ:::::::::::::::::Z",
-      " A:::::A                 A:::::A P::::::::P          I::::::::I           W:::W           W:::W           I::::::::IZ:::::::::::::::::Z",
-      "AAAAAAA                   AAAAAAAPPPPPPPPPP          IIIIIIIIII            WWW             WWW            IIIIIIIIIIZZZZZZZZZZZZZZZZZZZ"
-  );
+  static final String APIWIZ_ASCII_ART = """
+           ▗▄▖ ▗▄▄▖▗▄▄▄▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▄▖
+          ▐▌ ▐▌▐▌ ▐▌ █  ▐▌ ▐▌  █     ▗▞▘
+          ▐▛▀▜▌▐▛▀▘  █  ▐▌ ▐▌  █   ▗▞▘ \s
+          ▐▌ ▐▌▐▌  ▗▄█▄▖▐▙█▟▌▗▄█▄▖▐▙▄▄▄▖                                     \s
+          """;
 
   private ProgressSupport() {}
 
@@ -51,6 +39,18 @@ final class ProgressSupport {
         && System.getenv("NO_COLOR") == null
         && term != null
         && !"dumb".equalsIgnoreCase(term);
+  }
+
+  static boolean supportsLiveDashboard() {
+    if (!isInteractive() || !supportsAnsi()) return false;
+    String forced = System.getenv("APISEC_FORCE_LIVE_DASHBOARD");
+    if (forced != null) return Boolean.parseBoolean(forced);
+    if (!isWindows()) return true;
+
+    return isPresent("WT_SESSION")
+        || isPresent("TERM_PROGRAM")
+        || isPresent("ConEmuANSI")
+        || isPresent("ANSICON");
   }
 
   static boolean supportsUnicode() {
@@ -131,16 +131,20 @@ final class ProgressSupport {
   }
 
   static int asciiArtWidth() {
-    return APIWIZ_ASCII_ART.stream().mapToInt(String::length).max().orElse(0);
+    return asciiArtLines().stream().mapToInt(String::length).max().orElse(0);
   }
 
   static List<String> centeredAsciiArt(int width) {
     List<String> lines = new ArrayList<>();
-    for (String line : APIWIZ_ASCII_ART) {
+    for (String line : asciiArtLines()) {
       int left = Math.max(0, (width - line.length()) / 2);
       lines.add(" ".repeat(left) + line);
     }
     return lines;
+  }
+
+  static List<String> asciiArtLines() {
+    return APIWIZ_ASCII_ART.lines().toList();
   }
 
   static String padLeft(String text, int width) {
@@ -232,6 +236,17 @@ final class ProgressSupport {
       if (value != null && !value.isBlank()) return value;
     }
     return "";
+  }
+
+  private static boolean isWindows() {
+    return System.getProperty("os.name", "")
+        .toLowerCase(Locale.ROOT)
+        .contains("win");
+  }
+
+  private static boolean isPresent(String key) {
+    String value = System.getenv(key);
+    return value != null && !value.isBlank();
   }
 
   enum Phase {

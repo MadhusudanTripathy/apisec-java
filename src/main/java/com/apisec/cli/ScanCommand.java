@@ -76,12 +76,13 @@ public class ScanCommand implements Callable<Integer> {
     int skipped = 0;
     int failures = 0;
     List<Reporter.ApplicationScanEntry> entries = new ArrayList<>();
-    boolean interactive = !json && ProgressBar.isInteractive();
-    if (!interactive) {
+    boolean liveDashboard = !json && ProgressBar.isInteractive();
+    if (!liveDashboard && !json) {
       System.out.printf("Application %s resolved to %d resource(s)%n", firstNonBlank(resources.applicationId, applicationId), resources.resources.size());
     }
-    try (ApplicationScanProgress progress = interactive ? new ApplicationScanProgress(resources.resources.size(),
-        firstNonBlank(resources.name, resources.applicationId, applicationId)) : null) {
+    try (ApplicationProgress progress = liveDashboard
+        ? new ApplicationScanProgress(resources.resources.size(), firstNonBlank(resources.name, resources.applicationId, applicationId))
+        : (!json ? new PlainApplicationScanProgress(resources.resources.size(), firstNonBlank(resources.name, resources.applicationId, applicationId)) : null)) {
       for (ResourceTarget resource : resources.resources) {
         if (resource == null) {
           skipped++;
@@ -149,8 +150,13 @@ public class ScanCommand implements Callable<Integer> {
   }
 
   private static ScannerEngine.Result runScan(AppConfig cfg, ScannerEngine.Options options, boolean json) throws Exception {
-    if (json || !ProgressBar.isInteractive()) return ScannerEngine.run(cfg, options);
-    try (ProgressBar progress = new ProgressBar()) {
+    if (json) return ScannerEngine.run(cfg, options);
+    if (ProgressBar.isInteractive()) {
+      try (ProgressBar progress = new ProgressBar()) {
+        return ScannerEngine.run(cfg, options, progress);
+      }
+    }
+    try (PlainProgress progress = new PlainProgress()) {
       return ScannerEngine.run(cfg, options, progress);
     }
   }

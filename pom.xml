@@ -13,6 +13,9 @@
     <jackson.version>2.19.0</jackson.version>
     <junit.version>5.12.2</junit.version>
     <native.maven.plugin.version>0.10.6</native.maven.plugin.version>
+    <native.watchdog.interval>60</native.watchdog.interval>
+    <native.image.jvm.xmx>4g</native.image.jvm.xmx>
+    <native.metadata.repository.enabled>false</native.metadata.repository.enabled>
   </properties>
 
   <dependencies>
@@ -91,10 +94,18 @@
             <configuration>
               <imageName>apisec</imageName>
               <mainClass>com.apisec.cli.ApiSec</mainClass>
+              <verbose>true</verbose>
+              <jvmArgs>
+                <jvmArg>-Xmx${native.image.jvm.xmx}</jvmArg>
+              </jvmArgs>
+              <metadataRepository>
+                <enabled>${native.metadata.repository.enabled}</enabled>
+              </metadataRepository>
               <buildArgs>
                 <buildArg>--no-fallback</buildArg>
                 <buildArg>--enable-url-protocols=http,https</buildArg>
                 <buildArg>-H:+ReportExceptionStackTraces</buildArg>
+                <buildArg>-H:DeadlockWatchdogInterval=${native.watchdog.interval}</buildArg>
               </buildArgs>
             </configuration>
             <executions>
