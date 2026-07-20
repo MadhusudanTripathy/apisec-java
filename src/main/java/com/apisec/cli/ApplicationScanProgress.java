@@ -147,14 +147,14 @@ class ApplicationScanProgress implements ApplicationProgress {
   private synchronized void paint() {
     if (!screenInitialized) {
       if (ansi) {
-        System.err.print("\033[?25l");
+        System.err.print("\033[?25l\033[H\033[2J");
       } else {
         System.err.println();
       }
       screenInitialized = true;
     }
-    if (ansi && renderedRows > 0) {
-      System.err.print("\033[" + renderedRows + "A\r");
+    if (ansi) {
+      System.err.print("\033[H\033[2J");
     }
 
     int width = Math.max(90, ProgressSupport.dashboardWidth());
@@ -206,9 +206,6 @@ class ApplicationScanProgress implements ApplicationProgress {
       longestVisibleLine = Math.max(longestVisibleLine, visibleLength);
       renderedRows += ProgressSupport.renderedRows(line, width);
       System.err.print("\r\033[2K" + line + "\n");
-    }
-    for (int i = renderedRows; i < maxRenderedRows; i++) {
-      System.err.print("\r\033[2K\n");
     }
     maxRenderedLines = Math.max(maxRenderedLines, renderedLines);
     maxRenderedRows = Math.max(maxRenderedRows, renderedRows);
@@ -293,13 +290,9 @@ class ApplicationScanProgress implements ApplicationProgress {
   }
 
   private void clearScreen() {
-    if (!screenInitialized || maxRenderedRows <= 0) return;
+    if (!screenInitialized) return;
     if (ansi) {
-      System.err.print("\033[" + maxRenderedRows + "A\r");
-      for (int i = 0; i < maxRenderedRows; i++) {
-        System.err.print("\r\033[2K");
-        if (i < maxRenderedRows - 1) System.err.print("\n");
-      }
+      System.err.print("\033[H\033[2J");
       System.err.print("\r\033[?25h");
     } else {
       System.err.println();
