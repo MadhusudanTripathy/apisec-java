@@ -147,14 +147,14 @@ class ApplicationScanProgress implements ApplicationProgress {
   private synchronized void paint() {
     if (!screenInitialized) {
       if (ansi) {
-        System.err.print("\033[?25l");
+        enterLiveScreen();
       } else {
         System.err.println();
       }
       screenInitialized = true;
     }
     if (ansi) {
-      clearAndHome();
+      home();
     }
 
     int width = Math.max(90, ProgressSupport.dashboardWidth());
@@ -206,6 +206,9 @@ class ApplicationScanProgress implements ApplicationProgress {
       longestVisibleLine = Math.max(longestVisibleLine, visibleLength);
       renderedRows += ProgressSupport.renderedRows(line, width);
       System.err.print("\r\033[2K" + line + "\n");
+    }
+    if (ansi) {
+      System.err.print("\033[J");
     }
     System.err.flush();
     maxRenderedLines = Math.max(maxRenderedLines, renderedLines);
@@ -293,15 +296,22 @@ class ApplicationScanProgress implements ApplicationProgress {
   private void clearScreen() {
     if (!screenInitialized) return;
     if (ansi) {
-      clearAndHome();
-      System.err.print("\r\033[?25h");
+      exitLiveScreen();
       System.err.flush();
     } else {
       System.err.println();
     }
   }
 
-  private void clearAndHome() {
-    System.err.print("\033[2J\033[3J\033[1;1H");
+  private void enterLiveScreen() {
+    System.err.print("\033[?1049h\033[?25l\033[2J\033[1;1H");
+  }
+
+  private void home() {
+    System.err.print("\033[1;1H");
+  }
+
+  private void exitLiveScreen() {
+    System.err.print("\033[?25h\033[?1049l");
   }
 }
