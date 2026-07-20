@@ -87,14 +87,14 @@ class ProgressBar implements ProgressSink, AutoCloseable {
   private synchronized void paint() {
     if (!screenInitialized) {
       if (ansi) {
-        System.err.print("\033[?25l\033[H\033[2J");
+        System.err.print("\033[?25l");
       } else {
         System.err.println();
       }
       screenInitialized = true;
     }
     if (ansi) {
-      System.err.print("\033[H\033[2J");
+      clearAndHome();
     }
 
     int width = Math.max(80, ProgressSupport.dashboardWidth());
@@ -128,6 +128,7 @@ class ProgressBar implements ProgressSink, AutoCloseable {
       renderedRows += ProgressSupport.renderedRows(line, width);
       System.err.print("\r\033[2K" + line + "\n");
     }
+    System.err.flush();
     ProgressSupport.debug(
         "single-frame",
         "width=" + width
@@ -170,9 +171,15 @@ class ProgressBar implements ProgressSink, AutoCloseable {
   private void clearScreen() {
     if (!screenInitialized) return;
     if (ansi) {
-      System.err.print("\033[H\033[2J\r\033[?25h");
+      clearAndHome();
+      System.err.print("\r\033[?25h");
+      System.err.flush();
     } else {
       System.err.println();
     }
+  }
+
+  private void clearAndHome() {
+    System.err.print("\033[2J\033[3J\033[1;1H");
   }
 }

@@ -147,14 +147,14 @@ class ApplicationScanProgress implements ApplicationProgress {
   private synchronized void paint() {
     if (!screenInitialized) {
       if (ansi) {
-        System.err.print("\033[?25l\033[H\033[2J");
+        System.err.print("\033[?25l");
       } else {
         System.err.println();
       }
       screenInitialized = true;
     }
     if (ansi) {
-      System.err.print("\033[H\033[2J");
+      clearAndHome();
     }
 
     int width = Math.max(90, ProgressSupport.dashboardWidth());
@@ -207,6 +207,7 @@ class ApplicationScanProgress implements ApplicationProgress {
       renderedRows += ProgressSupport.renderedRows(line, width);
       System.err.print("\r\033[2K" + line + "\n");
     }
+    System.err.flush();
     maxRenderedLines = Math.max(maxRenderedLines, renderedLines);
     maxRenderedRows = Math.max(maxRenderedRows, renderedRows);
     ProgressSupport.debug(
@@ -292,10 +293,15 @@ class ApplicationScanProgress implements ApplicationProgress {
   private void clearScreen() {
     if (!screenInitialized) return;
     if (ansi) {
-      System.err.print("\033[H\033[2J");
+      clearAndHome();
       System.err.print("\r\033[?25h");
+      System.err.flush();
     } else {
       System.err.println();
     }
+  }
+
+  private void clearAndHome() {
+    System.err.print("\033[2J\033[3J\033[1;1H");
   }
 }
