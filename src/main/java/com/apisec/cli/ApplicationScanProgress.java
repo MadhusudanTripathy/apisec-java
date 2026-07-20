@@ -154,8 +154,8 @@ class ApplicationScanProgress implements ApplicationProgress {
       System.err.print("\033[H");
     }
 
-    int width = Math.max(90, ProgressSupport.terminalWidth());
-    int contentWidth = Math.max(86, width - 2);
+    int width = Math.max(90, ProgressSupport.dashboardWidth());
+    int contentWidth = Math.max(82, width - 4);
     int finished = completedResources + skippedResources + failedResources;
     int resourcesPercent = totalResources <= 0 ? 0 : ProgressSupport.clamp((int) Math.round((finished * 100.0) / totalResources));
     String resourcesSuffix = ProgressSupport.padLeft(finished + "/" + Math.max(totalResources, 1), 7)

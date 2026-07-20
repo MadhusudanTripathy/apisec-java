@@ -91,8 +91,8 @@ class ProgressBar implements ProgressSink, AutoCloseable {
       System.err.print("\033[" + renderedLines + "A\r");
     }
 
-    int width = Math.max(80, ProgressSupport.terminalWidth());
-    int contentWidth = Math.max(76, width - 2);
+    int width = Math.max(80, ProgressSupport.dashboardWidth());
+    int contentWidth = Math.max(72, width - 4);
     int overall = overallPercent.get();
     int barWidth = Math.max(18, Math.min(72, contentWidth - 28));
     int phaseBarWidth = Math.max(12, Math.min(48, contentWidth / 4));

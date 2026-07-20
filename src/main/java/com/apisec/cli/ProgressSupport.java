@@ -65,6 +65,36 @@ final class ProgressSupport {
       int parsed = Integer.parseInt(columns);
       if (parsed >= 60) return parsed;
     }
+    Integer tputWidth = commandWidth("/bin/sh", "-lc", "tput cols 2>/dev/null");
+    if (tputWidth != null && tputWidth >= 60) {
+      return tputWidth;
+    }
+    Integer sttyWidth = sttyWidth();
+    if (sttyWidth != null && sttyWidth >= 60) {
+      return sttyWidth;
+    }
+    if (isWindows()) {
+      Integer modeWidth = commandWidth("cmd", "/c", "mode con");
+      if (modeWidth != null && modeWidth >= 60) {
+        return modeWidth;
+      }
+      Integer powershellWidth = commandWidth(
+          "powershell", "-NoProfile", "-Command",
+          "$Host.UI.RawUI.WindowSize.Width");
+      if (powershellWidth != null && powershellWidth >= 60) {
+        return powershellWidth;
+      }
+    }
+    return isWindows() ? 100 : 140;
+  }
+
+  static int dashboardWidth() {
+    int margin = isWindows() ? 8 : 4;
+    int width = terminalWidth() - margin;
+    return Math.max(72, width);
+  }
+
+  private static Integer sttyWidth() {
     try {
       Process process = new ProcessBuilder("/bin/sh", "-lc", "stty size < /dev/tty").start();
       try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
@@ -80,7 +110,30 @@ final class ProgressSupport {
       }
     } catch (Exception ignored) {
     }
-    return 140;
+    return null;
+  }
+
+  private static Integer commandWidth(String... command) {
+    try {
+      Process process = new ProcessBuilder(command).start();
+      try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+        String line = reader.readLine();
+        process.waitFor();
+        if (line == null) return null;
+        String trimmed = line.trim();
+        if (trimmed.matches("\\d+")) {
+          return Integer.parseInt(trimmed);
+        }
+        if (trimmed.toLowerCase(Locale.ROOT).contains("columns:")) {
+          String digits = trimmed.replaceAll(".*columns:\\s*", "").replaceAll("[^0-9].*", "");
+          if (digits.matches("\\d+")) {
+            return Integer.parseInt(digits);
+          }
+        }
+      }
+    } catch (Exception ignored) {
+    }
+    return null;
   }
 
   static int clamp(int value) {
