@@ -3,6 +3,10 @@ package com.apisec.cli;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -49,7 +53,8 @@ final class ProgressSupport {
     if (forced != null) return Boolean.parseBoolean(forced);
     if (!isWindows()) return true;
 
-    return isPresent("WT_SESSION")
+    return isGitBashLikeWindows()
+        || isPresent("WT_SESSION")
         || isPresent("TERM_PROGRAM")
         || isPresent("ConEmuANSI")
         || isPresent("ANSICON");
@@ -341,7 +346,17 @@ final class ProgressSupport {
 
   static void debug(String component, String message) {
     if (!progressDebugEnabled()) return;
-    System.err.printf("[progress-debug] %s %s%n", component, message);
+    try {
+      Path logs = Path.of("").toAbsolutePath().normalize().resolve("logs");
+      Files.createDirectories(logs);
+      Files.writeString(
+          logs.resolve("progress-debug.log"),
+          "[progress-debug] " + component + " " + message + System.lineSeparator(),
+          StandardCharsets.UTF_8,
+          StandardOpenOption.CREATE,
+          StandardOpenOption.APPEND);
+    } catch (Exception ignored) {
+    }
   }
 
   static String terminalSummary() {
@@ -368,7 +383,7 @@ final class ProgressSupport {
         .contains("win");
   }
 
-  private static boolean isGitBashLikeWindows() {
+  static boolean isGitBashLikeWindows() {
     if (!isWindows()) return false;
     return isPresent("MSYSTEM")
         || "xterm".equalsIgnoreCase(System.getenv("TERM"))
