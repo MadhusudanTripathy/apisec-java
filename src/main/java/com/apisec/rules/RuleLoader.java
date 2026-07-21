@@ -62,8 +62,8 @@ public class RuleLoader {
 
   public static String displayKey(Group g) {
     if (g == null) return "";
-    if (!blank(g.sourceName)) return g.sourceName;
     if ("OWASP API Security Top 10 2023 Backup".equals(g.name)) return "owasp-api-2023-backup";
+    if (!blank(g.sourceName)) return g.sourceName;
     if (!blank(g.name)) return slugify(g.name);
     if (!blank(g.id)) return g.id;
     return "";
@@ -97,22 +97,41 @@ public class RuleLoader {
             m.mutations = Arrays.asList(mapper.readValue(s(v), Mutation[].class));
           } catch (Exception ignored) { m.mutations = new ArrayList<>(); }
         }
+        case "scanner.enabled" -> m.scannerEnabled = Boolean.parseBoolean(s(v));
+        case "scanner.mode" -> {
+          m.scannerMode = s(v);
+          if (!m.scannerMode.isBlank()) m.scanType = m.scannerMode;
+        }
+        case "scanner.evaluationMode" -> m.evaluationMode = s(v);
+        case "scanner.passive" -> m.passive = Boolean.parseBoolean(s(v));
+        case "scanner.destructive" -> m.destructive = Boolean.parseBoolean(s(v));
+        case "scanner.requiresAuthContext" -> m.requiresAuthContext = Boolean.parseBoolean(s(v));
+        case "scanner.requiresAltContext" -> m.requiresAltContext = Boolean.parseBoolean(s(v));
+        case "scanner.successCriteria" -> m.successCriteria = map(v);
+        case "scanner.mutations" -> {
+          List<Mutation> parsed = mutations(v, mapper);
+          if (!parsed.isEmpty()) m.mutations = parsed;
+        }
       }
     }
     return m;
   }
 
   public static class ScannerMetadata {
+    public boolean scannerEnabled = true;
     public String owasp = "";
     public List<String> cwe = new ArrayList<>();
     public List<String> cves = new ArrayList<>();
     public String scanType = "";
+    public String scannerMode = "";
+    public String evaluationMode = "";
     public boolean destructive;
     public boolean requiresAuthContext;
     public boolean requiresAltContext;
     public boolean passive;
     public String remediation = "";
     public List<Mutation> mutations = new ArrayList<>();
+    public Map<String,Object> successCriteria = new LinkedHashMap<>();
   }
 
   private static boolean blank(String s) { return s == null || s.isBlank(); }
@@ -142,6 +161,29 @@ public class RuleLoader {
   private static String safe(String value) { return value == null ? "" : value; }
   private static List<String> list(Object v) {
     if (v instanceof List<?> l) return l.stream().map(String::valueOf).toList();
+    return new ArrayList<>();
+  }
+  @SuppressWarnings("unchecked")
+  private static Map<String,Object> map(Object v) {
+    if (v instanceof Map<?,?> m) {
+      Map<String,Object> out = new LinkedHashMap<>();
+      m.forEach((k, value) -> out.put(String.valueOf(k), value));
+      return out;
+    }
+    return new LinkedHashMap<>();
+  }
+  private static List<Mutation> mutations(Object v, ObjectMapper mapper) {
+    try {
+      if (v instanceof List<?> list) {
+        List<Mutation> out = new ArrayList<>();
+        for (Object item : list) out.add(mapper.convertValue(item, Mutation.class));
+        return out;
+      }
+      if (v instanceof String text && !text.isBlank()) {
+        return Arrays.asList(mapper.readValue(text, Mutation[].class));
+      }
+    } catch (Exception ignored) {
+    }
     return new ArrayList<>();
   }
 }

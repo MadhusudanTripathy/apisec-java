@@ -1,8 +1,11 @@
 package com.apisec.cli;
 
+import com.apisec.client.ApplicationScanModels.ResourceTarget;
 import com.apisec.curl.CurlParser;
 import com.apisec.config.AppConfig;
 import com.apisec.engine.EndpointClassifier;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.apisec.eval.Evaluator;
 import com.apisec.model.RequestModel;
 import com.apisec.model.ResponseModel;
@@ -26,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ScanCommandTest {
+  private static final ObjectMapper MAPPER = new ObjectMapper();
 
   @Test void resolvesInlineCurlSubcommandStyleInvocation() {
     String curl = ScanCommand.resolveInlineCurl(
@@ -171,6 +175,34 @@ class ScanCommandTest {
     );
 
     assertEquals("scan_shared_run", options.scanId());
+  }
+
+  @Test void selectedServerOverridesResourceUrlForApplicationScanTarget() {
+    ResourceTarget resource = new ResourceTarget();
+    resource.selectedServer = "https://selected.example.com/api/";
+    resource.url = "https://default.example.com/v1/books/{id}";
+    resource.path = "/v1/books/{id}";
+
+    assertEquals("https://selected.example.com/api/v1/books/1", ScanCommand.safeUrl(resource));
+  }
+
+  @Test void selectedServerIsSerializedInResourceReport() throws Exception {
+    AppConfig cfg = AppConfig.defaults();
+    Path reportDir = Files.createTempDirectory("apisec-java-selected-server");
+    cfg.reports.directory = reportDir.toString();
+
+    ReportModels.Report report = new ReportModels.Report();
+    report.scanId = "scan_selected_server";
+    report.startedAt = Instant.parse("2026-07-21T10:00:00Z");
+    report.finishedAt = Instant.parse("2026-07-21T10:00:01Z");
+    report.resource = new ReportModels.Resource();
+    report.resource.resourceId = "resource-1";
+    report.resource.selectedServer = "https://selected.example.com/api";
+
+    var writeResult = Reporter.writeJson(report, cfg);
+    JsonNode json = MAPPER.readTree(Path.of(writeResult.path()).toFile());
+
+    assertEquals("https://selected.example.com/api", json.path("resource").path("selectedServer").asText());
   }
 
   @Test void reporterAvoidsFileNameCollisionsForSharedScanId() throws Exception {

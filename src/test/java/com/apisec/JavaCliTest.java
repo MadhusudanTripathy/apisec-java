@@ -52,8 +52,168 @@ class JavaCliTest {
     assertEquals(61, splitTotal);
   }
 
+  @Test void loadsScannerMetadataFromRuleGroup() throws Exception {
+    Path ruleFile = scannerMetadataRuleFile();
+    Group g = RuleLoader.loadFile(ruleFile);
+
+    var md = RuleLoader.metadata(g.rules.get(0));
+    assertTrue(md.scannerEnabled);
+    assertEquals("THREAT_MATCH", md.evaluationMode);
+    assertEquals("active", md.scannerMode);
+    assertEquals("AUTHZ_BYPASS", md.successCriteria.get("type"));
+    assertEquals(1, md.mutations.size());
+    assertEquals("ADD_QUERY_PARAM", md.mutations.get(0).operation);
+  }
+
+  @Test void activeScannerMetadataUsesDastSuccessCriteria() throws Exception {
+    HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+    server.createContext("/v1/orders/123", ex -> {
+      byte[] body = "{\"status\":\"ok\"}".getBytes(StandardCharsets.UTF_8);
+      ex.getResponseHeaders().set("Content-Type", "application/json");
+      ex.sendResponseHeaders(200, body.length);
+      ex.getResponseBody().write(body);
+      ex.close();
+    });
+    server.setExecutor(Executors.newSingleThreadExecutor());
+    server.start();
+    try {
+      AppConfig cfg = AppConfig.defaults();
+      cfg.reports.directory = Files.createTempDirectory("apisec-java-dast-metadata-reports").toString();
+
+      ScannerEngine.Result result = ScannerEngine.run(cfg, new ScannerEngine.Options(
+          "curl http://127.0.0.1:" + server.getAddress().getPort() + "/v1/orders/123",
+          null,
+          scannerMetadataRuleFile().toString()
+      ));
+
+      var finding = result.report().findings.stream().filter(f -> "TEST-DAST-001".equals(f.ruleId)).findFirst().orElseThrow();
+      assertEquals("FAILED", finding.status);
+      assertEquals("AUTHZ_BYPASS", finding.evidence.get("dastCriteria"));
+      assertTrue(String.valueOf(finding.evidence.get("reason")).contains("Mutated authorization request"));
+    } finally {
+      server.stop(0);
+    }
+  }
+
+  @Test void successCriteriaDefaultsToThreatMatchWhenEvaluationModeIsMissing() throws Exception {
+    HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+    server.createContext("/v1/orders/123", ex -> {
+      byte[] body = "{\"status\":\"ok\"}".getBytes(StandardCharsets.UTF_8);
+      ex.getResponseHeaders().set("Content-Type", "application/json");
+      ex.sendResponseHeaders(200, body.length);
+      ex.getResponseBody().write(body);
+      ex.close();
+    });
+    server.setExecutor(Executors.newSingleThreadExecutor());
+    server.start();
+    try {
+      AppConfig cfg = AppConfig.defaults();
+      cfg.reports.directory = Files.createTempDirectory("apisec-java-dast-default-reports").toString();
+
+      ScannerEngine.Result result = ScannerEngine.run(cfg, new ScannerEngine.Options(
+          "curl http://127.0.0.1:" + server.getAddress().getPort() + "/v1/orders/123",
+          null,
+          scannerMetadataRuleFile(false).toString()
+      ));
+
+      var finding = result.report().findings.stream().filter(f -> "TEST-DAST-001".equals(f.ruleId)).findFirst().orElseThrow();
+      assertEquals("FAILED", finding.status);
+      assertEquals("AUTHZ_BYPASS", finding.evidence.get("dastCriteria"));
+    } finally {
+      server.stop(0);
+    }
+  }
+
   @Test void redactsSecrets() {
     assertTrue(Redactor.text("x-apikey: secret").contains("[REDACTED]"));
+  }
+
+  private static Path scannerMetadataRuleFile() throws Exception {
+    return scannerMetadataRuleFile(true);
+  }
+
+  private static Path scannerMetadataRuleFile(boolean includeEvaluationMode) throws Exception {
+    Path file = Files.createTempFile("apisec-java-scanner-metadata-rule", ".json");
+    String evaluationModeMetadata = includeEvaluationMode ? """
+                  {
+                    "key": "scanner.evaluationMode",
+                    "value": "THREAT_MATCH",
+                    "type": "String"
+                  },
+        """ : "";
+    Files.writeString(file, """
+        {
+          "id": "111111111111111111111111",
+          "name": "Scanner Metadata Test Group",
+          "description": "Scanner Metadata Test Group",
+          "precondition": {
+            "type": "Field",
+            "expression": "true",
+            "placeholders": [],
+            "metadata": []
+          },
+          "rules": [
+            {
+              "id": "222222222222222222222222",
+              "ruleId": "TEST-DAST-001",
+              "name": "DAST success criteria test",
+              "description": "DAST success criteria test",
+              "priority": "HIGH",
+              "assertion": {
+                "type": "Field",
+                "expression": "{0}",
+                "placeholders": [
+                  {
+                    "rule": "REGEX",
+                    "key": "request.path",
+                    "value": "/admin"
+                  }
+                ],
+                "metadata": [
+                  {
+                    "key": "owasp",
+                    "value": "API5:2023",
+                    "type": "String"
+                  },
+                  {
+                    "key": "scanner.enabled",
+                    "value": true,
+                    "type": "Boolean"
+                  },
+                  {
+                    "key": "scanner.mode",
+                    "value": "active",
+                    "type": "String"
+                  },
+                  %s
+                  {
+                    "key": "scanner.mutations",
+                    "value": [
+                      {
+                        "name": "add-admin-query",
+                        "operation": "ADD_QUERY_PARAM",
+                        "key": "admin",
+                        "value": "true"
+                      }
+                    ],
+                    "type": "Array"
+                  },
+                  {
+                    "key": "scanner.successCriteria",
+                    "value": {
+                      "type": "AUTHZ_BYPASS",
+                      "successStatus": ["2xx"],
+                      "bodySimilarityThreshold": 0.85
+                    },
+                    "type": "Object"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+        """.formatted(evaluationModeMetadata));
+    return file;
   }
 
   @Test void loadsPropertiesConfig() throws Exception {

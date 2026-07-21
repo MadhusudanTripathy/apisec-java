@@ -9,6 +9,7 @@ import com.apisec.report.ReportModels;
 import com.apisec.report.Reporter;
 import picocli.CommandLine;
 import picocli.CommandLine.*;
+import java.io.Console;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -72,6 +73,7 @@ public class ScanCommand implements Callable<Integer> {
       System.out.println("No scan resources found for application " + applicationId);
       return 0;
     }
+    selectServers(resources);
     int attempted = 0;
     int skipped = 0;
     int failures = 0;
@@ -233,6 +235,7 @@ public class ScanCommand implements Callable<Integer> {
     out.revision = resource.revision;
     out.status = resource.status;
     out.baseUrl = resource.baseUrl;
+    out.selectedServer = resource.selectedServer;
     out.path = resource.path;
     out.method = resource.method;
     out.operationId = resource.operationId;
@@ -270,10 +273,105 @@ public class ScanCommand implements Callable<Integer> {
     return method == null || method.isBlank() ? "GET" : method.toUpperCase(Locale.ROOT);
   }
 
-  private static String safeUrl(ResourceTarget resource) {
-    String raw = resource == null ? "" : firstNonBlank(resource.url, resource.baseUrl);
+  static String safeUrl(ResourceTarget resource) {
+    String raw = resource == null ? "" : firstNonBlank(selectedServerUrl(resource), resource.url, resource.baseUrl);
     if (raw.isBlank()) return "";
     return raw.replaceAll("\\{[^/}]+}", "1");
+  }
+
+  private static void selectServers(ApplicationScanResources resources) {
+    Map<String, List<ResourceTarget>> resourcesByOas = new LinkedHashMap<>();
+    for (ResourceTarget resource : resources.resources) {
+      if (resource == null) continue;
+      resourcesByOas.computeIfAbsent(oasKey(resource), ignored -> new ArrayList<>()).add(resource);
+    }
+
+    for (List<ResourceTarget> oasResources : resourcesByOas.values()) {
+      if (oasResources.isEmpty()) continue;
+      ResourceTarget representative = oasResources.get(0);
+      List<String> servers = distinctServers(oasResources);
+      if (servers.isEmpty()) {
+        continue;
+      }
+
+      String selected = servers.size() == 1 ? servers.get(0) : promptForServer(representative, servers);
+      for (ResourceTarget resource : oasResources) {
+        resource.selectedServer = selected;
+      }
+    }
+  }
+
+  private static List<String> distinctServers(List<ResourceTarget> resources) {
+    LinkedHashSet<String> servers = new LinkedHashSet<>();
+    for (ResourceTarget resource : resources) {
+      if (resource == null || resource.servers == null) continue;
+      for (String server : resource.servers) {
+        String normalized = normalizeServer(server);
+        if (!normalized.isBlank()) servers.add(normalized);
+      }
+    }
+    return new ArrayList<>(servers);
+  }
+
+  private static String promptForServer(ResourceTarget resource, List<String> servers) {
+    Console console = System.console();
+    String label = oasLabel(resource);
+    if (console == null) {
+      throw new IllegalStateException("application scan requires server selection for " + label + ", but no interactive console is available");
+    }
+
+    console.printf("%nSelect server for %s:%n", label);
+    for (int i = 0; i < servers.size(); i++) {
+      console.printf("  %d. %s%n", i + 1, servers.get(i));
+    }
+
+    while (true) {
+      String input = console.readLine("Choose server [1-%d]: ", servers.size());
+      if (input == null) {
+        throw new IllegalStateException("application scan requires server selection for " + label);
+      }
+      String trimmed = input.trim();
+      try {
+        int selected = Integer.parseInt(trimmed);
+        if (selected >= 1 && selected <= servers.size()) {
+          return servers.get(selected - 1);
+        }
+      } catch (NumberFormatException ignored) {
+      }
+      console.printf("Invalid selection. Enter a number from 1 to %d.%n", servers.size());
+    }
+  }
+
+  static String selectedServerUrl(ResourceTarget resource) {
+    if (resource == null || resource.selectedServer == null || resource.selectedServer.isBlank()) return "";
+    return buildUrl(resource.selectedServer, resource.path);
+  }
+
+  static String buildUrl(String server, String path) {
+    String root = normalizeServer(server);
+    if (root.isBlank()) return "";
+    String suffix = firstNonBlank(path, "/");
+    if (!suffix.startsWith("/")) suffix = "/" + suffix;
+    return root + suffix;
+  }
+
+  private static String normalizeServer(String server) {
+    if (server == null) return "";
+    String normalized = server.trim();
+    while (normalized.endsWith("/")) {
+      normalized = normalized.substring(0, normalized.length() - 1);
+    }
+    return normalized;
+  }
+
+  private static String oasKey(ResourceTarget resource) {
+    return firstNonBlank(resource.swaggerId, resource.swaggerDocumentId, resource.swaggerName, "unknown");
+  }
+
+  private static String oasLabel(ResourceTarget resource) {
+    String name = firstNonBlank(resource.swaggerName, "OAS");
+    String id = firstNonBlank(resource.swaggerId, resource.swaggerDocumentId);
+    return id.isBlank() ? name : name + " (" + id + ")";
   }
 
   private static String firstNonBlank(String... values) {

@@ -64,6 +64,7 @@ public class ApplicationScanClient {
         target.revision = integer(node, "revision");
         target.status = text(node, "status");
         target.baseUrl = text(node, "baseUrl");
+        target.selectedServer = text(node, "selectedServer");
         target.url = text(node, "url");
         target.path = text(node, "path");
         target.method = text(node, "method");

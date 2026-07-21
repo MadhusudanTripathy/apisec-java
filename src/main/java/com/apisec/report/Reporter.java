@@ -446,6 +446,7 @@ public class Reporter {
     if (resource.revision != null) node.put("revision", resource.revision);
     put(node, "status", resource.status);
     put(node, "baseUrl", resource.baseUrl);
+    put(node, "selectedServer", resource.selectedServer);
     put(node, "path", resource.path);
     put(node, "method", resource.method);
     put(node, "operationId", resource.operationId);

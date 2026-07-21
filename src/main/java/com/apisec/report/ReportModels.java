@@ -40,6 +40,7 @@ public class ReportModels {
     public Integer revision;
     public String status;
     public String baseUrl;
+    public String selectedServer;
     public String path;
     public String method;
     public String operationId;

@@ -25,6 +25,7 @@ public class ApplicationScanModels {
     public Integer revision;
     public String status;
     public String baseUrl;
+    public String selectedServer;
     public String url;
     public String path;
     public String method;

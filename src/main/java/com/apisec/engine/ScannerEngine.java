@@ -150,6 +150,10 @@ public class ScannerEngine {
         ScannerMetadata md = RuleLoader.metadata(rule);
         Finding f = base(rule, md);
         f.status = "SKIPPED";
+        if (!md.scannerEnabled) {
+            f.evidence.put("reason", "scanner metadata disabled this rule");
+            return f;
+        }
         RuleApplicabilityService.Decision applicability = RuleApplicabilityService.applicable(rule.ruleId, req, endpoint, baselineSemantics);
         if (!applicability.applicable()) {
             f.evidence.put("reason", applicability.reason());
@@ -222,9 +226,16 @@ public class ScannerEngine {
                 FindingNarratives.enrichEvidence(f, rule.ruleId, rule.name, spec, false);
                 return f;
             }
-            Evaluator.Result ev = Evaluator.assertion(rule.assertion, req, baseline, resp);
-            f.status = ev.passed() ? "PASSED" : "FAILED";
-            f.evidence.put("reason", f.status.equals("FAILED") && isAuthRemovalRule(rule.ruleId) ? "Endpoint returned " + resp.statusCode + " after " + mutationTarget(spec) + " was removed." : ev.reason());
+            if (DastDecision.enabled(md.evaluationMode, md.successCriteria)) {
+                DastDecision.Result decision = DastDecision.evaluate(md.successCriteria, m.request, spec, baseline, resp, mutationSemantics);
+                f.status = decision.finding() ? "FAILED" : "PASSED";
+                f.evidence.putAll(decision.evidence());
+                f.evidence.put("reason", decision.reason());
+            } else {
+                Evaluator.Result ev = Evaluator.assertion(rule.assertion, req, baseline, resp);
+                f.status = ev.passed() ? "PASSED" : "FAILED";
+                f.evidence.put("reason", f.status.equals("FAILED") && isAuthRemovalRule(rule.ruleId) ? "Endpoint returned " + resp.statusCode + " after " + mutationTarget(spec) + " was removed." : ev.reason());
+            }
             FindingQuality.annotateMutation(f, rule.ruleId, spec, baseline, resp, baselineSemantics, mutationSemantics, endpoint);
             FindingNarratives.enrichEvidence(f, rule.ruleId, rule.name, spec, false);
             return f;
