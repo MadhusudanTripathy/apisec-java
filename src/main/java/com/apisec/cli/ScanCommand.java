@@ -121,7 +121,12 @@ public class ScanCommand implements Callable<Integer> {
           if (progress != null) progress.resourceCompleted(result.report());
         } catch (Exception e) {
           failures++;
-          if (progress != null) progress.resourceFailed(e.getMessage());
+          String failure = failureDescription(e);
+          if (progress != null) progress.resourceFailed(failure);
+          if (verbose) {
+            System.err.printf("Application resource failed: %s %s - %s%n", safeMethod(resource.method), safeUrl(resource), failure);
+            e.printStackTrace(System.err);
+          }
           entries.add(Reporter.failedApplicationEntry(
               firstNonBlank(resources.applicationId, applicationId),
               firstNonBlank(resources.name, resources.applicationId, applicationId),
@@ -129,7 +134,7 @@ public class ScanCommand implements Callable<Integer> {
               safeMethod(resource.method),
               firstNonBlank(resource.path, safeUrl(resource)),
               firstNonBlank(resource.operationId),
-              e.getMessage()));
+              failure));
         }
       }
     }
@@ -166,6 +171,17 @@ public class ScanCommand implements Callable<Integer> {
   private static ScannerEngine.Result runScan(AppConfig cfg, ScannerEngine.Options options, boolean json, ScannerEngine.ProgressSink progress) throws Exception {
     if (progress != null) return ScannerEngine.run(cfg, options, progress);
     return runScan(cfg, options, json);
+  }
+
+  private static String failureDescription(Exception e) {
+    if (e == null) return "scan failed";
+    String message = e.getMessage();
+    if (message != null && !message.isBlank()) return message;
+    Throwable cause = e.getCause();
+    if (cause != null && cause.getMessage() != null && !cause.getMessage().isBlank()) {
+      return cause.getClass().getSimpleName() + ": " + cause.getMessage();
+    }
+    return e.getClass().getSimpleName();
   }
 
   @Command(name = "curl", mixinStandardHelpOptions = true, description = "Scan using curl-style arguments without wrapping them in --curl")

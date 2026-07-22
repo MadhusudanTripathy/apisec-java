@@ -1,503 +1,581 @@
 {
-  "_id" : null,
-  "id" : "6a4c8c7f9eaa468e62240699",
-  "sourceName" : "api7-server-side-request-forgery",
-  "name" : "API7 Server Side Request Forgery",
-  "description" : "API7 Server Side Request Forgery defensive API scanner rule group.",
-  "predefined" : true,
-  "precondition" : {
-    "expression" : "({0} || {1} || {2} || {3})",
-    "placeholders" : [ {
-      "rule" : "PRESENT",
-      "key" : "request.headers.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.queryParams.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.body",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.path",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    } ],
-    "success" : false,
-    "type" : "Field",
-    "serviceRegistryId" : "",
-    "metadata" : [ ]
+  "_id": null,
+  "id": "6a4c8c7f9eaa468e62240699",
+  "sourceName": "api7-server-side-request-forgery",
+  "name": "API7 Server Side Request Forgery",
+  "description": "API7 Server Side Request Forgery defensive API scanner rule group.",
+  "predefined": true,
+  "precondition": {
+    "expression": "({0} || {1} || {2} || {3})",
+    "placeholders": [
+      {
+        "rule": "PRESENT",
+        "key": "request.headers.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.queryParams.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.body",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.path",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      }
+    ],
+    "success": false,
+    "type": "Field",
+    "serviceRegistryId": "",
+    "metadata": []
   },
-  "rules" : [ {
-    "_id" : null,
-    "id" : "00ac9e757654d8069107fd92",
-    "ruleId" : "API7-SSRF-001",
-    "name" : "URL-like input parameter detected",
-    "description" : "URL-like inputs require strict validation.",
-    "assertion" : {
-      "expression" : "false",
-      "placeholders" : [ ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API7:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-918" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Validate URL inputs with allowlists and block private networks.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+  "rules": [
+    {
+      "_id": null,
+      "id": "00ac9e757654d8069107fd92",
+      "ruleId": "API7-SSRF-001",
+      "name": "URL-like input parameter detected",
+      "description": "URL-like inputs require strict validation.",
+      "assertion": {
+        "expression": "false",
+        "placeholders": [],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API7:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-918\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Validate URL inputs with allowlists and block private networks.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "df02571ac2b0cf922c449839",
+      "ruleId": "API7-SSRF-002",
+      "name": "Callback/webhook URL accepted without validation, passive by default",
+      "description": "Callback URLs should be allowlisted.",
+      "assertion": {
+        "expression": "false",
+        "placeholders": [],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API7:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-918\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Require controlled callback domains and validate schemes.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "df02571ac2b0cf922c449839",
-    "ruleId" : "API7-SSRF-002",
-    "name" : "Callback/webhook URL accepted without validation, passive by default",
-    "description" : "Callback URLs should be allowlisted.",
-    "assertion" : {
-      "expression" : "false",
-      "placeholders" : [ ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API7:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-918" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Require controlled callback domains and validate schemes.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "61f30fb8b1a2a4279e1c65ab",
+      "ruleId": "API7-SSRF-003",
+      "name": "Insecure callback URL accepted",
+      "description": "Insecure callback URLs should be rejected.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "400",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "422",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API7:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-918\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Require HTTPS and an allowlist for callback URLs.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"http-callback-url\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"callbackUrl\",\"value\":\"http://example.com/apisec\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "bb284e5be5c009cb67434a6f",
+      "ruleId": "API7-SSRF-004",
+      "name": "Internal fetch error leaked",
+      "description": "Internal fetch errors can expose SSRF behavior.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "REGEX",
+            "key": "response.body",
+            "value": "(?i)(connection refused|no route to host|metadata|169\\.254|localhost)",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API7:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-918\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Do not expose upstream fetch errors to clients.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "61f30fb8b1a2a4279e1c65ab",
-    "ruleId" : "API7-SSRF-003",
-    "name" : "Insecure callback URL accepted",
-    "description" : "Insecure callback URLs should be rejected.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "400",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "422",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API7:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-918" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Require HTTPS and an allowlist for callback URLs.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"http-callback-url\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"callbackUrl\",\"value\":\"http://example.com/apisec\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "bb284e5be5c009cb67434a6f",
-    "ruleId" : "API7-SSRF-004",
-    "name" : "Internal fetch error leaked",
-    "description" : "Internal fetch errors can expose SSRF behavior.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "REGEX",
-        "key" : "response.body",
-        "value" : "(?i)(connection refused|no route to host|metadata|169\\.254|localhost)",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API7:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-918" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Do not expose upstream fetch errors to clients.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "778e27ffde3cc41ab3afb9eb",
-    "ruleId" : "API7-SSRF-005",
-    "name" : "URL field points to private IP, skipped unless controlled test mode",
-    "description" : "Private IP SSRF checks require explicit controlled test mode.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "400",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "422",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API7:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-918" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-dangerous",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Block private, link-local, and metadata service network ranges.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"private-ip-url-field\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"url\",\"value\":\"http://127.0.0.1/\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  } ],
-  "action" : {
-    "type" : "Email",
-    "name" : "",
-    "description" : "",
-    "email" : { },
-    "slack" : { },
-    "microsoftTeams" : { },
-    "incident" : { },
-    "serviceCallout" : [ ],
-    "executeWorkflow" : { },
-    "executed" : false
+    {
+      "_id": null,
+      "id": "778e27ffde3cc41ab3afb9eb",
+      "ruleId": "API7-SSRF-005",
+      "name": "URL field points to private IP, skipped unless controlled test mode",
+      "description": "Private IP SSRF checks require explicit controlled test mode.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "400",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "422",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API7:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-918\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-dangerous",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Block private, link-local, and metadata service network ranges.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"private-ip-url-field\",\"operation\":\"ADD_JSON_FIELD\",\"key\":\"url\",\"value\":\"http://127.0.0.1/\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
+    }
+  ],
+  "action": {
+    "type": "Email",
+    "name": "",
+    "description": "",
+    "email": {},
+    "slack": {},
+    "microsoftTeams": {},
+    "incident": {},
+    "serviceCallout": [],
+    "executeWorkflow": {},
+    "executed": false
   },
-  "anyActionExecuted" : false,
-  "scope" : "GLOBAL",
-  "apis" : [ ],
-  "metadata" : {
-    "version" : "1.1.0"
+  "anyActionExecuted": false,
+  "scope": "GLOBAL",
+  "apis": [],
+  "metadata": {
+    "version": "1.1.0"
   },
-  "success" : false,
-  "enforced" : false,
-  "blockOnThreat" : false,
-  "editable" : false,
-  "passedRules" : 0,
-  "skippedRules" : 0,
-  "_class" : null
+  "success": false,
+  "enforced": false,
+  "blockOnThreat": false,
+  "editable": false,
+  "passedRules": 0,
+  "skippedRules": 0,
+  "_class": null
 }

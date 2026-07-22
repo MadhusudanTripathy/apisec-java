@@ -1,468 +1,542 @@
 {
-  "_id" : null,
-  "id" : "6a4c8c7f9eaa468e62240697",
-  "sourceName" : "api6-unrestricted-access-to-sensitive-business-flows",
-  "name" : "API6 Unrestricted Access To Sensitive Business Flows",
-  "description" : "API6 Unrestricted Access To Sensitive Business Flows defensive API scanner rule group.",
-  "predefined" : true,
-  "precondition" : {
-    "expression" : "({0} || {1} || {2} || {3})",
-    "placeholders" : [ {
-      "rule" : "PRESENT",
-      "key" : "request.headers.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.queryParams.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.body",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.path",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    } ],
-    "success" : false,
-    "type" : "Field",
-    "serviceRegistryId" : "",
-    "metadata" : [ ]
+  "_id": null,
+  "id": "6a4c8c7f9eaa468e62240697",
+  "sourceName": "api6-unrestricted-access-to-sensitive-business-flows",
+  "name": "API6 Unrestricted Access To Sensitive Business Flows",
+  "description": "API6 Unrestricted Access To Sensitive Business Flows defensive API scanner rule group.",
+  "predefined": true,
+  "precondition": {
+    "expression": "({0} || {1} || {2} || {3})",
+    "placeholders": [
+      {
+        "rule": "PRESENT",
+        "key": "request.headers.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.queryParams.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.body",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.path",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      }
+    ],
+    "success": false,
+    "type": "Field",
+    "serviceRegistryId": "",
+    "metadata": []
   },
-  "rules" : [ {
-    "_id" : null,
-    "id" : "cbbd3f7bbc49557506a932ea",
-    "ruleId" : "API6-BUSINESS-001",
-    "name" : "Missing anti-automation signal",
-    "description" : "Business flow endpoints should expose anti-automation controls.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "ABSENT",
-        "key" : "response.headers.X-RateLimit-Limit",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API6:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-799" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Use rate limits, bot controls, and abuse monitoring for sensitive flows.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+  "rules": [
+    {
+      "_id": null,
+      "id": "cbbd3f7bbc49557506a932ea",
+      "ruleId": "API6-BUSINESS-001",
+      "name": "Missing anti-automation signal",
+      "description": "Business flow endpoints should expose anti-automation controls.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.X-RateLimit-Limit",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API6:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-799\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Use rate limits, bot controls, and abuse monitoring for sensitive flows.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "9ca5e2c6a2fc50d6be58dac8",
+      "ruleId": "API6-BUSINESS-002",
+      "name": "OTP-like endpoint lacks rate-limit signal",
+      "description": "OTP endpoints should be rate limited.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.X-RateLimit-Limit",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API6:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-307\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Rate limit OTP generation and verification attempts.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "9ca5e2c6a2fc50d6be58dac8",
-    "ruleId" : "API6-BUSINESS-002",
-    "name" : "OTP-like endpoint lacks rate-limit signal",
-    "description" : "OTP endpoints should be rate limited.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "ABSENT",
-        "key" : "response.headers.X-RateLimit-Limit",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API6:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-307" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Rate limit OTP generation and verification attempts.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "a9e9aebe37a6216b19e55327",
+      "ruleId": "API6-BUSINESS-003",
+      "name": "Payment-like POST missing idempotency key",
+      "description": "Payment-like POSTs should use idempotency keys.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.Idempotency-Key",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API6:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-841\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Require idempotency keys for payment and order creation flows.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "c4d5fcf266bff999d88c8898",
+      "ruleId": "API6-BUSINESS-004",
+      "name": "Coupon/reward endpoint replay warning, passive unless test mode",
+      "description": "Coupon and reward flows need replay protection.",
+      "assertion": {
+        "expression": "false",
+        "placeholders": [],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API6:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-294\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Use nonce, replay windows, and redemption state checks.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "a9e9aebe37a6216b19e55327",
-    "ruleId" : "API6-BUSINESS-003",
-    "name" : "Payment-like POST missing idempotency key",
-    "description" : "Payment-like POSTs should use idempotency keys.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "ABSENT",
-        "key" : "response.headers.Idempotency-Key",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API6:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-841" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Require idempotency keys for payment and order creation flows.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "c4d5fcf266bff999d88c8898",
-    "ruleId" : "API6-BUSINESS-004",
-    "name" : "Coupon/reward endpoint replay warning, passive unless test mode",
-    "description" : "Coupon and reward flows need replay protection.",
-    "assertion" : {
-      "expression" : "false",
-      "placeholders" : [ ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API6:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-294" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Use nonce, replay windows, and redemption state checks.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "451f9e171dcaf009e2749a84",
-    "ruleId" : "API6-BUSINESS-005",
-    "name" : "Sensitive action lacks confirmation marker",
-    "description" : "Sensitive actions should require explicit confirmation or step-up controls.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "ABSENT",
-        "key" : "response.headers.X-Confirmation-Required",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API6:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-841" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Require confirmation or step-up authentication for sensitive business actions.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  } ],
-  "action" : {
-    "type" : "Email",
-    "name" : "",
-    "description" : "",
-    "email" : { },
-    "slack" : { },
-    "microsoftTeams" : { },
-    "incident" : { },
-    "serviceCallout" : [ ],
-    "executeWorkflow" : { },
-    "executed" : false
+    {
+      "_id": null,
+      "id": "451f9e171dcaf009e2749a84",
+      "ruleId": "API6-BUSINESS-005",
+      "name": "Sensitive action lacks confirmation marker",
+      "description": "Sensitive actions should require explicit confirmation or step-up controls.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.X-Confirmation-Required",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API6:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-841\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Require confirmation or step-up authentication for sensitive business actions.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
+    }
+  ],
+  "action": {
+    "type": "Email",
+    "name": "",
+    "description": "",
+    "email": {},
+    "slack": {},
+    "microsoftTeams": {},
+    "incident": {},
+    "serviceCallout": [],
+    "executeWorkflow": {},
+    "executed": false
   },
-  "anyActionExecuted" : false,
-  "scope" : "GLOBAL",
-  "apis" : [ ],
-  "metadata" : {
-    "version" : "1.1.0"
+  "anyActionExecuted": false,
+  "scope": "GLOBAL",
+  "apis": [],
+  "metadata": {
+    "version": "1.1.0"
   },
-  "success" : false,
-  "enforced" : false,
-  "blockOnThreat" : false,
-  "editable" : false,
-  "passedRules" : 0,
-  "skippedRules" : 0,
-  "_class" : null
+  "success": false,
+  "enforced": false,
+  "blockOnThreat": false,
+  "editable": false,
+  "passedRules": 0,
+  "skippedRules": 0,
+  "_class": null
 }

@@ -1,654 +1,758 @@
 {
-  "_id" : null,
-  "id" : "6a4c8c7f9eaa468e62240693",
-  "sourceName" : "api4-unrestricted-resource-consumption",
-  "name" : "API4 Unrestricted Resource Consumption",
-  "description" : "API4 Unrestricted Resource Consumption defensive API scanner rule group.",
-  "predefined" : true,
-  "precondition" : {
-    "expression" : "({0} || {1} || {2} || {3})",
-    "placeholders" : [ {
-      "rule" : "PRESENT",
-      "key" : "request.headers.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.queryParams.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.body",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.path",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    } ],
-    "success" : false,
-    "type" : "Field",
-    "serviceRegistryId" : "",
-    "metadata" : [ ]
+  "_id": null,
+  "id": "6a4c8c7f9eaa468e62240693",
+  "sourceName": "api4-unrestricted-resource-consumption",
+  "name": "API4 Unrestricted Resource Consumption",
+  "description": "API4 Unrestricted Resource Consumption defensive API scanner rule group.",
+  "predefined": true,
+  "precondition": {
+    "expression": "({0} || {1} || {2} || {3})",
+    "placeholders": [
+      {
+        "rule": "PRESENT",
+        "key": "request.headers.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.queryParams.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.body",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.path",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      }
+    ],
+    "success": false,
+    "type": "Field",
+    "serviceRegistryId": "",
+    "metadata": []
   },
-  "rules" : [ {
-    "_id" : null,
-    "id" : "dd64e7a8124d9ce3ea2b898a",
-    "ruleId" : "API4-RESOURCE-001",
-    "name" : "Large pagination limit",
-    "description" : "Large limits should be capped.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3} && {4})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "400",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "422",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "429",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API4:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-770" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Set server-side maximum pagination limits.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"large-pagination-limit\",\"operation\":\"LARGE_PAGINATION_LIMIT\",\"key\":\"limit\",\"value\":\"10000\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+  "rules": [
+    {
+      "_id": null,
+      "id": "dd64e7a8124d9ce3ea2b898a",
+      "ruleId": "API4-RESOURCE-001",
+      "name": "Large pagination limit",
+      "description": "Large limits should be capped.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3} && {4})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "400",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "422",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "429",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API4:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-770\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Set server-side maximum pagination limits.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"large-pagination-limit\",\"operation\":\"LARGE_PAGINATION_LIMIT\",\"key\":\"limit\",\"value\":\"10000\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "1642764bcd6e19864458faa4",
+      "ruleId": "API4-RESOURCE-002",
+      "name": "Negative pagination limit",
+      "description": "Negative limits should be rejected.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "400",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "422",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API4:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-20\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Validate numeric bounds for pagination parameters.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"negative-pagination-limit\",\"operation\":\"NEGATIVE_PAGINATION_LIMIT\",\"key\":\"limit\",\"value\":\"\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "1642764bcd6e19864458faa4",
-    "ruleId" : "API4-RESOURCE-002",
-    "name" : "Negative pagination limit",
-    "description" : "Negative limits should be rejected.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "400",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "422",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API4:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-20" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Validate numeric bounds for pagination parameters.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"negative-pagination-limit\",\"operation\":\"NEGATIVE_PAGINATION_LIMIT\",\"key\":\"limit\",\"value\":\"\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "3a07b8a346bc3843d78b1374",
+      "ruleId": "API4-RESOURCE-003",
+      "name": "Huge page number",
+      "description": "Huge page numbers should be bounded.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3} && {4})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "400",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "404",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "422",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API4:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-770\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Apply numeric bounds to page parameters.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"huge-page-number\",\"operation\":\"REPLACE_QUERY_PARAM\",\"key\":\"page\",\"value\":\"999999999\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "2c69618d0dce6b9e29d03865",
+      "ruleId": "API4-RESOURCE-004",
+      "name": "Large response body",
+      "description": "Large responses may indicate missing resource controls.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "GREATER_THAN",
+            "key": "response.bodySize",
+            "value": "1048576",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API4:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-400\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Paginate and cap response payload sizes.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "3a07b8a346bc3843d78b1374",
-    "ruleId" : "API4-RESOURCE-003",
-    "name" : "Huge page number",
-    "description" : "Huge page numbers should be bounded.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3} && {4})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "400",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "404",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "422",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API4:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-770" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Apply numeric bounds to page parameters.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"huge-page-number\",\"operation\":\"REPLACE_QUERY_PARAM\",\"key\":\"page\",\"value\":\"999999999\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "70312b956cd49eaed71ebf72",
+      "ruleId": "API4-RESOURCE-005",
+      "name": "Slow response warning",
+      "description": "Slow responses can indicate resource exhaustion risk.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "GREATER_THAN",
+            "key": "response.timeMs",
+            "value": "3000",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API4:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-400\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Optimize expensive queries and enforce timeouts.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "2c69618d0dce6b9e29d03865",
-    "ruleId" : "API4-RESOURCE-004",
-    "name" : "Large response body",
-    "description" : "Large responses may indicate missing resource controls.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "GREATER_THAN",
-        "key" : "response.bodySize",
-        "value" : "1048576",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API4:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-400" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Paginate and cap response payload sizes.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "70312b956cd49eaed71ebf72",
-    "ruleId" : "API4-RESOURCE-005",
-    "name" : "Slow response warning",
-    "description" : "Slow responses can indicate resource exhaustion risk.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "GREATER_THAN",
-        "key" : "response.timeMs",
-        "value" : "3000",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API4:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-400" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Optimize expensive queries and enforce timeouts.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "7f5288ca9fa5a4cb33ef53bf",
-    "ruleId" : "API4-RESOURCE-006",
-    "name" : "Missing rate-limit headers",
-    "description" : "Sensitive APIs should expose standard or de-facto rate-limit signals.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3})",
-      "placeholders" : [ {
-        "rule" : "ABSENT",
-        "key" : "response.headers.X-RateLimit-Limit",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      }, {
-        "rule" : "ABSENT",
-        "key" : "response.headers.RateLimit-Limit",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      }, {
-        "rule" : "ABSENT",
-        "key" : "response.headers.RateLimit-Remaining",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      }, {
-        "rule" : "ABSENT",
-        "key" : "response.headers.Retry-After",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API4:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-770" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Implement and communicate rate limits using standard RateLimit headers or documented compatibility headers.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  } ],
-  "action" : {
-    "type" : "Email",
-    "name" : "",
-    "description" : "",
-    "email" : { },
-    "slack" : { },
-    "microsoftTeams" : { },
-    "incident" : { },
-    "serviceCallout" : [ ],
-    "executeWorkflow" : { },
-    "executed" : false
+    {
+      "_id": null,
+      "id": "7f5288ca9fa5a4cb33ef53bf",
+      "ruleId": "API4-RESOURCE-006",
+      "name": "Missing rate-limit headers",
+      "description": "Sensitive APIs should expose standard or de-facto rate-limit signals.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3})",
+        "placeholders": [
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.X-RateLimit-Limit",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          },
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.RateLimit-Limit",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          },
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.RateLimit-Remaining",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          },
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.Retry-After",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API4:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-770\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Implement and communicate rate limits using standard RateLimit headers or documented compatibility headers.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
+    }
+  ],
+  "action": {
+    "type": "Email",
+    "name": "",
+    "description": "",
+    "email": {},
+    "slack": {},
+    "microsoftTeams": {},
+    "incident": {},
+    "serviceCallout": [],
+    "executeWorkflow": {},
+    "executed": false
   },
-  "anyActionExecuted" : false,
-  "scope" : "GLOBAL",
-  "apis" : [ ],
-  "metadata" : {
-    "version" : "1.1.0"
+  "anyActionExecuted": false,
+  "scope": "GLOBAL",
+  "apis": [],
+  "metadata": {
+    "version": "1.1.0"
   },
-  "success" : false,
-  "enforced" : false,
-  "blockOnThreat" : false,
-  "editable" : false,
-  "passedRules" : 0,
-  "skippedRules" : 0,
-  "_class" : null
+  "success": false,
+  "enforced": false,
+  "blockOnThreat": false,
+  "editable": false,
+  "passedRules": 0,
+  "skippedRules": 0,
+  "_class": null
 }

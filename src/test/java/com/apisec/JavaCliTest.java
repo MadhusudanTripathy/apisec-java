@@ -56,6 +56,13 @@ class JavaCliTest {
     Path ruleFile = scannerMetadataRuleFile();
     Group g = RuleLoader.loadFile(ruleFile);
 
+    var metadata = g.rules.get(0).assertion.metadata;
+    assertEquals("true", metadata.stream().filter(e -> "scanner.enabled".equals(e.key)).findFirst().orElseThrow().value);
+    assertEquals("[{\"name\":\"add-admin-query\",\"operation\":\"ADD_QUERY_PARAM\",\"key\":\"admin\",\"value\":\"true\"}]",
+        metadata.stream().filter(e -> "scanner.mutations".equals(e.key)).findFirst().orElseThrow().value);
+    assertEquals("{\"type\":\"AUTHZ_BYPASS\",\"successStatus\":[\"2xx\"],\"bodySimilarityThreshold\":0.85}",
+        metadata.stream().filter(e -> "scanner.successCriteria".equals(e.key)).findFirst().orElseThrow().value);
+
     var md = RuleLoader.metadata(g.rules.get(0));
     assertTrue(md.scannerEnabled);
     assertEquals("THREAT_MATCH", md.evaluationMode);
@@ -535,8 +542,13 @@ class JavaCliTest {
       assertEquals(0, code);
       assertEquals("acme-team-dev", observedTenant.get());
       assertEquals("test-api-key", observedApiKey.get());
-      assertTrue(Files.exists(rulesDir.resolve("owasp-api-2023-backup.json")));
-      Group pulled = RuleLoader.loadFile(rulesDir.resolve("owasp-api-2023-backup.json"));
+      Path pulledPath = rulesDir.resolve("owasp-api-2023-backup.json");
+      assertTrue(Files.exists(pulledPath));
+      ObjectNode pulledJson = (ObjectNode) mapper.readTree(Files.readString(pulledPath));
+      var cweValue = pulledJson.path("rules").get(0).path("assertion").path("metadata").get(1).path("value");
+      assertTrue(cweValue.isTextual());
+      assertEquals("[\"CWE-639\"]", cweValue.asText());
+      Group pulled = RuleLoader.loadFile(pulledPath);
       assertTrue(pulled.id.matches("[0-9a-f]{24}"));
       assertTrue(pulled.rules.get(0).id.matches("[0-9a-f]{24}"));
       assertNotEquals(pulled.rules.get(0).ruleId, pulled.rules.get(0).id);

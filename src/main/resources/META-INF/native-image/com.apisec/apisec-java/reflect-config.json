@@ -186,6 +186,12 @@
     "allPublicMethods": true
   },
   {
+    "name": "com.apisec.rules.RuleModels$MetadataValueDeserializer",
+    "allDeclaredConstructors": true,
+    "allPublicFields": true,
+    "allPublicMethods": true
+  },
+  {
     "name": "com.apisec.rules.RuleModels$Mutation",
     "allDeclaredConstructors": true,
     "allPublicFields": true,

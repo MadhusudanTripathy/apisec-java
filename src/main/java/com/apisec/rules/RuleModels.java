@@ -1,6 +1,13 @@
 package com.apisec.rules;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.io.IOException;
 import java.util.*;
 
 public class RuleModels {
@@ -64,9 +71,22 @@ public class RuleModels {
 
   public static class MetadataEntry {
     public String key;
-    public Object value;
+    @JsonDeserialize(using = MetadataValueDeserializer.class)
+    public String value;
     public boolean required;
     public String type;
+  }
+
+  public static class MetadataValueDeserializer extends JsonDeserializer<String> {
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    @Override
+    public String deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+      JsonNode node = p.readValueAsTree();
+      if (node == null || node.isNull()) return null;
+      if (node.isTextual()) return node.asText();
+      return MAPPER.writeValueAsString(node);
+    }
   }
 
   public static class Mutation {

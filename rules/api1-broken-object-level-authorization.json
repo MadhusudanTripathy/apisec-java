@@ -1,619 +1,718 @@
 {
-  "_id" : null,
-  "id" : "6a4c8c7f9eaa468e6224068b",
-  "sourceName" : "api1-broken-object-level-authorization",
-  "name" : "API1 Broken Object Level Authorization",
-  "description" : "API1 Broken Object Level Authorization defensive API scanner rule group.",
-  "predefined" : true,
-  "precondition" : {
-    "expression" : "({0} || {1} || {2} || {3})",
-    "placeholders" : [ {
-      "rule" : "PRESENT",
-      "key" : "request.headers.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.queryParams.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.body",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.path",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    } ],
-    "success" : false,
-    "type" : "Field",
-    "serviceRegistryId" : "",
-    "metadata" : [ ]
+  "_id": null,
+  "id": "6a4c8c7f9eaa468e6224068b",
+  "sourceName": "api1-broken-object-level-authorization",
+  "name": "API1 Broken Object Level Authorization",
+  "description": "API1 Broken Object Level Authorization defensive API scanner rule group.",
+  "predefined": true,
+  "precondition": {
+    "expression": "({0} || {1} || {2} || {3})",
+    "placeholders": [
+      {
+        "rule": "PRESENT",
+        "key": "request.headers.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.queryParams.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.body",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.path",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      }
+    ],
+    "success": false,
+    "type": "Field",
+    "serviceRegistryId": "",
+    "metadata": []
   },
-  "rules" : [ {
-    "_id" : null,
-    "id" : "b34ce25565b07878a8942a45",
-    "ruleId" : "API1-BOLA-001",
-    "name" : "Change numeric path ID",
-    "description" : "Object IDs should not expose another user's data when changed.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "404",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API1:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-639" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Enforce object-level authorization on every object lookup.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"replace-path-id\",\"operation\":\"REPLACE_PATH_ID\",\"key\":\"\",\"value\":\"999999\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+  "rules": [
+    {
+      "_id": null,
+      "id": "b34ce25565b07878a8942a45",
+      "ruleId": "API1-BOLA-001",
+      "name": "Change numeric path ID",
+      "description": "Object IDs should not expose another user's data when changed.",
+      "assertion": {
+        "expression": "({0} && {1} && {2})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "404",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API1:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-639\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Enforce object-level authorization on every object lookup.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"replace-path-id\",\"operation\":\"REPLACE_PATH_ID\",\"key\":\"\",\"value\":\"999999\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "CRITICAL",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "4a48c62cdaa9b8e3b704f23a",
+      "ruleId": "API1-BOLA-002",
+      "name": "Change query ID",
+      "description": "Query object IDs should be authorized.",
+      "assertion": {
+        "expression": "({0} && {1} && {2})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "404",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API1:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-639\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Authorize access to IDs supplied in query parameters.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"replace-query-id\",\"operation\":\"REPLACE_QUERY_PARAM\",\"key\":\"id\",\"value\":\"999999\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "CRITICAL",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "CRITICAL",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "4a48c62cdaa9b8e3b704f23a",
-    "ruleId" : "API1-BOLA-002",
-    "name" : "Change query ID",
-    "description" : "Query object IDs should be authorized.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "404",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API1:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-639" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Authorize access to IDs supplied in query parameters.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"replace-query-id\",\"operation\":\"REPLACE_QUERY_PARAM\",\"key\":\"id\",\"value\":\"999999\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "875e78eb2304850ae0c0f65b",
+      "ruleId": "API1-BOLA-003",
+      "name": "Change UUID-like path ID",
+      "description": "UUID object IDs should still require authorization.",
+      "assertion": {
+        "expression": "({0} && {1} && {2})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "404",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API1:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-639\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Check ownership or tenant authorization for UUID object references.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"replace-uuid-path-id\",\"operation\":\"REPLACE_PATH_ID\",\"key\":\"\",\"value\":\"00000000-0000-4000-8000-000000000000\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "CRITICAL",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "d2033d24068131a473e633e0",
+      "ruleId": "API1-BOLA-004",
+      "name": "Change tenant/org header",
+      "description": "Tenant headers should not control authorization by themselves.",
+      "assertion": {
+        "expression": "({0} && {1})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API1:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-639\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Derive tenant context from trusted identity claims, not client-controlled headers.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"replace-tenant-header\",\"operation\":\"REPLACE_HEADER\",\"key\":\"X-Tenant-ID\",\"value\":\"999999\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "CRITICAL",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "875e78eb2304850ae0c0f65b",
-    "ruleId" : "API1-BOLA-003",
-    "name" : "Change UUID-like path ID",
-    "description" : "UUID object IDs should still require authorization.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "404",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API1:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-639" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Check ownership or tenant authorization for UUID object references.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"replace-uuid-path-id\",\"operation\":\"REPLACE_PATH_ID\",\"key\":\"\",\"value\":\"00000000-0000-4000-8000-000000000000\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "a600203cfb0ae6d145e46008",
+      "ruleId": "API1-BOLA-005",
+      "name": "Object enumeration signal",
+      "description": "Successful changed object lookups can indicate enumeration risk.",
+      "assertion": {
+        "expression": "({0} && {1} && {2})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "404",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API1:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-203\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Avoid predictable object references and enforce authorization.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"enumeration-id-signal\",\"operation\":\"REPLACE_QUERY_PARAM\",\"key\":\"id\",\"value\":\"1\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "CRITICAL",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "d2033d24068131a473e633e0",
-    "ruleId" : "API1-BOLA-004",
-    "name" : "Change tenant/org header",
-    "description" : "Tenant headers should not control authorization by themselves.",
-    "assertion" : {
-      "expression" : "({0} && {1})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API1:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-639" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Derive tenant context from trusted identity claims, not client-controlled headers.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"replace-tenant-header\",\"operation\":\"REPLACE_HEADER\",\"key\":\"X-Tenant-ID\",\"value\":\"999999\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "a600203cfb0ae6d145e46008",
-    "ruleId" : "API1-BOLA-005",
-    "name" : "Object enumeration signal",
-    "description" : "Successful changed object lookups can indicate enumeration risk.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "404",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API1:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-203" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Avoid predictable object references and enforce authorization.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"enumeration-id-signal\",\"operation\":\"REPLACE_QUERY_PARAM\",\"key\":\"id\",\"value\":\"1\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "4ffcf748708cd9b309b18181",
-    "ruleId" : "API1-BOLA-006",
-    "name" : "Alternate user curl comparison",
-    "description" : "Low-privilege alternate user should not receive the same protected object.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "GREATER_THAN_EQUAL_TO",
-        "key" : "baseline.bodySimilarity",
-        "value" : "0.85",
-        "resolvedValue" : null,
-        "valueDataType" : "DOUBLE",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API1:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-639" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Verify object authorization across user and tenant boundaries.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"alt-user-comparison\",\"operation\":\"ADD_HEADER\",\"key\":\"X-ApiSec-Alt\",\"value\":\"true\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "CRITICAL",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  } ],
-  "action" : {
-    "type" : "Email",
-    "name" : "",
-    "description" : "",
-    "email" : { },
-    "slack" : { },
-    "microsoftTeams" : { },
-    "incident" : { },
-    "serviceCallout" : [ ],
-    "executeWorkflow" : { },
-    "executed" : false
+    {
+      "_id": null,
+      "id": "4ffcf748708cd9b309b18181",
+      "ruleId": "API1-BOLA-006",
+      "name": "Alternate user curl comparison",
+      "description": "Low-privilege alternate user should not receive the same protected object.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "GREATER_THAN_EQUAL_TO",
+            "key": "baseline.bodySimilarity",
+            "value": "0.85",
+            "resolvedValue": null,
+            "valueDataType": "DOUBLE",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API1:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-639\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Verify object authorization across user and tenant boundaries.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"alt-user-comparison\",\"operation\":\"ADD_HEADER\",\"key\":\"X-ApiSec-Alt\",\"value\":\"true\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "CRITICAL",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
+    }
+  ],
+  "action": {
+    "type": "Email",
+    "name": "",
+    "description": "",
+    "email": {},
+    "slack": {},
+    "microsoftTeams": {},
+    "incident": {},
+    "serviceCallout": [],
+    "executeWorkflow": {},
+    "executed": false
   },
-  "anyActionExecuted" : false,
-  "scope" : "GLOBAL",
-  "apis" : [ ],
-  "metadata" : {
-    "version" : "1.1.0"
+  "anyActionExecuted": false,
+  "scope": "GLOBAL",
+  "apis": [],
+  "metadata": {
+    "version": "1.1.0"
   },
-  "success" : false,
-  "enforced" : false,
-  "blockOnThreat" : false,
-  "editable" : false,
-  "passedRules" : 0,
-  "skippedRules" : 0,
-  "_class" : null
+  "success": false,
+  "enforced": false,
+  "blockOnThreat": false,
+  "editable": false,
+  "passedRules": 0,
+  "skippedRules": 0,
+  "_class": null
 }

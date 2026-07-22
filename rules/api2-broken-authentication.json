@@ -1,651 +1,756 @@
 {
-  "_id" : null,
-  "id" : "6a4c8c7f9eaa468e6224068f",
-  "sourceName" : "api2-broken-authentication",
-  "name" : "API2 Broken Authentication",
-  "description" : "API2 Broken Authentication defensive API scanner rule group.",
-  "predefined" : true,
-  "precondition" : {
-    "expression" : "({0} || {1} || {2} || {3})",
-    "placeholders" : [ {
-      "rule" : "PRESENT",
-      "key" : "request.headers.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.queryParams.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.body",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.path",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    } ],
-    "success" : false,
-    "type" : "Field",
-    "serviceRegistryId" : "",
-    "metadata" : [ ]
+  "_id": null,
+  "id": "6a4c8c7f9eaa468e6224068f",
+  "sourceName": "api2-broken-authentication",
+  "name": "API2 Broken Authentication",
+  "description": "API2 Broken Authentication defensive API scanner rule group.",
+  "predefined": true,
+  "precondition": {
+    "expression": "({0} || {1} || {2} || {3})",
+    "placeholders": [
+      {
+        "rule": "PRESENT",
+        "key": "request.headers.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.queryParams.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.body",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.path",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      }
+    ],
+    "success": false,
+    "type": "Field",
+    "serviceRegistryId": "",
+    "metadata": []
   },
-  "rules" : [ {
-    "_id" : null,
-    "id" : "7e94210e8ff73644cf2c7a25",
-    "ruleId" : "API2-AUTH-001",
-    "name" : "Endpoint should reject missing Authorization header",
-    "description" : "Authenticated endpoints should reject missing authorization.",
-    "assertion" : {
-      "expression" : "({0} && {1})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API2:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-306", "CWE-287" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Require authentication for protected endpoints.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"remove-authorization-header\",\"operation\":\"REMOVE_HEADER\",\"key\":\"Authorization\",\"value\":\"\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+  "rules": [
+    {
+      "_id": null,
+      "id": "7e94210e8ff73644cf2c7a25",
+      "ruleId": "API2-AUTH-001",
+      "name": "Endpoint should reject missing Authorization header",
+      "description": "Authenticated endpoints should reject missing authorization.",
+      "assertion": {
+        "expression": "({0} && {1})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API2:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-306\",\"CWE-287\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Require authentication for protected endpoints.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"remove-authorization-header\",\"operation\":\"REMOVE_HEADER\",\"key\":\"Authorization\",\"value\":\"\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "CRITICAL",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "7a94614b5ca52827518ac9b2",
+      "ruleId": "API2-AUTH-002",
+      "name": "Empty bearer token",
+      "description": "Empty bearer tokens should be rejected.",
+      "assertion": {
+        "expression": "({0} && {1})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API2:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-287\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Reject empty or malformed bearer tokens.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"empty-bearer-token\",\"operation\":\"REPLACE_HEADER\",\"key\":\"Authorization\",\"value\":\"Bearer \"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "CRITICAL",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "7a94614b5ca52827518ac9b2",
-    "ruleId" : "API2-AUTH-002",
-    "name" : "Empty bearer token",
-    "description" : "Empty bearer tokens should be rejected.",
-    "assertion" : {
-      "expression" : "({0} && {1})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API2:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-287" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Reject empty or malformed bearer tokens.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"empty-bearer-token\",\"operation\":\"REPLACE_HEADER\",\"key\":\"Authorization\",\"value\":\"Bearer \"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "fb7bd7151eb5955609d0bb35",
+      "ruleId": "API2-AUTH-003",
+      "name": "Random bearer token",
+      "description": "Random bearer tokens should be rejected.",
+      "assertion": {
+        "expression": "({0} && {1})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API2:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-287\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Validate token signature, issuer, audience, and expiry.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"random-bearer-token\",\"operation\":\"REPLACE_HEADER\",\"key\":\"Authorization\",\"value\":\"Bearer apisec-invalid-token\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "6a2249695852d02f8d16a143",
+      "ruleId": "API2-AUTH-004",
+      "name": "API key appears in URL",
+      "description": "API keys in URLs can leak through logs and referrers.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "REGEX",
+            "key": "response.body",
+            "value": "(?i)(api_key|apikey|access_token|token)=",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API2:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-598\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Send API keys in headers and redact them from logs.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "fb7bd7151eb5955609d0bb35",
-    "ruleId" : "API2-AUTH-003",
-    "name" : "Random bearer token",
-    "description" : "Random bearer tokens should be rejected.",
-    "assertion" : {
-      "expression" : "({0} && {1})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API2:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-287" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Validate token signature, issuer, audience, and expiry.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"random-bearer-token\",\"operation\":\"REPLACE_HEADER\",\"key\":\"Authorization\",\"value\":\"Bearer apisec-invalid-token\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "eddf8ba9f0c250fc49b2778c",
+      "ruleId": "API2-AUTH-005",
+      "name": "Cookie missing HttpOnly/Secure/SameSite",
+      "description": "Session cookies should include secure attributes.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "ABSENT",
+            "key": "response.headers.Set-Cookie",
+            "value": "",
+            "resolvedValue": null,
+            "valueDataType": "STRING",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API2:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-614\",\"CWE-1004\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Set HttpOnly, Secure, and SameSite on sensitive cookies.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "bf595b1425c999fe1d31a1bd",
+      "ruleId": "API2-AUTH-006",
+      "name": "Missing auth should not return same body as baseline",
+      "description": "Removing auth should not return the same sensitive body.",
+      "assertion": {
+        "expression": "({0})",
+        "placeholders": [
+          {
+            "rule": "GREATER_THAN_EQUAL_TO",
+            "key": "baseline.bodySimilarity",
+            "value": "0.85",
+            "resolvedValue": null,
+            "valueDataType": "DOUBLE",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API2:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-306\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Return an auth error body instead of protected resource data.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"remove-auth-body-compare\",\"operation\":\"REMOVE_HEADER\",\"key\":\"Authorization\",\"value\":\"\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "6a2249695852d02f8d16a143",
-    "ruleId" : "API2-AUTH-004",
-    "name" : "API key appears in URL",
-    "description" : "API keys in URLs can leak through logs and referrers.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "REGEX",
-        "key" : "response.body",
-        "value" : "(?i)(api_key|apikey|access_token|token)=",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API2:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-598" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Send API keys in headers and redact them from logs.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "eddf8ba9f0c250fc49b2778c",
-    "ruleId" : "API2-AUTH-005",
-    "name" : "Cookie missing HttpOnly/Secure/SameSite",
-    "description" : "Session cookies should include secure attributes.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "ABSENT",
-        "key" : "response.headers.Set-Cookie",
-        "value" : "",
-        "resolvedValue" : null,
-        "valueDataType" : "STRING",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API2:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-614", "CWE-1004" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Set HttpOnly, Secure, and SameSite on sensitive cookies.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "bf595b1425c999fe1d31a1bd",
-    "ruleId" : "API2-AUTH-006",
-    "name" : "Missing auth should not return same body as baseline",
-    "description" : "Removing auth should not return the same sensitive body.",
-    "assertion" : {
-      "expression" : "({0})",
-      "placeholders" : [ {
-        "rule" : "GREATER_THAN_EQUAL_TO",
-        "key" : "baseline.bodySimilarity",
-        "value" : "0.85",
-        "resolvedValue" : null,
-        "valueDataType" : "DOUBLE",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API2:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-306" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Return an auth error body instead of protected resource data.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"remove-auth-body-compare\",\"operation\":\"REMOVE_HEADER\",\"key\":\"Authorization\",\"value\":\"\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "19ca9ca4a8e807e0d0468a8c",
-    "ruleId" : "API2-AUTH-007",
-    "name" : "JWT weak or missing claims, passive only",
-    "description" : "JWTs should include strong required claims.",
-    "assertion" : {
-      "expression" : "false",
-      "placeholders" : [ ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API2:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-347" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "passive",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Validate JWT signature and require issuer, audience, subject, and expiry claims.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  } ],
-  "action" : {
-    "type" : "Email",
-    "name" : "",
-    "description" : "",
-    "email" : { },
-    "slack" : { },
-    "microsoftTeams" : { },
-    "incident" : { },
-    "serviceCallout" : [ ],
-    "executeWorkflow" : { },
-    "executed" : false
+    {
+      "_id": null,
+      "id": "19ca9ca4a8e807e0d0468a8c",
+      "ruleId": "API2-AUTH-007",
+      "name": "JWT weak or missing claims, passive only",
+      "description": "JWTs should include strong required claims.",
+      "assertion": {
+        "expression": "false",
+        "placeholders": [],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API2:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-347\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "passive",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Validate JWT signature and require issuer, audience, subject, and expiry claims.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
+    }
+  ],
+  "action": {
+    "type": "Email",
+    "name": "",
+    "description": "",
+    "email": {},
+    "slack": {},
+    "microsoftTeams": {},
+    "incident": {},
+    "serviceCallout": [],
+    "executeWorkflow": {},
+    "executed": false
   },
-  "anyActionExecuted" : false,
-  "scope" : "GLOBAL",
-  "apis" : [ ],
-  "metadata" : {
-    "version" : "1.1.0"
+  "anyActionExecuted": false,
+  "scope": "GLOBAL",
+  "apis": [],
+  "metadata": {
+    "version": "1.1.0"
   },
-  "success" : false,
-  "enforced" : false,
-  "blockOnThreat" : false,
-  "editable" : false,
-  "passedRules" : 0,
-  "skippedRules" : 0,
-  "_class" : null
+  "success": false,
+  "enforced": false,
+  "blockOnThreat": false,
+  "editable": false,
+  "passedRules": 0,
+  "skippedRules": 0,
+  "_class": null
 }

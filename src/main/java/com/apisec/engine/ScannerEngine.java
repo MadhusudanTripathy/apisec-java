@@ -220,7 +220,7 @@ public class ScannerEngine {
             f.evidence.put("mutatedCredential", mutationTarget(spec));
             f.evidence.put("mutationExchange", exchangeSnapshot(md.requiresAltContext && alt != null ? alt : m.request, resp, cfg.reports.redactSecrets));
             attachMutationLocation(f, spec);
-            if (!resp.error.isBlank()) {
+            if (resp.error != null && !resp.error.isBlank()) {
                 f.status = "ERROR";
                 f.evidence.put("reason", resp.error);
                 FindingNarratives.enrichEvidence(f, rule.ruleId, rule.name, spec, false);

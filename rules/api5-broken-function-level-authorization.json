@@ -1,675 +1,782 @@
 {
-  "_id" : null,
-  "id" : "6a4c8c7f9eaa468e62240695",
-  "sourceName" : "api5-broken-function-level-authorization",
-  "name" : "API5 Broken Function Level Authorization",
-  "description" : "API5 Broken Function Level Authorization defensive API scanner rule group.",
-  "predefined" : true,
-  "precondition" : {
-    "expression" : "({0} || {1} || {2} || {3})",
-    "placeholders" : [ {
-      "rule" : "PRESENT",
-      "key" : "request.headers.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.queryParams.*",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.body",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    }, {
-      "rule" : "PRESENT",
-      "key" : "request.path",
-      "value" : "",
-      "resolvedValue" : null,
-      "valueDataType" : "STRING",
-      "successful" : null
-    } ],
-    "success" : false,
-    "type" : "Field",
-    "serviceRegistryId" : "",
-    "metadata" : [ ]
+  "_id": null,
+  "id": "6a4c8c7f9eaa468e62240695",
+  "sourceName": "api5-broken-function-level-authorization",
+  "name": "API5 Broken Function Level Authorization",
+  "description": "API5 Broken Function Level Authorization defensive API scanner rule group.",
+  "predefined": true,
+  "precondition": {
+    "expression": "({0} || {1} || {2} || {3})",
+    "placeholders": [
+      {
+        "rule": "PRESENT",
+        "key": "request.headers.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.queryParams.*",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.body",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      },
+      {
+        "rule": "PRESENT",
+        "key": "request.path",
+        "value": "",
+        "resolvedValue": null,
+        "valueDataType": "STRING",
+        "successful": null
+      }
+    ],
+    "success": false,
+    "type": "Field",
+    "serviceRegistryId": "",
+    "metadata": []
   },
-  "rules" : [ {
-    "_id" : null,
-    "id" : "92c6d6b54b03f930b0c7fee5",
-    "ruleId" : "API5-BFLA-001",
-    "name" : "Admin path without auth",
-    "description" : "Admin-like paths should require auth.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "404",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API5:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-285" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Protect administrative functions with server-side authorization checks.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"admin-remove-auth\",\"operation\":\"REMOVE_HEADER\",\"key\":\"Authorization\",\"value\":\"\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+  "rules": [
+    {
+      "_id": null,
+      "id": "92c6d6b54b03f930b0c7fee5",
+      "ruleId": "API5-BFLA-001",
+      "name": "Admin path without auth",
+      "description": "Admin-like paths should require auth.",
+      "assertion": {
+        "expression": "({0} && {1} && {2})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "404",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API5:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-285\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Protect administrative functions with server-side authorization checks.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"admin-remove-auth\",\"operation\":\"REMOVE_HEADER\",\"key\":\"Authorization\",\"value\":\"\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "daa9a0de4620b1691b0e02aa",
+      "ruleId": "API5-BFLA-002",
+      "name": "Admin path with alt low-privilege curl",
+      "description": "Low-privilege users should not access admin functions.",
+      "assertion": {
+        "expression": "({0} && {1} && {2})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "404",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API5:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-285\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "true",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Check role authorization for every privileged function.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"alt-admin-comparison\",\"operation\":\"ADD_HEADER\",\"key\":\"X-ApiSec-Alt\",\"value\":\"true\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "daa9a0de4620b1691b0e02aa",
-    "ruleId" : "API5-BFLA-002",
-    "name" : "Admin path with alt low-privilege curl",
-    "description" : "Low-privilege users should not access admin functions.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "404",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API5:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-285" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "true",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Check role authorization for every privileged function.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"alt-admin-comparison\",\"operation\":\"ADD_HEADER\",\"key\":\"X-ApiSec-Alt\",\"value\":\"true\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "b2d76c72aa4d985851066795",
+      "ruleId": "API5-BFLA-003",
+      "name": "Unsafe method override header",
+      "description": "Method override headers should not bypass authorization.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "400",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "405",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API5:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-284\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Disable method override or apply authorization after effective method resolution.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"method-override-delete\",\"operation\":\"ADD_HEADER\",\"key\":\"X-HTTP-Method-Override\",\"value\":\"DELETE\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
+    {
+      "_id": null,
+      "id": "802e3ea7d608c091df746787",
+      "ruleId": "API5-BFLA-004",
+      "name": "OPTIONS reveals unsafe methods",
+      "description": "OPTIONS should not reveal unintended unsafe methods.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3} && {4} && {5})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "200",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "204",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "404",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "405",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API5:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-200\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Restrict Allow headers to intended methods.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"options-method\",\"operation\":\"OPTIONS_METHOD\",\"key\":\"\",\"value\":\"\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "LOW",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "b2d76c72aa4d985851066795",
-    "ruleId" : "API5-BFLA-003",
-    "name" : "Unsafe method override header",
-    "description" : "Method override headers should not bypass authorization.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "400",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "405",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API5:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-284" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Disable method override or apply authorization after effective method resolution.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"method-override-delete\",\"operation\":\"ADD_HEADER\",\"key\":\"X-HTTP-Method-Override\",\"value\":\"DELETE\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
+    {
+      "_id": null,
+      "id": "70aa2d295f7f516f7519d561",
+      "ruleId": "API5-BFLA-005",
+      "name": "Privileged query flag",
+      "description": "Client-controlled privileged flags should be rejected.",
+      "assertion": {
+        "expression": "({0} && {1} && {2} && {3})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "400",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "422",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API5:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-285\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Ignore privileged client-supplied flags and derive privileges from identity.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"privileged-query-flag\",\"operation\":\"ADD_QUERY_PARAM\",\"key\":\"admin\",\"value\":\"true\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "MEDIUM",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
     },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "802e3ea7d608c091df746787",
-    "ruleId" : "API5-BFLA-004",
-    "name" : "OPTIONS reveals unsafe methods",
-    "description" : "OPTIONS should not reveal unintended unsafe methods.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3} && {4} && {5})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "200",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "204",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "404",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "405",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API5:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-200" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Restrict Allow headers to intended methods.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"options-method\",\"operation\":\"OPTIONS_METHOD\",\"key\":\"\",\"value\":\"\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "LOW",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "70aa2d295f7f516f7519d561",
-    "ruleId" : "API5-BFLA-005",
-    "name" : "Privileged query flag",
-    "description" : "Client-controlled privileged flags should be rejected.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2} && {3})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "400",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "422",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API5:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-285" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Ignore privileged client-supplied flags and derive privileges from identity.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"privileged-query-flag\",\"operation\":\"ADD_QUERY_PARAM\",\"key\":\"admin\",\"value\":\"true\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "MEDIUM",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  }, {
-    "_id" : null,
-    "id" : "62111401c3a650f851ac0ffd",
-    "ruleId" : "API5-BFLA-006",
-    "name" : "Role header tampering",
-    "description" : "Role headers should not grant privileges.",
-    "assertion" : {
-      "expression" : "({0} && {1} && {2})",
-      "placeholders" : [ {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "400",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "401",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      }, {
-        "rule" : "NOT_EQUAL_TO",
-        "key" : "response.code",
-        "value" : "403",
-        "resolvedValue" : null,
-        "valueDataType" : "INTEGER",
-        "successful" : null
-      } ],
-      "success" : false,
-      "type" : "Field",
-      "serviceRegistryId" : "",
-      "metadata" : [ {
-        "key" : "owasp",
-        "value" : "API5:2023",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "cwe",
-        "value" : [ "CWE-285" ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "cves",
-        "value" : [ ],
-        "required" : false,
-        "type" : "STRING_ARRAY"
-      }, {
-        "key" : "scanType",
-        "value" : "active-safe",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "destructive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAuthContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "requiresAltContext",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "passive",
-        "value" : "false",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "remediation",
-        "value" : "Do not trust client-controlled role headers.",
-        "required" : false,
-        "type" : "STRING"
-      }, {
-        "key" : "curlMutations",
-        "value" : "[{\"name\":\"role-header-admin\",\"operation\":\"ADD_HEADER\",\"key\":\"X-Role\",\"value\":\"admin\"}]",
-        "required" : false,
-        "type" : "STRING"
-      } ]
-    },
-    "rateLimitConfig" : {
-      "statusCode" : "",
-      "limit" : 0,
-      "windowSize" : 0
-    },
-    "actions" : [ ],
-    "priority" : "HIGH",
-    "success" : false,
-    "enforced" : true,
-    "blockOnThreat" : false
-  } ],
-  "action" : {
-    "type" : "Email",
-    "name" : "",
-    "description" : "",
-    "email" : { },
-    "slack" : { },
-    "microsoftTeams" : { },
-    "incident" : { },
-    "serviceCallout" : [ ],
-    "executeWorkflow" : { },
-    "executed" : false
+    {
+      "_id": null,
+      "id": "62111401c3a650f851ac0ffd",
+      "ruleId": "API5-BFLA-006",
+      "name": "Role header tampering",
+      "description": "Role headers should not grant privileges.",
+      "assertion": {
+        "expression": "({0} && {1} && {2})",
+        "placeholders": [
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "400",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "401",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          },
+          {
+            "rule": "NOT_EQUAL_TO",
+            "key": "response.code",
+            "value": "403",
+            "resolvedValue": null,
+            "valueDataType": "INTEGER",
+            "successful": null
+          }
+        ],
+        "success": false,
+        "type": "Field",
+        "serviceRegistryId": "",
+        "metadata": [
+          {
+            "key": "owasp",
+            "value": "API5:2023",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "cwe",
+            "value": "[\"CWE-285\"]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "cves",
+            "value": "[]",
+            "required": false,
+            "type": "STRING_ARRAY"
+          },
+          {
+            "key": "scanType",
+            "value": "active-safe",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "destructive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAuthContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "requiresAltContext",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "passive",
+            "value": "false",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "remediation",
+            "value": "Do not trust client-controlled role headers.",
+            "required": false,
+            "type": "STRING"
+          },
+          {
+            "key": "curlMutations",
+            "value": "[{\"name\":\"role-header-admin\",\"operation\":\"ADD_HEADER\",\"key\":\"X-Role\",\"value\":\"admin\"}]",
+            "required": false,
+            "type": "STRING"
+          }
+        ]
+      },
+      "rateLimitConfig": {
+        "statusCode": "",
+        "limit": 0,
+        "windowSize": 0
+      },
+      "actions": [],
+      "priority": "HIGH",
+      "success": false,
+      "enforced": true,
+      "blockOnThreat": false
+    }
+  ],
+  "action": {
+    "type": "Email",
+    "name": "",
+    "description": "",
+    "email": {},
+    "slack": {},
+    "microsoftTeams": {},
+    "incident": {},
+    "serviceCallout": [],
+    "executeWorkflow": {},
+    "executed": false
   },
-  "anyActionExecuted" : false,
-  "scope" : "GLOBAL",
-  "apis" : [ ],
-  "metadata" : {
-    "version" : "1.1.0"
+  "anyActionExecuted": false,
+  "scope": "GLOBAL",
+  "apis": [],
+  "metadata": {
+    "version": "1.1.0"
   },
-  "success" : false,
-  "enforced" : false,
-  "blockOnThreat" : false,
-  "editable" : false,
-  "passedRules" : 0,
-  "skippedRules" : 0,
-  "_class" : null
+  "success": false,
+  "enforced": false,
+  "blockOnThreat": false,
+  "editable": false,
+  "passedRules": 0,
+  "skippedRules": 0,
+  "_class": null
 }
