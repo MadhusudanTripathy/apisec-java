@@ -50,11 +50,15 @@ public class PullCommand implements Callable<Integer> {
         throw new IllegalArgumentException("rule group requires a readable name for file export");
       }
       Path out = Path.of(cfg.rules.directory, fileKey + ".json");
-      if (Files.exists(out) && !overwrite) {
-        System.out.println("Skipped existing rule group: " + out);
-        continue;
+      if (Files.exists(out)) {
+        if (!overwrite) {
+          System.out.println("Skipped existing rule group: " + out);
+          continue;
+        }
+        System.out.println("Overwriting existing rule group: " + out);
       }
-      Files.writeString(out, mapper.writerWithDefaultPrettyPrinter().writeValueAsString(g));
+      Files.writeString(out, mapper.writerWithDefaultPrettyPrinter().writeValueAsString(g),
+          StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
       System.out.println("Saved rule group: " + out);
     }
     return 0;

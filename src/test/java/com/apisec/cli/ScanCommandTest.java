@@ -1,6 +1,7 @@
 package com.apisec.cli;
 
 import com.apisec.client.ApplicationScanModels.ResourceTarget;
+import com.apisec.client.ApplicationScanModels.EnvironmentTarget;
 import com.apisec.curl.CurlParser;
 import com.apisec.config.AppConfig;
 import com.apisec.engine.EndpointClassifier;
@@ -186,6 +187,20 @@ class ScanCommandTest {
     assertEquals("https://selected.example.com/api/v1/books/1", ScanCommand.safeUrl(resource));
   }
 
+  @Test void serverLabelsAppendEnvironmentNamesForPromptDisplay() {
+    ResourceTarget first = new ResourceTarget();
+    first.servers = List.of("http://35.154.57.83:8000/v1/loans/");
+    first.environments = List.of(environment("DEV"), environment("UAT"));
+
+    ResourceTarget second = new ResourceTarget();
+    second.servers = List.of("http://35.154.57.83:8000/v1/loans");
+    second.environments = List.of(environment("QA"));
+
+    var labels = ScanCommand.serverLabels(List.of(first, second));
+
+    assertEquals("http://35.154.57.83:8000/v1/loans (DEV, UAT, QA)", labels.get("http://35.154.57.83:8000/v1/loans"));
+  }
+
   @Test void selectedServerIsSerializedInResourceReport() throws Exception {
     AppConfig cfg = AppConfig.defaults();
     Path reportDir = Files.createTempDirectory("apisec-java-selected-server");
@@ -225,6 +240,12 @@ class ScanCommandTest {
 
     assertTrue(firstWrite.path().endsWith("scan_20260717_100000_scan_shared_run.json"));
     assertTrue(secondWrite.path().endsWith("scan_20260717_100000_scan_shared_run_2.json"));
+  }
+
+  private static EnvironmentTarget environment(String name) {
+    EnvironmentTarget env = new EnvironmentTarget();
+    env.environmentName = name;
+    return env;
   }
 
   @Test void evaluatorTreatsRequestBodyNumericComparisonAsBodySimilarityAlias() {

@@ -545,6 +545,43 @@ class JavaCliTest {
     }
   }
 
+  @Test void pullOverwriteReplacesExistingRuleGroupFile() throws Exception {
+    ObjectMapper mapper = new ObjectMapper();
+    ObjectNode groupNode = (ObjectNode) mapper.readTree(Files.readString(BACKUP_RULE_FILE));
+    String groupJson = mapper.writeValueAsString(groupNode);
+    HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+    server.createContext("/v2/api-security/cli/pull/rule-group", ex -> {
+      byte[] body = ("{\"ruleGroups\":[" + groupJson + "]}").getBytes(StandardCharsets.UTF_8);
+      ex.getResponseHeaders().set("Content-Type", "application/json");
+      ex.sendResponseHeaders(200, body.length);
+      ex.getResponseBody().write(body);
+      ex.close();
+    });
+    server.setExecutor(Executors.newSingleThreadExecutor());
+    server.start();
+    try {
+      Path rulesDir = Files.createTempDirectory("apisec-java-pulled-rules-overwrite");
+      Path existing = rulesDir.resolve("owasp-api-2023-backup.json");
+      Files.writeString(existing, "{\"stale\":true}");
+      Path cfg = Files.createTempFile("apisec-java-pull-overwrite", ".properties");
+      Files.writeString(cfg, """
+          rules.directory=%s
+          rules.pull.sourceUrl=http://127.0.0.1:%d/v2/api-security/cli/pull/rule-group
+          """.formatted(rulesDir, server.getAddress().getPort()));
+
+      int code = new CommandLine(new PullCommand()).execute("--config", cfg.toString(), "--overwrite");
+
+      assertEquals(0, code);
+      String rewritten = Files.readString(existing);
+      assertFalse(rewritten.contains("\"stale\":true"));
+      Group pulled = RuleLoader.loadFile(existing);
+      assertTrue(pulled.id.matches("[0-9a-f]{24}"));
+      assertEquals("owasp-api-2023-backup", RuleLoader.displayKey(pulled));
+    } finally {
+      server.stop(0);
+    }
+  }
+
   @Test void scanFallsBackToAllLocalRuleGroupsWhenActiveGroupFilterMatchesNothing() throws Exception {
     Path rulesDir = Files.createTempDirectory("apisec-java-rules-fallback");
     Path sourceRule = BACKUP_RULE_FILE;

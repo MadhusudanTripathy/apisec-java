@@ -294,7 +294,8 @@ public class ScanCommand implements Callable<Integer> {
         continue;
       }
 
-      String selected = servers.size() == 1 ? servers.get(0) : promptForServer(representative, servers);
+      Map<String, String> labels = serverLabels(oasResources);
+      String selected = servers.size() == 1 ? servers.get(0) : promptForServer(representative, servers, labels);
       for (ResourceTarget resource : oasResources) {
         resource.selectedServer = selected;
       }
@@ -313,7 +314,28 @@ public class ScanCommand implements Callable<Integer> {
     return new ArrayList<>(servers);
   }
 
-  private static String promptForServer(ResourceTarget resource, List<String> servers) {
+  static Map<String, String> serverLabels(List<ResourceTarget> resources) {
+    LinkedHashMap<String, LinkedHashSet<String>> envsByServer = new LinkedHashMap<>();
+    for (ResourceTarget resource : resources) {
+      if (resource == null) continue;
+      List<String> environmentNames = environmentNames(resource);
+      if (resource.servers == null || resource.servers.isEmpty()) continue;
+      for (String server : resource.servers) {
+        String normalized = normalizeServer(server);
+        if (normalized.isBlank()) continue;
+        LinkedHashSet<String> envs = envsByServer.computeIfAbsent(normalized, ignored -> new LinkedHashSet<>());
+        envs.addAll(environmentNames);
+      }
+    }
+
+    LinkedHashMap<String, String> labels = new LinkedHashMap<>();
+    for (Map.Entry<String, LinkedHashSet<String>> entry : envsByServer.entrySet()) {
+      labels.put(entry.getKey(), formatServerLabel(entry.getKey(), entry.getValue()));
+    }
+    return labels;
+  }
+
+  private static String promptForServer(ResourceTarget resource, List<String> servers, Map<String, String> labels) {
     Console console = System.console();
     String label = oasLabel(resource);
     if (console == null) {
@@ -322,7 +344,8 @@ public class ScanCommand implements Callable<Integer> {
 
     console.printf("%nSelect server for %s:%n", label);
     for (int i = 0; i < servers.size(); i++) {
-      console.printf("  %d. %s%n", i + 1, servers.get(i));
+      String server = servers.get(i);
+      console.printf("  %d. %s%n", i + 1, firstNonBlank(labels.get(server), server));
     }
 
     while (true) {
@@ -340,6 +363,25 @@ public class ScanCommand implements Callable<Integer> {
       }
       console.printf("Invalid selection. Enter a number from 1 to %d.%n", servers.size());
     }
+  }
+
+  private static List<String> environmentNames(ResourceTarget resource) {
+    LinkedHashSet<String> names = new LinkedHashSet<>();
+    if (resource == null || resource.environments == null) {
+      return new ArrayList<>();
+    }
+    for (var environment : resource.environments) {
+      if (environment == null || environment.environmentName == null || environment.environmentName.isBlank()) continue;
+      names.add(environment.environmentName.trim());
+    }
+    return new ArrayList<>(names);
+  }
+
+  private static String formatServerLabel(String server, Collection<String> envNames) {
+    if (envNames == null || envNames.isEmpty()) {
+      return server;
+    }
+    return server + " (" + String.join(", ", envNames) + ")";
   }
 
   static String selectedServerUrl(ResourceTarget resource) {

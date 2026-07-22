@@ -2,6 +2,7 @@ package com.apisec.client;
 
 import com.apisec.config.AppConfig;
 import com.apisec.client.ApplicationScanModels.ApplicationScanResources;
+import com.apisec.client.ApplicationScanModels.EnvironmentTarget;
 import com.apisec.client.ApplicationScanModels.ResourceTarget;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -72,6 +73,7 @@ public class ApplicationScanClient {
         target.summary = text(node, "summary");
         target.tags = stringList(node.path("tags"));
         target.servers = stringList(node.path("servers"));
+        target.environments = environments(node.path("environments"));
         target.lastScannedAt = instant(node, "lastScannedAt");
         out.resources.add(target);
       }
@@ -122,6 +124,20 @@ public class ApplicationScanClient {
     if (node != null && node.isArray()) {
       for (JsonNode value : node) {
         if (!value.isNull()) out.add(value.asText());
+      }
+    }
+    return out;
+  }
+
+  private static ArrayList<EnvironmentTarget> environments(JsonNode node) {
+    ArrayList<EnvironmentTarget> out = new ArrayList<>();
+    if (node != null && node.isArray()) {
+      for (JsonNode value : node) {
+        if (value == null || value.isNull()) continue;
+        EnvironmentTarget environment = new EnvironmentTarget();
+        environment.environmentId = text(value, "environmentId");
+        environment.environmentName = text(value, "environmentName");
+        out.add(environment);
       }
     }
     return out;

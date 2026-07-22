@@ -33,6 +33,13 @@ public class ApplicationScanModels {
     public String summary;
     public List<String> tags = new ArrayList<>();
     public List<String> servers = new ArrayList<>();
+    public List<EnvironmentTarget> environments = new ArrayList<>();
     public Instant lastScannedAt;
+  }
+
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class EnvironmentTarget {
+    public String environmentId;
+    public String environmentName;
   }
 }
