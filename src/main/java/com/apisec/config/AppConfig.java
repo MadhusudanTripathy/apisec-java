@@ -313,7 +313,7 @@ public class AppConfig {
   private static boolean boolVal(Object v, boolean d) { return v == null ? d : Boolean.parseBoolean(String.valueOf(v)); }
 
   public static final String DEFAULT_PROPERTIES = """
-apiwiz.tenant=common
+apiwiz.tenant=
 apiwiz.x-apikey=
 
 scanner.mode=safe
@@ -352,7 +352,7 @@ webhook.endpointReportRetention=0
 
   public static final String DEFAULT_YAML = """
 apiwiz:
-  tenant: "common"
+  tenant: ""
   x-apikey: ""
 scanner:
   mode: safe
