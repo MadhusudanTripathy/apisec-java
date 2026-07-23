@@ -56,23 +56,23 @@ public class AppConfig {
     public boolean failOpen = true;
   }
   public static class Rules {
-    public String directory = "~/.apisec/rules";
+    public String directory = "./rules";
     public List<String> activeGroups = new ArrayList<>(DEFAULT_ACTIVE_RULE_GROUPS);
     public Pull pull = new Pull();
   }
   public static class Pull {
     public boolean enabled = true;
-    public String sourceUrl = "http://localhost:8073/v2/api-security/cli/pull/rule-group";
+    public String sourceUrl = "https://api.apiwiz.io/itorix/v2/api-security/cli/pull/rule-group";
     public String tenant = "";
   }
   public static class Reports {
-    public String directory = "~/.apisec/reports";
+    public String directory = "./reports";
     public String fileNamePattern = "scan_{timestamp}_{scanId}.json";
     public boolean redactSecrets = true;
   }
   public static class Webhook {
     public boolean enabled = false;
-    public String url = "";
+    public String url = "https://api.apiwiz.io/itorix/v2/api-security/cli/webhook";
     public String tenant = "";
     public int timeoutSeconds = 5;
     public int retries = 3;
@@ -313,7 +313,7 @@ public class AppConfig {
   private static boolean boolVal(Object v, boolean d) { return v == null ? d : Boolean.parseBoolean(String.valueOf(v)); }
 
   public static final String DEFAULT_PROPERTIES = """
-apiwiz.tenant=
+apiwiz.tenant=common
 apiwiz.x-apikey=
 
 scanner.mode=safe
@@ -322,7 +322,7 @@ scanner.maxRequestsPerRule=3
 scanner.redactSecrets=true
 scanner.allowDangerous=false
 
-application.scan.sourceUrl=
+application.scan.sourceUrl=https://api.apiwiz.io/itorix/v2/api-security/application
 
 openai.enabled=false
 openai.baseUrl=https://api.openai.com/v1/chat/completions
@@ -334,18 +334,16 @@ openai.temperature=0.2
 openai.includeRawEvidence=false
 openai.failOpen=true
 
-rules.directory=~/.apisec/rules
-rules.activeGroups=api1-broken-object-level-authorization,api2-broken-authentication,api3-broken-object-property-level-authorization,api4-unrestricted-resource-consumption,api5-broken-function-level-authorization,api6-unrestricted-access-to-sensitive-business-flows,api7-server-side-request-forgery,api8-security-misconfiguration,api9-improper-inventory-management,api10-unsafe-consumption-of-apis
+rules.directory=./rules
 rules.pull.enabled=true
-rules.pull.sourceUrl=http://localhost:8073/v2/api-security/cli/pull/rule-group
-rules.pull.tenant=
+rules.pull.sourceUrl=https://api.apiwiz.io/itorix/v2/api-security/cli/pull/rule-group
 
-reports.directory=~/.apisec/reports
+reports.directory=./reports
 reports.fileNamePattern=scan_{timestamp}_{scanId}.json
 reports.redactSecrets=true
 
 webhook.enabled=false
-webhook.url=
+webhook.url=https://api.apiwiz.io/itorix/v2/api-security/cli/webhook
 webhook.tenant=
 webhook.timeoutSeconds=5
 webhook.retries=3
@@ -354,7 +352,7 @@ webhook.endpointReportRetention=0
 
   public static final String DEFAULT_YAML = """
 apiwiz:
-  tenant: ""
+  tenant: "common"
   x-apikey: ""
 scanner:
   mode: safe
@@ -364,7 +362,7 @@ scanner:
   allowDangerous: false
 application:
   scan:
-    sourceUrl: ""
+    sourceUrl: "https://api.apiwiz.io/itorix/v2/api-security/application"
 openai:
   enabled: false
   baseUrl: "https://api.openai.com/v1/chat/completions"
@@ -376,19 +374,17 @@ openai:
   includeRawEvidence: false
   failOpen: true
 rules:
-  directory: "~/.apisec/rules"
-  activeGroups: ["api1-broken-object-level-authorization", "api2-broken-authentication", "api3-broken-object-property-level-authorization", "api4-unrestricted-resource-consumption", "api5-broken-function-level-authorization", "api6-unrestricted-access-to-sensitive-business-flows", "api7-server-side-request-forgery", "api8-security-misconfiguration", "api9-improper-inventory-management", "api10-unsafe-consumption-of-apis"]
+  directory: "./rules"
   pull:
     enabled: true
-    sourceUrl: "http://localhost:8073/v2/api-security/cli/pull/rule-group"
-    tenant: ""
+    sourceUrl: "https://api.apiwiz.io/itorix/v2/api-security/cli/pull/rule-group"
 reports:
-  directory: "~/.apisec/reports"
+  directory: "./reports"
   fileNamePattern: "scan_{timestamp}_{scanId}.json"
   redactSecrets: true
 webhook:
   enabled: false
-  url: ""
+  url: "https://api.apiwiz.io/itorix/v2/api-security/cli/webhook"
   tenant: ""
   timeoutSeconds: 5
   retries: 3

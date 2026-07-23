@@ -97,24 +97,27 @@ java -jar target/apisec-java-1.0.0.jar config init
 Example:
 
 ```properties
+apiwiz.tenant=common
+apiwiz.x-apikey=
+
 scanner.timeoutSeconds=10
 scanner.maxRequestsPerRule=3
 scanner.redactSecrets=true
 scanner.allowDangerous=false
 
-rules.directory=rules
-rules.activeGroups=api1-broken-object-level-authorization,api2-broken-authentication,api3-broken-object-property-level-authorization,api4-unrestricted-resource-consumption,api5-broken-function-level-authorization,api6-unrestricted-access-to-sensitive-business-flows,api7-server-side-request-forgery,api8-security-misconfiguration,api9-improper-inventory-management,api10-unsafe-consumption-of-apis
-rules.pull.enabled=true
-rules.pull.sourceUrl=http://localhost:8073/v1/apiwiz-api-security/cli/pull/rule-group
-rules.pull.tokenEnv=APISEC_RULES_TOKEN
-rules.pull.tenant=acme-team-dev
+application.scan.sourceUrl=https://api.apiwiz.io/itorix/v2/api-security/application
 
-reports.directory=reports
+rules.directory=./rules
+rules.pull.enabled=true
+rules.pull.sourceUrl=https://api.apiwiz.io/itorix/v2/api-security/cli/pull/rule-group
+rules.pull.tokenEnv=APISEC_RULES_TOKEN
+
+reports.directory=./reports
 reports.fileNamePattern=scan_{timestamp}_{scanId}.json
 reports.redactSecrets=true
 
-webhook.enabled=true
-webhook.url=http://localhost:9002/v1/apiwiz-api-security/cli/webhook
+webhook.enabled=false
+webhook.url=https://api.apiwiz.io/itorix/v2/api-security/cli/webhook
 webhook.secret=${APISEC_CLI_WEBHOOK_SECRET}
 webhook.tenant=my-tenant
 webhook.timeoutSeconds=5
@@ -160,7 +163,7 @@ java -jar target/apisec-java-1.0.0.jar rules validate --file ../apisec/rules/owa
 
 ## Pull Rules
 
-If `rules.pull.sourceUrl` and `rules.pull.tenant` are configured, pull needs no source flags:
+If `rules.pull.sourceUrl` is configured, pull needs no source flags. `rules.pull.tenant` inherits from `apiwiz.tenant`:
 
 ```sh
 java -jar target/apisec-java-1.0.0.jar pull

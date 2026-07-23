@@ -599,8 +599,13 @@ class JavaCliTest {
     Path sourceRule = BACKUP_RULE_FILE;
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode groupNode = (ObjectNode) mapper.readTree(Files.readString(sourceRule));
+    ObjectNode secondGroupNode = groupNode.deepCopy();
     groupNode.put("id", "6a211ab00afd106e71e7f7f3");
+    secondGroupNode.put("id", "7b322bc11bfe217f82f8f8f4");
+    secondGroupNode.put("name", "Secondary Rule Group");
+    secondGroupNode.put("description", "Secondary Rule Group");
     Files.writeString(rulesDir.resolve("6a211ab00afd106e71e7f7f3.json"), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(groupNode));
+    Files.writeString(rulesDir.resolve("7b322bc11bfe217f82f8f8f4.json"), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(secondGroupNode));
 
     HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
     server.createContext("/v1/permissions", ex -> {
@@ -615,7 +620,7 @@ class JavaCliTest {
     try {
       AppConfig cfg = AppConfig.defaults();
       cfg.rules.directory = rulesDir.toString();
-      cfg.rules.activeGroups = DEFAULT_ACTIVE_GROUPS;
+      cfg.rules.activeGroups = List.of("does-not-match-anything");
       cfg.reports.directory = Files.createTempDirectory("apisec-java-rules-fallback-reports").toString();
 
       ScannerEngine.Result result = ScannerEngine.run(cfg, new ScannerEngine.Options(
@@ -624,7 +629,7 @@ class JavaCliTest {
           null
       ));
 
-      assertTrue(result.report().summary.totalRules > 0);
+      assertEquals(122, result.report().summary.totalRules);
     } finally {
       server.stop(0);
     }

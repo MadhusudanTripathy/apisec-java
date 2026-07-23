@@ -88,8 +88,6 @@ public class ScannerEngine {
 
     private static List<Group> loadGroups(AppConfig cfg, String explicit) throws Exception {
         if (explicit == null || explicit.isBlank()) {
-            List<Group> configured = RuleLoader.loadDir(cfg.rules.directory, cfg.rules.activeGroups);
-            if (!configured.isEmpty()) return configured;
             return RuleLoader.loadDir(cfg.rules.directory, List.of());
         }
         java.nio.file.Path p = java.nio.file.Path.of(explicit);
