@@ -21,7 +21,6 @@ public class ScanCommand implements Callable<Integer> {
   @Option(names="--curl") String curl;
   @Option(names="--curl-file") Path curlFile;
   @Option(names="--application-source") String applicationSource;
-  @Option(names="--config") String config;
   @Option(names="--rules-dir") String rulesDir;
   @Option(names="--rules") String rules;
   @Option(names="--report-dir") String reportDir;
@@ -42,7 +41,7 @@ public class ScanCommand implements Callable<Integer> {
   @Unmatched List<String> inlineCurlArgs = new ArrayList<>();
 
   @Override public Integer call() throws Exception {
-    AppConfig cfg = AppConfig.resolve(config, rulesDir, reportDir, webhook, webhookApiKey, timeout, maxRequests, redactSecrets, allowDangerous);
+    AppConfig cfg = AppConfig.resolve(rulesDir, reportDir, webhook, webhookApiKey, timeout, maxRequests, redactSecrets, allowDangerous);
     String inlineCurl = resolveInlineCurl(applicationId, inlineCurlArgs);
     if (inlineCurl != null) {
       curl = inlineCurl;
@@ -186,7 +185,6 @@ public class ScanCommand implements Callable<Integer> {
 
   @Command(name = "curl", mixinStandardHelpOptions = true, description = "Scan using curl-style arguments without wrapping them in --curl")
   static class CurlCmd implements Callable<Integer> {
-    @Option(names="--config") String config;
     @Option(names="--rules-dir") String rulesDir;
     @Option(names="--rules") String rules;
     @Option(names="--report-dir") String reportDir;
@@ -210,7 +208,7 @@ public class ScanCommand implements Callable<Integer> {
     @Override public Integer call() throws Exception {
       if (!"json".equals(export)) throw new IllegalArgumentException("unsupported export format " + export);
       if (altCurlFile != null) altCurl = Files.readString(altCurlFile);
-      AppConfig cfg = AppConfig.resolve(config, rulesDir, reportDir, webhook, webhookApiKey, timeout, maxRequests, redactSecrets, allowDangerous);
+      AppConfig cfg = AppConfig.resolve(rulesDir, reportDir, webhook, webhookApiKey, timeout, maxRequests, redactSecrets, allowDangerous);
       String curl = toCurlCommand(url, curlArgs);
       ScannerEngine.Result result = runScan(cfg, new ScannerEngine.Options(curl, altCurl, rules), json);
       Reporter.print(result.report(), result.path(), new Reporter.DisplayOptions(json, showPassed, showSkipped, verbose));

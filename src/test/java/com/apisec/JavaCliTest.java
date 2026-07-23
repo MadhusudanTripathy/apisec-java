@@ -223,9 +223,8 @@ class JavaCliTest {
     return file;
   }
 
-  @Test void loadsPropertiesConfig() throws Exception {
-    Path cfg = Files.createTempFile("apisec-java", ".properties");
-    Files.writeString(cfg, """
+  @Test void loadsDefaultConfigProperties() throws Exception {
+    try (AutoCloseable ignored = temporaryConfigProperties("""
         apiwiz.tenant=acme-team-dev
         apiwiz.x-apikey=test-api-key
         scanner.timeoutSeconds=22
@@ -249,11 +248,11 @@ class JavaCliTest {
         webhook.timeoutSeconds=7
         webhook.retries=4
         webhook.endpointReportRetention=12
-        """.formatted(String.join(",", DEFAULT_ACTIVE_GROUPS)));
-    AppConfig cfgObj = AppConfig.resolve(cfg.toString(), null, null, null, null, null, null, null, null);
+        """.formatted(String.join(",", DEFAULT_ACTIVE_GROUPS)))) {
+    AppConfig cfgObj = AppConfig.resolve(null, null, null, null, null, null, null, null);
     assertEquals(22, cfgObj.scanner.timeoutSeconds);
     assertEquals(2, cfgObj.scanner.maxRequestsPerRule);
-    assertEquals(cfg.getParent().resolve("../apisec/rules").normalize().toString(), cfgObj.rules.directory);
+    assertEquals(Path.of("../apisec/rules").toAbsolutePath().normalize().toString(), cfgObj.rules.directory);
     assertEquals(DEFAULT_ACTIVE_GROUPS, cfgObj.rules.activeGroups);
     assertEquals("http://localhost:8073/v2/api-security/application", cfgObj.application.scan.sourceUrl);
     assertTrue(cfgObj.openai.enabled);
@@ -269,12 +268,13 @@ class JavaCliTest {
     assertEquals("acme-team-dev", cfgObj.apiwiz.tenant);
     assertEquals("test-api-key", cfgObj.apiwiz.xApiKey);
     assertEquals("acme-team-dev", cfgObj.rules.pull.tenant);
-    assertEquals(cfg.getParent().resolve("reports").normalize().toString(), cfgObj.reports.directory);
+    assertEquals(Path.of("reports").toAbsolutePath().normalize().toString(), cfgObj.reports.directory);
     assertTrue(cfgObj.webhook.enabled);
     assertEquals("acme-team-dev", cfgObj.webhook.tenant);
     assertEquals(7, cfgObj.webhook.timeoutSeconds);
     assertEquals(4, cfgObj.webhook.retries);
     assertEquals(12, cfgObj.webhook.endpointReportRetention);
+    }
   }
 
   @Test void scannerUsesApiKeyRemovalAndSkipsNoIdBola() throws Exception {
@@ -529,15 +529,14 @@ class JavaCliTest {
     server.start();
     try {
       Path rulesDir = Files.createTempDirectory("apisec-java-pulled-rules");
-      Path cfg = Files.createTempFile("apisec-java-pull", ".properties");
-      Files.writeString(cfg, """
+      try (AutoCloseable ignored = temporaryConfigProperties("""
           apiwiz.tenant=acme-team-dev
           apiwiz.x-apikey=test-api-key
           rules.directory=%s
           rules.pull.sourceUrl=http://127.0.0.1:%d/v2/api-security/cli/pull/rule-group
-          """.formatted(rulesDir, server.getAddress().getPort()));
+          """.formatted(rulesDir, server.getAddress().getPort()))) {
 
-      int code = new CommandLine(new PullCommand()).execute("--config", cfg.toString());
+      int code = new CommandLine(new PullCommand()).execute();
 
       assertEquals(0, code);
       assertEquals("acme-team-dev", observedTenant.get());
@@ -552,6 +551,7 @@ class JavaCliTest {
       assertTrue(pulled.id.matches("[0-9a-f]{24}"));
       assertTrue(pulled.rules.get(0).id.matches("[0-9a-f]{24}"));
       assertNotEquals(pulled.rules.get(0).ruleId, pulled.rules.get(0).id);
+      }
     } finally {
       server.stop(0);
     }
@@ -575,13 +575,12 @@ class JavaCliTest {
       Path rulesDir = Files.createTempDirectory("apisec-java-pulled-rules-overwrite");
       Path existing = rulesDir.resolve("owasp-api-2023-backup.json");
       Files.writeString(existing, "{\"stale\":true}");
-      Path cfg = Files.createTempFile("apisec-java-pull-overwrite", ".properties");
-      Files.writeString(cfg, """
+      try (AutoCloseable ignored = temporaryConfigProperties("""
           rules.directory=%s
           rules.pull.sourceUrl=http://127.0.0.1:%d/v2/api-security/cli/pull/rule-group
-          """.formatted(rulesDir, server.getAddress().getPort()));
+          """.formatted(rulesDir, server.getAddress().getPort()))) {
 
-      int code = new CommandLine(new PullCommand()).execute("--config", cfg.toString(), "--overwrite");
+      int code = new CommandLine(new PullCommand()).execute("--overwrite");
 
       assertEquals(0, code);
       String rewritten = Files.readString(existing);
@@ -589,6 +588,7 @@ class JavaCliTest {
       Group pulled = RuleLoader.loadFile(existing);
       assertTrue(pulled.id.matches("[0-9a-f]{24}"));
       assertEquals("owasp-api-2023-backup", RuleLoader.displayKey(pulled));
+      }
     } finally {
       server.stop(0);
     }
@@ -678,17 +678,16 @@ class JavaCliTest {
     server.start();
     try {
       Path reportsDir = Files.createTempDirectory("apisec-java-application-scan-reports");
-      Path cfg = Files.createTempFile("apisec-java-application-scan", ".properties");
-      Files.writeString(cfg, """
+      try (AutoCloseable ignored = temporaryConfigProperties("""
           apiwiz.tenant=acme-team-dev
           apiwiz.x-apikey=test-api-key
           application.scan.sourceUrl=http://127.0.0.1:%d/v2/api-security/application
           rules.directory=../apisec/rules
           reports.directory=%s
           webhook.enabled=false
-          """.formatted(server.getAddress().getPort(), reportsDir));
+          """.formatted(server.getAddress().getPort(), reportsDir))) {
 
-      int code = new CommandLine(new ApiSec()).execute("scan", "app-123", "--config", cfg.toString(), "--rules", BACKUP_RULE_FILE.toString());
+      int code = new CommandLine(new ApiSec()).execute("scan", "app-123", "--rules", BACKUP_RULE_FILE.toString());
 
       assertEquals(0, code);
       assertNull(observedTenant.get());
@@ -700,6 +699,7 @@ class JavaCliTest {
       assertEquals("swagger-payments", report.path("resource").path("swaggerId").asText());
       assertEquals("GET", report.path("target").path("method").asText());
       assertTrue(report.path("target").path("url").asText().endsWith("/v1/payments/1"));
+      }
     } finally {
       server.stop(0);
     }
@@ -870,5 +870,18 @@ class JavaCliTest {
     } finally {
       server.stop(0);
     }
+  }
+
+  private static AutoCloseable temporaryConfigProperties(String content) throws Exception {
+    Path config = Path.of("config.properties").toAbsolutePath().normalize();
+    String original = Files.exists(config) ? Files.readString(config) : null;
+    Files.writeString(config, content);
+    return () -> {
+      if (original == null) {
+        Files.deleteIfExists(config);
+      } else {
+        Files.writeString(config, original);
+      }
+    };
   }
 }

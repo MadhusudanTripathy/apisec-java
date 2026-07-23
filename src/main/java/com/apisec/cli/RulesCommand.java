@@ -17,13 +17,11 @@ public class RulesCommand implements Runnable {
 
     @Command(name = "list", mixinStandardHelpOptions = true)
     static class ListCmd implements Callable<Integer> {
-        @Option(names = "--config")
-        String config;
         @Option(names = "--rules-dir")
         String rulesDir;
 
         public Integer call() throws Exception {
-            AppConfig c = AppConfig.resolve(config, rulesDir, null, null, null, null, null, null, null);
+            AppConfig c = AppConfig.resolve(rulesDir, null, null, null, null, null, null, null);
             for (Group g : RuleLoader.loadDir(c.rules.directory, c.rules.activeGroups))
                 System.out.printf("%s\t%s\t%d rules\t%s%n", RuleLoader.displayKey(g), g.version(), g.rules.size(), g.name);
             return 0;
@@ -34,13 +32,11 @@ public class RulesCommand implements Runnable {
     static class ShowCmd implements Callable<Integer> {
         @Option(names = "--id", required = true)
         String id;
-        @Option(names = "--config")
-        String config;
         @Option(names = "--rules-dir")
         String rulesDir;
 
         public Integer call() throws Exception {
-            AppConfig c = AppConfig.resolve(config, rulesDir, null, null, null, null, null, null, null);
+            AppConfig c = AppConfig.resolve(rulesDir, null, null, null, null, null, null, null);
             for (Group g : RuleLoader.loadDir(c.rules.directory, java.util.List.of()))
                 if (id.equals(g.id) || id.equals(g.name) || id.equals(RuleLoader.displayKey(g))) {
                     System.out.printf("%s%nVersion: %s%nRules: %d%n%s%n", g.name, g.version(), g.rules.size(), g.description);

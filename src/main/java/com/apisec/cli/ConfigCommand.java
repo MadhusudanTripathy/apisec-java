@@ -18,22 +18,20 @@ public class ConfigCommand implements Runnable {
     static class InitCmd implements Callable<Integer> {
         public Integer call() throws Exception {
             AppConfig.initDefault();
-            System.out.println("Config initialized: " + AppConfig.expand("~/.apisec/config.yaml"));
+            System.out.println("Config initialized: " + AppConfig.resolveConfigPath());
             return 0;
         }
     }
 
     @Command(name = "show", mixinStandardHelpOptions = true)
     static class ShowCmd implements Callable<Integer> {
-        @Option(names = "--config")
-        String config;
         @Option(names = "--rules-dir")
         String rulesDir;
         @Option(names = "--report-dir")
         String reportDir;
 
         public Integer call() throws Exception {
-            AppConfig c = AppConfig.resolve(config, rulesDir, reportDir, null, null, null, null, null, null);
+            AppConfig c = AppConfig.resolve(rulesDir, reportDir, null, null, null, null, null, null);
             System.out.println(new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValueAsString(c));
             return 0;
         }

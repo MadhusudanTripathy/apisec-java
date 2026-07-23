@@ -82,17 +82,16 @@ java -jar target/apisec-java-1.0.0.jar scan \
 
 ## Configure Once
 
-The Java CLI loads this properties file by default:
+The Java CLI loads exactly one properties file from the current working directory:
 
 ```txt
-~/.apisec/apisec-java.properties
+./config.properties
 ```
 
-Create it from the sample:
+Create it with:
 
 ```sh
-mkdir -p ~/.apisec
-cp apisec-java.properties ~/.apisec/apisec-java.properties
+java -jar target/apisec-java-1.0.0.jar config init
 ```
 
 Example:
@@ -135,14 +134,6 @@ The old wrapped form is still supported:
 ```sh
 java -jar target/apisec-java-1.0.0.jar scan \
   --curl "curl http://localhost:9002/itorix/v1/permissions -H 'x-apikey: test'"
-```
-
-Use a custom config file:
-
-```sh
-java -jar target/apisec-java-1.0.0.jar scan \
-  --config ./apisec-java.properties \
-  --curl-file request.curl
 ```
 
 When the rules directory is configured, `--rules` may also be a group id:

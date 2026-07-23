@@ -86,11 +86,11 @@ public class AppConfig {
     return c;
   }
 
-  public static AppConfig resolve(String configPath, String rulesDir, String reportDir, String webhookUrl,
+  public static AppConfig resolve(String rulesDir, String reportDir, String webhookUrl,
                                   String webhookApiKey, Integer timeout, Integer maxRequests,
                                   Boolean redact, Boolean allowDangerous) throws IOException {
     AppConfig c = defaults();
-    Path p = resolveConfigPath(configPath);
+    Path p = resolveConfigPath();
     if (Files.exists(p)) mergeConfigFile(c, p);
     if (Files.exists(p)) resolveConfigRelativePaths(c, p.getParent());
 //    overrideEnv(c);//always take from the adjacent config property file
@@ -107,32 +107,8 @@ public class AppConfig {
     return c;
   }
 
-  public static Path resolveConfigPath(String configPath) {
-    String explicit = firstNonBlank(configPath, System.getenv("APISEC_CONFIG"));
-    if (!explicit.isBlank()) return Paths.get(expand(explicit));
-    for (Path candidate: localConfigCandidates()) {
-      if (Files.exists(candidate)) return candidate;
-    }
-    return Paths.get(expand("~/.apisec/apisec-java.properties"));
-  }
-
-  private static List<Path> localConfigCandidates() {
-    List<Path> candidates = new ArrayList<>();
-    candidates.add(Paths.get("apisec-java.properties").toAbsolutePath().normalize());
-    executableDirectory().ifPresent(dir -> candidates.add(dir.resolve("apisec-java.properties").toAbsolutePath().normalize()));
-    return candidates.stream().distinct().toList();
-  }
-
-  private static Optional<Path> executableDirectory() {
-    try {
-      Optional<String> command = ProcessHandle.current().info().command();
-      if (command.isPresent() && !command.get().isBlank()) {
-        Path p = Paths.get(command.get()).toAbsolutePath().normalize();
-        return Optional.ofNullable(p.getParent());
-      }
-    } catch (Exception ignored) {
-    }
-    return Optional.empty();
+  public static Path resolveConfigPath() {
+    return Paths.get("config.properties").toAbsolutePath().normalize();
   }
 
   private static void resolveConfigRelativePaths(AppConfig c, Path configDir) {
@@ -152,12 +128,8 @@ public class AppConfig {
     AppConfig c = defaults();
     Files.createDirectories(Paths.get(c.rules.directory));
     Files.createDirectories(Paths.get(c.reports.directory));
-    Files.createDirectories(Paths.get(expand("~/.apisec/cache")));
-    Path cfg = Paths.get(expand("~/.apisec/config.yaml"));
-    Files.createDirectories(cfg.getParent());
-    Path props = Paths.get(expand("~/.apisec/apisec-java.properties"));
+    Path props = Paths.get("config.properties").toAbsolutePath().normalize();
     if (!Files.exists(props)) Files.writeString(props, DEFAULT_PROPERTIES);
-    if (!Files.exists(cfg)) Files.writeString(cfg, DEFAULT_YAML);
   }
 
   private static void mergeConfigFile(AppConfig c, Path path) throws IOException {

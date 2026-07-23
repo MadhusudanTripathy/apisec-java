@@ -18,13 +18,12 @@ public class PullCommand implements Callable<Integer> {
   @Option(names="--source") String source;
   @Option(names="--token") String token;
   @Option(names="--tenant") String tenant;
-  @Option(names="--config") String config;
   @Option(names="--rules-dir") String rulesDir;
   @Option(names="--overwrite", defaultValue="false") boolean overwrite;
 
   @Override
   public Integer call() throws Exception {
-    AppConfig cfg = AppConfig.resolve(config, rulesDir, null, null, null, null, null, null, null);
+    AppConfig cfg = AppConfig.resolve(rulesDir, null, null, null, null, null, null, null);
     String resolvedSource = firstNonBlank(source, cfg.rules.pull.sourceUrl);
     String resolvedTenant = firstNonBlank(tenant, cfg.rules.pull.tenant, cfg.apiwiz.tenant);
     String resolvedApiKey = firstNonBlank(token, cfg.apiwiz.xApiKey);
